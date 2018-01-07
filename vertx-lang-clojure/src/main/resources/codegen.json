@@ -1,0 +1,8 @@
+{
+  "name": "md-generator",
+  "generators": [ {
+    "kind": "class",
+    "fileName": "'md/' + type.raw.moduleName + '/' + type.raw.simpleName + '.md'",
+    "templateFileName": "class-md.templ"
+  }]
+}

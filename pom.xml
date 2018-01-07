@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-parent</artifactId>
+        <version>9</version>
+    </parent>
+
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-lang-clojure-parent</artifactId>
+
+    <version>3.5.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>vertx-lang-clojure</module>
+        <!--<module>vertx-lang-kotlin-compiler</module>-->
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <clojure.version>1.9.0</clojure.version>
+        <junit.version>4.12</junit.version>
+        <stack.version>3.5.1-SNAPSHOT</stack.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-dependencies</artifactId>
+                <version>${stack.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.clojure/clojure -->
+        <dependency>
+            <groupId>org.clojure</groupId>
+            <artifactId>clojure</artifactId>
+            <version>${clojure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/clojure</sourceDirectory>
+        <testSourceDirectory>src/test/clojure</testSourceDirectory>
+    </build>
+</project>
