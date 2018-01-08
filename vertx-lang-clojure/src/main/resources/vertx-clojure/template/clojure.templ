@@ -2,5 +2,11 @@
 \n
 
 @foreach{method:methods}
-(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method.name))} [@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ())\n
+  @if{method.name == type.raw.getSimpleName()}
+    \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method.name))} [@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ());constructor
+  @else{method.staticMethod}
+    \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method.name))} [@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ());static method
+  @else{}
+    \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method.name))} [@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ())
+  @end{}
 @end{}
