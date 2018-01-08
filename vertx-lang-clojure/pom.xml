@@ -2,30 +2,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
-        <artifactId>vertx-lang-clojure-parent</artifactId>
         <groupId>io.vertx</groupId>
-        <version>3.5.1-SNAPSHOT</version>
+        <artifactId>vertx-parent</artifactId>
+        <version>9</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-clojure</artifactId>
+    <version>3.5.0</version>
+
+    <properties>
+        <stack.version>3.5.0</stack.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.21</slf4j.version>
+        <log4j2.version>2.8.2</log4j2.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-dependencies</artifactId>
+                <version>${stack.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
-
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-codegen</artifactId>
-            <classifier>tck-sources</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-core</artifactId>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>io.vertx</groupId>
@@ -39,29 +47,88 @@
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-codetrans</artifactId>
-            <optional>true</optional>
+            <artifactId>vertx-core</artifactId>
+            <classifier>sources</classifier>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mvel</groupId>
+            <artifactId>mvel2</artifactId>
+            <version>2.2.6.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-codegen</artifactId>
-            <scope>provided</scope>
-            <classifier>sources</classifier>
+            <classifier>tck</classifier>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-core</artifactId>
-            <scope>provided</scope>
-            <classifier>sources</classifier>
+            <artifactId>vertx-codegen</artifactId>
+            <classifier>tck-sources</classifier>
+            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-codegen</artifactId>
+            <classifier>sources</classifier>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-native-epoll</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-native-kqueue</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
-                    <!-- Unpack vertx-core source code to target/sources/vertx-core -->
+                    <!-- Unpack Vert.x Core source code to target/vertx-core -->
                     <execution>
                         <id>unpack-vertx-core</id>
                         <phase>generate-sources</phase>
@@ -73,14 +140,12 @@
                             <includeArtifactIds>vertx-core</includeArtifactIds>
                             <includeTypes>jar</includeTypes>
                             <includeClassifiers>sources</includeClassifiers>
-                            <includes>io/vertx/core/**/*.java,examples/**/*.java</includes>
-                            <excludes>**/impl/**/*.java,**/logging/**/*.java</excludes>
                             <outputDirectory>${project.build.directory}/sources/vertx-core</outputDirectory>
                         </configuration>
                     </execution>
-                    <!-- Unpack codegen source code to src/test/java -->
+                    <!-- Unpack Codegen TCK source code to target/sources/codegen -->
                     <execution>
-                        <id>unpack-codegen</id>
+                        <id>unpack-codegen-tck</id>
                         <phase>generate-test-sources</phase>
                         <goals>
                             <goal>unpack-dependencies</goal>
@@ -90,103 +155,68 @@
                             <includeArtifactIds>vertx-codegen</includeArtifactIds>
                             <includeTypes>jar</includeTypes>
                             <includeClassifiers>tck-sources</includeClassifiers>
-                            <outputDirectory>${project.build.directory}/sources/test</outputDirectory>
+                            <outputDirectory>${project.build.directory}/sources/codegen</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <systemProperties>
-                        <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
-                    </systemProperties>
-                </configuration>
+                <version>2.2.4</version>
                 <executions>
-                    <!-- Run the annotation processor on vertx-core and generate the Clojure API -->
+                    <!-- Run the annotation processor on vertx-core and generate the js API -->
                     <execution>
-                        <id>generate-api</id>
+                        <id>generate-vertx-core</id>
                         <goals>
                             <goal>process</goal>
                         </goals>
                         <phase>generate-sources</phase>
                         <configuration>
+                            <systemProperties>
+                                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+                            </systemProperties>
                             <processors>
                                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
                             </processors>
                             <optionMap>
-                                <generators>clojure</generators>
-                                <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
-                                <docgen.output>${project.build.directory}/generated/doc</docgen.output>
+                                <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                                <codeGenerators>Clojure</codeGenerators>
                             </optionMap>
                             <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
                         </configuration>
                     </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.12</version>
-
-                <executions>
+                    <!-- Run the annotation processor on codegen and generate the js codegen -->
                     <execution>
-                        <id>attach-generated-sources</id>
-                        <phase>generate-sources</phase>
-
+                        <id>generate-codegen</id>
                         <goals>
-                            <goal>add-source</goal>
+                            <goal>process</goal>
                         </goals>
+                        <phase>generate-test-sources</phase>
                         <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources/clojure</source>
-                            </sources>
+                            <systemProperties>
+                                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+                            </systemProperties>
+                            <processors>
+                                <processor>io.vertx.codegen.CodeGenProcessor</processor>
+                            </processors>
+                            <optionMap>
+                                <outputDirectory>${project.basedir}/src/test</outputDirectory>
+                                <codeGenerators>Clojure</codeGenerators>
+                            </optionMap>
+                            <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                            <goal>test-jar-no-fork</goal>
-                        </goals>
-                        <phase>package</phase>
-
-                        <configuration>
-                            <includes>
-                                <include>**/*.clj</include>
-                                <include>**/*.json</include>
-                                <include>**/*.templ</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/*.templ</exclude>
-                                <exclude>**/codegen.json</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                        <version>4.11</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
+
 </project>
