@@ -1,27 +1,44 @@
 (ns io.@{type.raw.moduleName}.clojure.@{type.raw.getSimpleName(CASE_KEBAB)})\n
-\n
 @code{
     /*clojure does not allow different functions with the same name, thus combine the functions with the same name first
     use their name as map key, methods as value list*/
     import java.util.HashMap;
 
     var methodsMap = new HashMap();
+    var importClassSet = new HashMap();
     foreach (method : methods) {
         if(methodsMap[method.name] == null){
             methodsMap[method.name] = [method]
         }else{
             methodsMap[method.name].add(method)
         }
+
+        foreach(param:method.params){
+            if(param.type.getName().startsWith("io.vertx.")){
+                importClassSet.put(param.type.raw,param.type.raw)
+            }
+        }
     }
 }
+\n(import @{type.raw})
+@foreach{clazz:importClassSet.keySet()}
+\n(import @{clazz})
+@end{}
+\n
 @foreach{methodName:methodsMap.keySet()}
 
 \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(methodName))}
 
 @foreach{method:methodsMap[methodName]}\n  (
-@if{method.name == type.raw.getSimpleName()}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ()
-@else{method.staticMethod}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ()
-@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ()
+@if{method.name == type.raw.getSimpleName()}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] (
+new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}
+)
+@else{method.staticMethod}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] (
+@{type.raw.getSimpleName}/@{method.name} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}
+)
+@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] (
+.@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}
+)
 @end{})
 @end{})
 @end{}
