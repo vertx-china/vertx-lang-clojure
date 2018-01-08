@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>vertx-lang-kotlin-parent</artifactId>
+        <artifactId>vertx-lang-clojure-parent</artifactId>
         <groupId>io.vertx</groupId>
         <version>3.5.1-SNAPSHOT</version>
     </parent>
@@ -106,7 +106,7 @@
                     </systemProperties>
                 </configuration>
                 <executions>
-                    <!-- Run the annotation processor on vertx-core and generate the Kotlin API -->
+                    <!-- Run the annotation processor on vertx-core and generate the Clojure API -->
                     <execution>
                         <id>generate-api</id>
                         <goals>
@@ -118,7 +118,7 @@
                                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
                             </processors>
                             <optionMap>
-                                <generators>kotlin</generators>
+                                <generators>clojure</generators>
                                 <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
                                 <docgen.output>${project.build.directory}/generated/doc</docgen.output>
                             </optionMap>
@@ -143,7 +143,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>${project.build.directory}/generated-sources/kotlin</source>
+                                <source>${project.build.directory}/generated-sources/clojure</source>
                             </sources>
                         </configuration>
                     </execution>
