@@ -1,0 +1,4 @@
+
+@foreach{method:methods}
+- @{method.name}(@foreach{param:method.params}@{param.name}@end{','})\n
+@end{}
