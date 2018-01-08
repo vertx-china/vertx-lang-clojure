@@ -14,11 +14,12 @@
         }
 
         foreach(param:method.params){
-            if(param.type.getName().startsWith("io.vertx.")){
+            if(param.type.getName().startsWith("io.vertx.")||param.type.getName().startsWith("java.util.")){
                 importClassSet.put(param.type.raw,param.type.raw)
             }
         }
     }
+
 }
 \n(import @{type.raw})
 @foreach{clazz:importClassSet.keySet()}

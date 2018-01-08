@@ -6,6 +6,7 @@
 (import io.vertx.core.http.RequestOptions)
 (import io.vertx.core.http.WebsocketVersion)
 (import io.vertx.core.Handler)
+(import java.util.function.Function)
 
 (defn is-metrics-enabled
   ([http-client ] (.isMetricsEnabled http-client )))

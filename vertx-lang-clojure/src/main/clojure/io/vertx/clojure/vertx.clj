@@ -15,7 +15,7 @@
   ([vertx options] (.createNetServer vertx options))
   ([vertx ] (.createNetServer vertx )))
 (defn deploy-verticle
-  ([ vertx name] (.deployVerticle vertx name))
+  ([vertx name] (.deployVerticle vertx name))
   ([vertx name completion-handler] (.deployVerticle vertx name completion-handler))
   ([vertx name options] (.deployVerticle vertx name options))
   ([vertx name options completion-handler] (.deployVerticle vertx name options completion-handler)))

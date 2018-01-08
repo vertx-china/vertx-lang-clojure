@@ -2,8 +2,10 @@
 
 (import io.vertx.core.CompositeFuture)
 (import io.vertx.core.CompositeFuture)
+(import java.util.List)
 (import io.vertx.core.Handler)
 (import io.vertx.core.Future)
+(import java.util.function.Function)
 
 (defn otherwise
   ([composite-future mapper] (.otherwise composite-future mapper))

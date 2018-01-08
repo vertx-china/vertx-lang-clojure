@@ -2,6 +2,7 @@
 
 (import io.vertx.core.cli.CLI)
 (import io.vertx.core.cli.Option)
+(import java.util.List)
 (import io.vertx.core.cli.Argument)
 
 (defn set-name
