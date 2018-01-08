@@ -1,0 +1,18 @@
+(ns io.vertx.clojure.srv-record)
+
+(import io.vertx.core.dns.SrvRecord)
+
+(defn protocol
+  ([srv-record ] (.protocol srv-record )))
+(defn port
+  ([srv-record ] (.port srv-record )))
+(defn service
+  ([srv-record ] (.service srv-record )))
+(defn name
+  ([srv-record ] (.name srv-record )))
+(defn weight
+  ([srv-record ] (.weight srv-record )))
+(defn priority
+  ([srv-record ] (.priority srv-record )))
+(defn target
+  ([srv-record ] (.target srv-record )))
