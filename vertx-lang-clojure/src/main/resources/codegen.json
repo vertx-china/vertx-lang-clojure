@@ -1,8 +1,8 @@
 {
-  "name": "md-generator",
+  "name": "Clojure",
   "generators": [ {
     "kind": "class",
-    "fileName": "'md/' + type.raw.moduleName + '/' + type.raw.simpleName + '.md'",
-    "templateFileName": "class-md.templ"
+    "fileName": "'resources/' + type.raw.moduleName + '/' + type.raw.getSimpleName(CASE_KEBAB) + '.java'",
+    "templateFileName": "vertx-clojure/template/clojure.templ"
   }]
 }
