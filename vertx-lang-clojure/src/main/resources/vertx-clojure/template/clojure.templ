@@ -1,12 +1,27 @@
 (ns io.@{type.raw.moduleName}.clojure.@{type.raw.getSimpleName(CASE_KEBAB)})\n
 \n
+@code{
+    /*clojure does not allow different functions with the same name, thus combine the functions with the same name first
+    use their name as map key, methods as value list*/
+    import java.util.HashMap;
 
-@foreach{method:methods}
-  @if{method.name == type.raw.getSimpleName()}
-    \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method.name))} [@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ());constructor
-  @else{method.staticMethod}
-    \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method.name))} [@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ());static method
-  @else{}
-    \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method.name))} [@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ())
-  @end{}
+    var methodsMap = new HashMap();
+    foreach (method : methods) {
+        if(methodsMap[method.name] == null){
+            methodsMap[method.name] = [method]
+        }else{
+            methodsMap[method.name].add(method)
+        }
+    }
+}
+@foreach{methodName:methodsMap.keySet()}
+
+\n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(methodName))}
+
+@foreach{method:methodsMap[methodName]}\n  (
+@if{method.name == type.raw.getSimpleName()}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ()
+@else{method.staticMethod}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ()
+@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] ()
+@end{})
+@end{})
 @end{}
