@@ -7,8 +7,6 @@
 
 (defn delimited-mode
   ([record-parser delim] (.delimitedMode record-parser delim)))
-(defn delimited-mode-
-  ([record-parser delim] (.delimitedMode record-parser delim)))
 (defn end-handler
   ([record-parser end-handler] (.endHandler record-parser end-handler)))
 (defn exception-handler
@@ -20,15 +18,11 @@
 (defn handler
   ([record-parser handler] (.handler record-parser handler)))
 (defn new-delimited
-  ([delim output] (RecordParser/newDelimited delim output))
+  ([delim stream-or-output] (RecordParser/newDelimited delim stream-or-output))
   ([delim] (RecordParser/newDelimited delim)))
-(defn new-delimited-
-  ([delim stream] (RecordParser/newDelimited delim stream)))
 (defn new-fixed
   ([size] (RecordParser/newFixed size))
-  ([size output] (RecordParser/newFixed size output)))
-(defn new-fixed-
-  ([size stream] (RecordParser/newFixed size stream)))
+  ([size stream-or-output] (RecordParser/newFixed size stream-or-output)))
 (defn pause
   ([record-parser ] (.pause record-parser )))
 (defn resume

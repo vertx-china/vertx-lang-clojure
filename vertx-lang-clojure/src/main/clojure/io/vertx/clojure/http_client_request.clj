@@ -19,8 +19,6 @@
   ([http-client-request chunk] (.end http-client-request chunk))
   ([http-client-request chunk enc] (.end http-client-request chunk enc))
   ([http-client-request ] (.end http-client-request )))
-(defn end-
-  ([http-client-request chunk] (.end http-client-request chunk)))
 (defn end-handler
   ([http-client-request end-handler] (.endHandler http-client-request end-handler)))
 (defn exception-handler
@@ -72,10 +70,8 @@
 (defn uri
   ([http-client-request ] (.uri http-client-request )))
 (defn write
-  ([http-client-request data] (.write http-client-request data))
+  ([http-client-request chunk-or-data] (.write http-client-request chunk-or-data))
   ([http-client-request chunk enc] (.write http-client-request chunk enc)))
-(defn write-
-  ([http-client-request chunk] (.write http-client-request chunk)))
 (defn write-custom-frame
   ([http-client-request type flags payload] (.writeCustomFrame http-client-request type flags payload))
   ([http-client-request frame] (.writeCustomFrame http-client-request frame)))

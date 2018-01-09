@@ -14,9 +14,7 @@
 (defn create
   ([cli] (CommandLine/create cli)))
 (defn get-argument-value
-  ([command-line name] (.getArgumentValue command-line name)))
-(defn get-argument-value-
-  ([command-line index] (.getArgumentValue command-line index)))
+  ([command-line index-or-name] (.getArgumentValue command-line index-or-name)))
 (defn get-option-value
   ([command-line name] (.getOptionValue command-line name)))
 (defn get-raw-value-for-argument

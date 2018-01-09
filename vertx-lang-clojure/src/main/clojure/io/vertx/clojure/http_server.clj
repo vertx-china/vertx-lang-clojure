@@ -16,11 +16,9 @@
   ([http-server ] (.isMetricsEnabled http-server )))
 (defn listen
   ([http-server ] (.listen http-server ))
-  ([http-server port host] (.listen http-server port host))
+  ([http-server port listen-handler-or-host] (.listen http-server port listen-handler-or-host))
   ([http-server port host listen-handler] (.listen http-server port host listen-handler))
-  ([http-server port] (.listen http-server port)))
-(defn listen-
-  ([http-server listen-handler] (.listen http-server listen-handler)))
+  ([http-server listen-handler-or-port] (.listen http-server listen-handler-or-port)))
 (defn request-handler
   ([http-server handler] (.requestHandler http-server handler)))
 (defn request-stream

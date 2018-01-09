@@ -19,8 +19,6 @@
   ([net-server ] (.isMetricsEnabled net-server )))
 (defn listen
   ([net-server ] (.listen net-server ))
-  ([net-server listen-handler] (.listen net-server listen-handler))
-  ([net-server port host] (.listen net-server port host))
+  ([net-server local-address-or-port-or-listen-handler] (.listen net-server local-address-or-port-or-listen-handler))
+  ([net-server local-address-or-port listen-handler-or-host] (.listen net-server local-address-or-port listen-handler-or-host))
   ([net-server port host listen-handler] (.listen net-server port host listen-handler)))
-(defn listen-
-  ([net-server local-address listen-handler] (.listen net-server local-address listen-handler)))

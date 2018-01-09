@@ -23,8 +23,6 @@
   ([http-server-response chunk] (.end http-server-response chunk))
   ([http-server-response chunk enc] (.end http-server-response chunk enc))
   ([http-server-response ] (.end http-server-response )))
-(defn end-
-  ([http-server-response chunk] (.end http-server-response chunk)))
 (defn end-handler
   ([http-server-response handler] (.endHandler http-server-response handler)))
 (defn ended
@@ -44,11 +42,9 @@
 (defn is-chunked
   ([http-server-response ] (.isChunked http-server-response )))
 (defn push
-  ([http-server-response method host path handler] (.push http-server-response method host path handler))
+  ([http-server-response method path-or-host headers-or-path handler] (.push http-server-response method path-or-host headers-or-path handler))
   ([http-server-response method path handler] (.push http-server-response method path handler))
   ([http-server-response method host path headers handler] (.push http-server-response method host path headers handler)))
-(defn push-
-  ([http-server-response method path headers handler] (.push http-server-response method path headers handler)))
 (defn put-header
   ([http-server-response name value] (.putHeader http-server-response name value)))
 (defn put-trailer
@@ -58,11 +54,9 @@
   ([http-server-response code] (.reset http-server-response code)))
 (defn send-file
   ([http-server-response filename] (.sendFile http-server-response filename))
-  ([http-server-response filename offset] (.sendFile http-server-response filename offset))
-  ([http-server-response filename offset length] (.sendFile http-server-response filename offset length))
+  ([http-server-response filename result-handler-or-offset] (.sendFile http-server-response filename result-handler-or-offset))
+  ([http-server-response filename offset result-handler-or-length] (.sendFile http-server-response filename offset result-handler-or-length))
   ([http-server-response filename offset length result-handler] (.sendFile http-server-response filename offset length result-handler)))
-(defn send-file-
-  ([http-server-response filename offset result-handler] (.sendFile http-server-response filename offset result-handler)))
 (defn set-chunked
   ([http-server-response chunked] (.setChunked http-server-response chunked)))
 (defn set-status-code
@@ -76,10 +70,8 @@
 (defn trailers
   ([http-server-response ] (.trailers http-server-response )))
 (defn write
-  ([http-server-response data] (.write http-server-response data))
+  ([http-server-response chunk-or-data] (.write http-server-response chunk-or-data))
   ([http-server-response chunk enc] (.write http-server-response chunk enc)))
-(defn write-
-  ([http-server-response chunk] (.write http-server-response chunk)))
 (defn write-continue
   ([http-server-response ] (.writeContinue http-server-response )))
 (defn write-custom-frame

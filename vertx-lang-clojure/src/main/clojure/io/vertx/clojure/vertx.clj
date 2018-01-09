@@ -45,10 +45,8 @@
   ([] (Vertx/currentContext )))
 (defn deploy-verticle
   ([vertx name] (.deployVerticle vertx name))
-  ([vertx name completion-handler] (.deployVerticle vertx name completion-handler))
+  ([vertx name options-or-completion-handler] (.deployVerticle vertx name options-or-completion-handler))
   ([vertx name options completion-handler] (.deployVerticle vertx name options completion-handler)))
-(defn deploy-verticle-
-  ([vertx name options] (.deployVerticle vertx name options)))
 (defn deployment-i-ds
   ([vertx ] (.deploymentIDs vertx )))
 (defn event-bus

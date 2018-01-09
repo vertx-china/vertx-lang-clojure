@@ -45,9 +45,7 @@
 (defn map
   ([composite-future mapper] (.map composite-future mapper)))
 (defn otherwise
-  ([composite-future mapper] (.otherwise composite-future mapper)))
-(defn otherwise-
-  ([composite-future value] (.otherwise composite-future value)))
+  ([composite-future value-or-mapper] (.otherwise composite-future value-or-mapper)))
 (defn otherwise-empty
   ([composite-future ] (.otherwiseEmpty composite-future )))
 (defn recover

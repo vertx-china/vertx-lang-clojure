@@ -33,21 +33,17 @@
   ([net-socket ] (.resume net-socket )))
 (defn send-file
   ([net-socket filename] (.sendFile net-socket filename))
-  ([net-socket filename offset] (.sendFile net-socket filename offset))
-  ([net-socket filename offset length] (.sendFile net-socket filename offset length))
+  ([net-socket filename result-handler-or-offset] (.sendFile net-socket filename result-handler-or-offset))
+  ([net-socket filename offset result-handler-or-length] (.sendFile net-socket filename offset result-handler-or-length))
   ([net-socket filename offset length result-handler] (.sendFile net-socket filename offset length result-handler)))
-(defn send-file-
-  ([net-socket filename offset result-handler] (.sendFile net-socket filename offset result-handler)))
 (defn set-write-queue-max-size
   ([net-socket max-size] (.setWriteQueueMaxSize net-socket max-size)))
 (defn upgrade-to-ssl
   ([net-socket handler] (.upgradeToSsl net-socket handler))
   ([net-socket server-name handler] (.upgradeToSsl net-socket server-name handler)))
 (defn write
-  ([net-socket data] (.write net-socket data))
+  ([net-socket str-or-data] (.write net-socket str-or-data))
   ([net-socket str enc] (.write net-socket str enc)))
-(defn write-
-  ([net-socket str] (.write net-socket str)))
 (defn write-handler-id
   ([net-socket ] (.writeHandlerID net-socket )))
 (defn write-queue-full

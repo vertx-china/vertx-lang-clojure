@@ -16,9 +16,7 @@
   ([message ] (.isSend message )))
 (defn reply
   ([message message] (.reply message message))
-  ([message message reply-handler] (.reply message message reply-handler))
+  ([message message options-or-reply-handler] (.reply message message options-or-reply-handler))
   ([message message options reply-handler] (.reply message message options reply-handler)))
-(defn reply-
-  ([message message options] (.reply message message options)))
 (defn reply-address
   ([message ] (.replyAddress message )))

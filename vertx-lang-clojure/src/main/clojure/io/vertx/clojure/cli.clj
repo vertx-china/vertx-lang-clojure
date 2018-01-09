@@ -16,9 +16,7 @@
 (defn create
   ([name] (CLI/create name)))
 (defn get-argument
-  ([cli name] (.getArgument cli name)))
-(defn get-argument-
-  ([cli index] (.getArgument cli index)))
+  ([cli index-or-name] (.getArgument cli index-or-name)))
 (defn get-arguments
   ([cli ] (.getArguments cli )))
 (defn get-description

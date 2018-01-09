@@ -3,27 +3,55 @@
     /*clojure does not allow different functions with the same name, thus combine the functions with the same name first
     use their name as map key, methods as value list*/
     import java.util.TreeMap;
+    import java.util.HashMap;
     import java.util.HashSet;
+    import java.util.ArrayList;
 
     var methodsMap = new TreeMap();
+    var paramsMap = new HashMap();
     var importClassSet = new HashSet();
     foreach (method : methods) {
         if(methodsMap[method.name] == null){
-            methodsMap[method.name] = [method]
-        }else{
-            /*Can't have 2 overloads with same arity, the second method with same name and params numbers will be add hyphen at the end of method name*/
-            var thereIsAnExistingMethodWithSameParameterNumber = false;
-            for( mtd:methodsMap[method.name] ){
-                if(mtd.params.size() == method.params.size()){
-                    thereIsAnExistingMethodWithSameParameterNumber = true;
-                }
+            methodsMap[method.name] = [method];
+            var params = new ArrayList();
+            for(param:method.params){
+                params.add(param.name);
             }
+            paramsMap[method.name +"-"+params.size()] = params;
+        }else{
+            /*Can't have 2 overloads with same arity, the method with same name and params numbers will be combined
+              e.g. (req [uri] ...)& (req [options] ...) -> (req [uri-or-options] ...)*/
+            var thereIsAnExistingMethodWithSameParameterNumber = false;
+
+            if(paramsMap[method.name+"-"+method.params.size()] != null){
+                thereIsAnExistingMethodWithSameParameterNumber = true;
+
+                var list = new ArrayList();
+
+                var paramNames = paramsMap[method.name+"-"+method.params.size()];
+                var params = method.params;
+                /*combine parameters' name e.g. option-or-request-uri*/
+                for(int j=0;j<params.size();j++){
+                    if(!paramNames.get(j).contains(params.get(j).name)){
+                        list.add(params.get(j).name + "-or-"+ paramNames.get(j));
+                    }else{
+                        list.add(paramNames.get(j));
+                    }
+                }
+
+                paramsMap[method.name+"-"+method.params.size()] = list;
+            }
+
             if(!thereIsAnExistingMethodWithSameParameterNumber){
-                methodsMap[method.name].add(method)
-            }else{
-                methodsMap[method.name + "-" ] = [method]
+                methodsMap[method.name].add(method);
+                var params = new ArrayList();
+                for(param:method.params){
+                    params.add(param.name);
+                }
+                paramsMap[method.name+"-"+params.size()] = params;
             }
         }
+        /*for import statements*/
         foreach(param:method.params){
             if(param.type.getName().startsWith("io.vertx.")||param.type.getName().startsWith("java.util.")){
                 importClassSet.add(param.type.raw)
@@ -42,14 +70,14 @@
 \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(methodName))}
 
 @foreach{method:methodsMap[methodName]}\n  (
-@if{method.name == type.raw.getSimpleName()}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] (
-new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}
+@if{method.name == type.raw.getSimpleName()}[@foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
-@else{method.staticMethod}[@foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] (
-@{type.raw.getSimpleName}/@{method.name} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}
+@else{method.staticMethod}[@foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+@{type.raw.getSimpleName}/@{method.name} @foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
-@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}] (
-.@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:method.params}@{CASE_KEBAB.format(CASE_CAMEL.parse(param.name))}@end{' '}
+@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+.@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
 @end{})
 @end{})

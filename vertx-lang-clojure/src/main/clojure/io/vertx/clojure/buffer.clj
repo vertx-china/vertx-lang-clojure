@@ -43,10 +43,8 @@
   ([buffer s] (.appendUnsignedShortLE buffer s)))
 (defn buffer
   ([] (Buffer/buffer ))
-  ([initial-size-hint] (Buffer/buffer initial-size-hint))
+  ([string-or-initial-size-hint] (Buffer/buffer string-or-initial-size-hint))
   ([string enc] (Buffer/buffer string enc)))
-(defn buffer-
-  ([string] (Buffer/buffer string)))
 (defn copy
   ([buffer ] (.copy buffer )))
 (defn get-buffer

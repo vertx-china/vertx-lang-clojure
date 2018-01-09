@@ -24,10 +24,8 @@
   ([event-bus interceptor] (.removeInterceptor event-bus interceptor)))
 (defn send
   ([event-bus address message] (.send event-bus address message))
-  ([event-bus address message reply-handler] (.send event-bus address message reply-handler))
+  ([event-bus address message options-or-reply-handler] (.send event-bus address message options-or-reply-handler))
   ([event-bus address message options reply-handler] (.send event-bus address message options reply-handler)))
-(defn send-
-  ([event-bus address message options] (.send event-bus address message options)))
 (defn sender
   ([event-bus address] (.sender event-bus address))
   ([event-bus address options] (.sender event-bus address options)))

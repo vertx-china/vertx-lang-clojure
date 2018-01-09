@@ -16,30 +16,22 @@
   ([future handler next] (.compose future handler next))
   ([future mapper] (.compose future mapper)))
 (defn fail
-  ([future cause] (.fail future cause)))
-(defn fail-
-  ([future failure-message] (.fail future failure-message)))
+  ([future failure-message-or-cause] (.fail future failure-message-or-cause)))
 (defn failed
   ([future ] (.failed future )))
 (defn failed-future
-  ([t] (Future/failedFuture t)))
-(defn failed-future-
-  ([failure-message] (Future/failedFuture failure-message)))
+  ([failure-message-or-t] (Future/failedFuture failure-message-or-t)))
 (defn future
   ([handler] (Future/future handler))
   ([] (Future/future )))
 (defn is-complete
   ([future ] (.isComplete future )))
 (defn map
-  ([future mapper] (.map future mapper)))
-(defn map-
-  ([future value] (.map future value)))
+  ([future value-or-mapper] (.map future value-or-mapper)))
 (defn map-empty
   ([future ] (.mapEmpty future )))
 (defn otherwise
-  ([future mapper] (.otherwise future mapper)))
-(defn otherwise-
-  ([future value] (.otherwise future value)))
+  ([future value-or-mapper] (.otherwise future value-or-mapper)))
 (defn otherwise-empty
   ([future ] (.otherwiseEmpty future )))
 (defn recover
@@ -57,6 +49,4 @@
   ([future result] (.tryComplete future result))
   ([future ] (.tryComplete future )))
 (defn try-fail
-  ([future cause] (.tryFail future cause)))
-(defn try-fail-
-  ([future failure-message] (.tryFail future failure-message)))
+  ([future failure-message-or-cause] (.tryFail future failure-message-or-cause)))

@@ -30,10 +30,8 @@
 (defn resume
   ([datagram-socket ] (.resume datagram-socket )))
 (defn send
-  ([datagram-socket packet port host handler] (.send datagram-socket packet port host handler))
+  ([datagram-socket str-or-packet port host handler] (.send datagram-socket str-or-packet port host handler))
   ([datagram-socket str enc port host handler] (.send datagram-socket str enc port host handler)))
-(defn send-
-  ([datagram-socket str port host handler] (.send datagram-socket str port host handler)))
 (defn sender
   ([datagram-socket port host] (.sender datagram-socket port host)))
 (defn unlisten-multicast-group
