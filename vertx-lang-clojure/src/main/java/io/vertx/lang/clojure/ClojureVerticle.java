@@ -91,20 +91,20 @@ public class ClojureVerticle implements Verticle {
         put("context", context);
       }};
 
-      IFn startIFn = Clojure.var(ns, "stop");
+      IFn stopIFn = Clojure.var(ns, "stop");
       IFn getInfo = Clojure.var("io.vertx.clojure.core", "get-method-parameters");
-      String rawParams = getInfo.invoke(startIFn).toString();
+      String rawParams = getInfo.invoke(stopIFn).toString();
       rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
       String[] paramNames = rawParams.split(" ");
       switch (paramNames.length) {
         case 1:
-          startIFn.invoke(objectMap.get(paramNames[0]));
+          stopIFn.invoke(objectMap.get(paramNames[0]));
           break;
         case 2:
-          startIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
+          stopIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
           break;
         default:
-          startIFn.invoke();
+          stopIFn.invoke();
           break;
       }
       stopFuture.complete();
