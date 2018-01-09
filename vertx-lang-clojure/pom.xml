@@ -181,8 +181,8 @@
                                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
                             </processors>
                             <optionMap>
-                                <outputDirectory>${project.basedir}/src/main</outputDirectory>
-                                <codeGenerators>Clojure</codeGenerators>
+                                <codegen.output>${project.basedir}/src/main</codegen.output>
+                                <codegen.generators>Clojure</codegen.generators>
                             </optionMap>
                             <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
                         </configuration>
@@ -202,8 +202,8 @@
                                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
                             </processors>
                             <optionMap>
-                                <outputDirectory>${project.basedir}/src/test</outputDirectory>
-                                <codeGenerators>Clojure</codeGenerators>
+                                <codegen.output>${project.basedir}/src/test</codegen.output>
+                                <codegen.generators>Clojure</codegen.generators>
                             </optionMap>
                             <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
                         </configuration>
