@@ -4,19 +4,19 @@
 (import io.vertx.core.Handler)
 (import io.vertx.core.net.SocketAddress)
 
-(defn is-metrics-enabled
-  ([net-server ] (.isMetricsEnabled net-server )))
 (defn actual-port
   ([net-server ] (.actualPort net-server )))
+(defn close
+  ([net-server ] (.close net-server ))
+  ([net-server completion-handler] (.close net-server completion-handler)))
 (defn connect-handler
   ([net-server handler] (.connectHandler net-server handler)))
 (defn connect-stream
   ([net-server ] (.connectStream net-server )))
 (defn exception-handler
   ([net-server handler] (.exceptionHandler net-server handler)))
-(defn close
-  ([net-server ] (.close net-server ))
-  ([net-server completion-handler] (.close net-server completion-handler)))
+(defn is-metrics-enabled
+  ([net-server ] (.isMetricsEnabled net-server )))
 (defn listen
   ([net-server ] (.listen net-server ))
   ([net-server listen-handler] (.listen net-server listen-handler))

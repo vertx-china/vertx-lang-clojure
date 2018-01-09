@@ -2,10 +2,11 @@
 @code{
     /*clojure does not allow different functions with the same name, thus combine the functions with the same name first
     use their name as map key, methods as value list*/
-    import java.util.HashMap;
+    import java.util.TreeMap;
+    import java.util.HashSet;
 
-    var methodsMap = new HashMap();
-    var importClassSet = new HashMap();
+    var methodsMap = new TreeMap();
+    var importClassSet = new HashSet();
     foreach (method : methods) {
         if(methodsMap[method.name] == null){
             methodsMap[method.name] = [method]
@@ -25,14 +26,14 @@
         }
         foreach(param:method.params){
             if(param.type.getName().startsWith("io.vertx.")||param.type.getName().startsWith("java.util.")){
-                importClassSet.put(param.type.raw,param.type.raw)
+                importClassSet.add(param.type.raw)
             }
         }
     }
 
 }
 \n(import @{type.raw})
-@foreach{clazz:importClassSet.keySet()}
+@foreach{clazz:importClassSet}
 \n(import @{clazz})
 @end{}
 \n
