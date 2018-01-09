@@ -10,9 +10,19 @@
         if(methodsMap[method.name] == null){
             methodsMap[method.name] = [method]
         }else{
-            methodsMap[method.name].add(method)
+            /*Can't have 2 overloads with same arity, the second method with same name and params numbers will be add hyphen at the end of method name*/
+            var thereIsAnExistingMethodWithSameParameterNumber = false;
+            for( mtd:methodsMap[method.name] ){
+                if(mtd.params.size() == method.params.size()){
+                    thereIsAnExistingMethodWithSameParameterNumber = true;
+                }
+            }
+            if(!thereIsAnExistingMethodWithSameParameterNumber){
+                methodsMap[method.name].add(method)
+            }else{
+                methodsMap[method.name + "-" ] = [method]
+            }
         }
-
         foreach(param:method.params){
             if(param.type.getName().startsWith("io.vertx.")||param.type.getName().startsWith("java.util.")){
                 importClassSet.put(param.type.raw,param.type.raw)

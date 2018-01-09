@@ -10,8 +10,7 @@
 (defn cli
   ([command-line ] (.cli command-line )))
 (defn get-argument-value
-  ([command-line name] (.getArgumentValue command-line name))
-  ([command-line index] (.getArgumentValue command-line index)))
+  ([command-line name] (.getArgumentValue command-line name)))
 (defn accept-more-values
   ([command-line option] (.acceptMoreValues command-line option)))
 (defn is-valid
@@ -26,6 +25,8 @@
   ([command-line ] (.allArguments command-line )))
 (defn get-raw-values-for-option
   ([command-line option] (.getRawValuesForOption command-line option)))
+(defn get-argument-value-
+  ([command-line index] (.getArgumentValue command-line index)))
 (defn is-seen-in-command-line
   ([command-line option] (.isSeenInCommandLine command-line option)))
 (defn is-flag-enabled

@@ -8,6 +8,8 @@
   ([net-socket ] (.resume net-socket )))
 (defn handler
   ([net-socket handler] (.handler net-socket handler)))
+(defn write-
+  ([net-socket str] (.write net-socket str)))
 (defn write-queue-full
   ([net-socket ] (.writeQueueFull net-socket )))
 (defn upgrade-to-ssl
@@ -25,8 +27,6 @@
   ([net-socket filename] (.sendFile net-socket filename))
   ([net-socket filename offset] (.sendFile net-socket filename offset))
   ([net-socket filename offset length] (.sendFile net-socket filename offset length))
-  ([net-socket filename result-handler] (.sendFile net-socket filename result-handler))
-  ([net-socket filename offset result-handler] (.sendFile net-socket filename offset result-handler))
   ([net-socket filename offset length result-handler] (.sendFile net-socket filename offset length result-handler)))
 (defn indicated-server-name
   ([net-socket ] (.indicatedServerName net-socket )))
@@ -39,11 +39,12 @@
 (defn end
   ([net-socket t] (.end net-socket t))
   ([net-socket ] (.end net-socket )))
+(defn send-file-
+  ([net-socket filename offset result-handler] (.sendFile net-socket filename offset result-handler)))
 (defn exception-handler
   ([net-socket handler] (.exceptionHandler net-socket handler)))
 (defn write
   ([net-socket data] (.write net-socket data))
-  ([net-socket str] (.write net-socket str))
   ([net-socket str enc] (.write net-socket str enc)))
 (defn close
   ([net-socket ] (.close net-socket )))

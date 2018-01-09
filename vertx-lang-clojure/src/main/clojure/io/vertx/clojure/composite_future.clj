@@ -8,8 +8,7 @@
 (import java.util.function.Function)
 
 (defn otherwise
-  ([composite-future mapper] (.otherwise composite-future mapper))
-  ([composite-future value] (.otherwise composite-future value)))
+  ([composite-future mapper] (.otherwise composite-future mapper)))
 (defn all
   ([f1 f2] (CompositeFuture/all f1 f2))
   ([f1 f2 f3] (CompositeFuture/all f1 f2 f3))
@@ -21,6 +20,8 @@
   ([composite-future handler] (.setHandler composite-future handler)))
 (defn recover
   ([composite-future mapper] (.recover composite-future mapper)))
+(defn otherwise-
+  ([composite-future value] (.otherwise composite-future value)))
 (defn cause
   ([composite-future index] (.cause composite-future index)))
 (defn failed

@@ -17,7 +17,6 @@
 (defn deploy-verticle
   ([vertx name] (.deployVerticle vertx name))
   ([vertx name completion-handler] (.deployVerticle vertx name completion-handler))
-  ([vertx name options] (.deployVerticle vertx name options))
   ([vertx name options completion-handler] (.deployVerticle vertx name options completion-handler)))
 (defn current-context
   ([] (Vertx/currentContext )))
@@ -41,6 +40,8 @@
   ([vertx ] (.deploymentIDs vertx )))
 (defn timer-stream
   ([vertx delay] (.timerStream vertx delay)))
+(defn deploy-verticle-
+  ([vertx name options] (.deployVerticle vertx name options)))
 (defn is-metrics-enabled
   ([vertx ] (.isMetricsEnabled vertx )))
 (defn file-system

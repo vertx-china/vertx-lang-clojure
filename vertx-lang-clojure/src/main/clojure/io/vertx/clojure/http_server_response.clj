@@ -29,12 +29,12 @@
 (defn end
   ([http-server-response chunk] (.end http-server-response chunk))
   ([http-server-response chunk enc] (.end http-server-response chunk enc))
-  ([http-server-response chunk] (.end http-server-response chunk))
   ([http-server-response ] (.end http-server-response )))
 (defn write
   ([http-server-response data] (.write http-server-response data))
-  ([http-server-response chunk enc] (.write http-server-response chunk enc))
-  ([http-server-response chunk] (.write http-server-response chunk)))
+  ([http-server-response chunk enc] (.write http-server-response chunk enc)))
+(defn end-
+  ([http-server-response chunk] (.end http-server-response chunk)))
 (defn close
   ([http-server-response ] (.close http-server-response )))
 (defn head-written
@@ -49,6 +49,8 @@
   ([http-server-response status-message] (.setStatusMessage http-server-response status-message)))
 (defn set-status-code
   ([http-server-response status-code] (.setStatusCode http-server-response status-code)))
+(defn write-
+  ([http-server-response chunk] (.write http-server-response chunk)))
 (defn put-trailer
   ([http-server-response name value] (.putTrailer http-server-response name value)))
 (defn set-chunked
@@ -57,7 +59,6 @@
   ([http-server-response handler] (.closeHandler http-server-response handler)))
 (defn push
   ([http-server-response method host path handler] (.push http-server-response method host path handler))
-  ([http-server-response method path headers handler] (.push http-server-response method path headers handler))
   ([http-server-response method path handler] (.push http-server-response method path handler))
   ([http-server-response method host path headers handler] (.push http-server-response method host path headers handler)))
 (defn trailers
@@ -66,9 +67,9 @@
   ([http-server-response filename] (.sendFile http-server-response filename))
   ([http-server-response filename offset] (.sendFile http-server-response filename offset))
   ([http-server-response filename offset length] (.sendFile http-server-response filename offset length))
-  ([http-server-response filename result-handler] (.sendFile http-server-response filename result-handler))
-  ([http-server-response filename offset result-handler] (.sendFile http-server-response filename offset result-handler))
   ([http-server-response filename offset length result-handler] (.sendFile http-server-response filename offset length result-handler)))
+(defn push-
+  ([http-server-response method path headers handler] (.push http-server-response method path headers handler)))
 (defn get-status-code
   ([http-server-response ] (.getStatusCode http-server-response )))
 (defn end-handler
@@ -82,5 +83,7 @@
   ([http-server-response code] (.reset http-server-response code)))
 (defn put-header
   ([http-server-response name value] (.putHeader http-server-response name value)))
+(defn send-file-
+  ([http-server-response filename offset result-handler] (.sendFile http-server-response filename offset result-handler)))
 (defn exception-handler
   ([http-server-response handler] (.exceptionHandler http-server-response handler)))

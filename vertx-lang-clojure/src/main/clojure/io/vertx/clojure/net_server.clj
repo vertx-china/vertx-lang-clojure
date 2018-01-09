@@ -21,8 +21,6 @@
   ([net-server ] (.listen net-server ))
   ([net-server listen-handler] (.listen net-server listen-handler))
   ([net-server port host] (.listen net-server port host))
-  ([net-server port host listen-handler] (.listen net-server port host listen-handler))
-  ([net-server port] (.listen net-server port))
-  ([net-server port listen-handler] (.listen net-server port listen-handler))
-  ([net-server local-address] (.listen net-server local-address))
+  ([net-server port host listen-handler] (.listen net-server port host listen-handler)))
+(defn listen-
   ([net-server local-address listen-handler] (.listen net-server local-address listen-handler)))

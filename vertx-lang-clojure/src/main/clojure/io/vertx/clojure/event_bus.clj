@@ -6,6 +6,8 @@
 
 (defn is-metrics-enabled
   ([event-bus ] (.isMetricsEnabled event-bus )))
+(defn send-
+  ([event-bus address message options] (.send event-bus address message options)))
 (defn add-interceptor
   ([event-bus interceptor] (.addInterceptor event-bus interceptor)))
 (defn local-consumer
@@ -25,7 +27,6 @@
 (defn send
   ([event-bus address message] (.send event-bus address message))
   ([event-bus address message reply-handler] (.send event-bus address message reply-handler))
-  ([event-bus address message options] (.send event-bus address message options))
   ([event-bus address message options reply-handler] (.send event-bus address message options reply-handler)))
 (defn consumer
   ([event-bus address] (.consumer event-bus address))

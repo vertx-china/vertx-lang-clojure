@@ -15,11 +15,12 @@
   ([cli ] (.getName cli )))
 (defn get-summary
   ([cli ] (.getSummary cli )))
+(defn get-argument-
+  ([cli index] (.getArgument cli index)))
 (defn get-option
   ([cli name] (.getOption cli name)))
 (defn get-argument
-  ([cli name] (.getArgument cli name))
-  ([cli index] (.getArgument cli index)))
+  ([cli name] (.getArgument cli name)))
 (defn parse
   ([cli arguments] (.parse cli arguments))
   ([cli arguments validate] (.parse cli arguments validate)))

@@ -35,7 +35,6 @@
 (defn end
   ([http-client-request chunk] (.end http-client-request chunk))
   ([http-client-request chunk enc] (.end http-client-request chunk enc))
-  ([http-client-request chunk] (.end http-client-request chunk))
   ([http-client-request ] (.end http-client-request )))
 (defn connection
   ([http-client-request ] (.connection http-client-request )))
@@ -43,11 +42,12 @@
   ([http-client-request method] (.setRawMethod http-client-request method)))
 (defn write
   ([http-client-request data] (.write http-client-request data))
-  ([http-client-request chunk] (.write http-client-request chunk))
   ([http-client-request chunk enc] (.write http-client-request chunk enc)))
 (defn send-head
   ([http-client-request ] (.sendHead http-client-request ))
   ([http-client-request completion-handler] (.sendHead http-client-request completion-handler)))
+(defn end-
+  ([http-client-request chunk] (.end http-client-request chunk)))
 (defn get-host
   ([http-client-request ] (.getHost http-client-request )))
 (defn resume
@@ -58,6 +58,8 @@
   ([http-client-request ] (.headers http-client-request )))
 (defn method
   ([http-client-request ] (.method http-client-request )))
+(defn write-
+  ([http-client-request chunk] (.write http-client-request chunk)))
 (defn query
   ([http-client-request ] (.query http-client-request )))
 (defn set-chunked

@@ -36,7 +36,6 @@
 (defn buffer
   ([] (Buffer/buffer ))
   ([initial-size-hint] (Buffer/buffer initial-size-hint))
-  ([string] (Buffer/buffer string))
   ([string enc] (Buffer/buffer string enc)))
 (defn get-unsigned-int
   ([buffer pos] (.getUnsignedInt buffer pos)))
@@ -135,6 +134,8 @@
 (defn to-string
   ([buffer ] (.toString buffer ))
   ([buffer enc] (.toString buffer enc)))
+(defn buffer-
+  ([string] (Buffer/buffer string)))
 (defn append-medium
   ([buffer i] (.appendMedium buffer i)))
 (defn set-medium

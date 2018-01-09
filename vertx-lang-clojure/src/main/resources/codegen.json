@@ -1,6 +1,7 @@
 {
   "name": "Clojure",
-  "generators": [ {
+  "generators": [
+    {
     "kind": "class",
     "fileName": "'clojure/io/' + type.raw.moduleName + '/clojure/' + type.raw.getSimpleName(CASE_SNAKE) + '.clj'",
     "templateFileName": "vertx-clojure/template/clojure.templ"

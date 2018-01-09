@@ -8,6 +8,8 @@
   ([datagram-socket ] (.isMetricsEnabled datagram-socket )))
 (defn resume
   ([datagram-socket ] (.resume datagram-socket )))
+(defn send-
+  ([datagram-socket str port host handler] (.send datagram-socket str port host handler)))
 (defn handler
   ([datagram-socket handler] (.handler datagram-socket handler)))
 (defn unlisten-multicast-group
@@ -31,7 +33,6 @@
   ([datagram-socket ] (.localAddress datagram-socket )))
 (defn send
   ([datagram-socket packet port host handler] (.send datagram-socket packet port host handler))
-  ([datagram-socket str port host handler] (.send datagram-socket str port host handler))
   ([datagram-socket str enc port host handler] (.send datagram-socket str enc port host handler)))
 (defn close
   ([datagram-socket handler] (.close datagram-socket handler))
