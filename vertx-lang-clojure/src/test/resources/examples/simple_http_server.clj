@@ -7,7 +7,10 @@
  '[io.vertx.clojure.http-server-request :as request]
  '[io.vertx.clojure.http-server-response :as response])
 
-(defn handle-request [req] (response/end (request/response req) "Hello from Vert.x!"))
+(defn handle-request [req]
+  (response/end
+   (request/response req)
+   "Hello from Vert.x!"))
 
 (defn start [vertx]
   do
