@@ -60,7 +60,7 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/clojure</sourceDirectory>
-        <testSourceDirectory>src/test/clojure</testSourceDirectory>
+        <sourceDirectory>src/main/clojure, src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/clojure, src/test/java</testSourceDirectory>
     </build>
 </project>
