@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.interface-with-variable-arg)
+(ns io.testmodel.lang.clojure.interface-with-variable-arg)
 
 (import io.vertx.codegen.testmodel.InterfaceWithVariableArg)
 

@@ -1,4 +1,4 @@
-(ns io.acme.clojure.sub-interface)
+(ns io.acme.lang.clojure.sub-interface)
 
 (import com.acme.pkg.sub.SubInterface)
 

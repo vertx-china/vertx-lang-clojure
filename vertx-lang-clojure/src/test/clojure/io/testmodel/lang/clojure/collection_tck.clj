@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.collection-tck)
+(ns io.testmodel.lang.clojure.collection-tck)
 
 (import io.vertx.codegen.testmodel.CollectionTCK)
 (import java.util.List)

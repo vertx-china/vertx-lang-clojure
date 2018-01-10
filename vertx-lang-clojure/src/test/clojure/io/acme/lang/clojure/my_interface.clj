@@ -1,4 +1,4 @@
-(ns io.acme.clojure.my-interface)
+(ns io.acme.lang.clojure.my-interface)
 
 (import com.acme.pkg.MyInterface)
 

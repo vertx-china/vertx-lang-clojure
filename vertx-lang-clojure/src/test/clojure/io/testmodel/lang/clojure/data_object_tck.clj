@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.data-object-tck)
+(ns io.testmodel.lang.clojure.data-object-tck)
 
 (import io.vertx.codegen.testmodel.DataObjectTCK)
 (import io.vertx.codegen.testmodel.DataObjectWithMaps)

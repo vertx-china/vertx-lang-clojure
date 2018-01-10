@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.interface-with-api-arg)
+(ns io.testmodel.lang.clojure.interface-with-api-arg)
 
 (import io.vertx.codegen.testmodel.InterfaceWithApiArg)
 (import io.vertx.codegen.testmodel.RefedInterface1)

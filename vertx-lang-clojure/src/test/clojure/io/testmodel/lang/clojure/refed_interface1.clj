@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.refed-interface1)
+(ns io.testmodel.lang.clojure.refed-interface1)
 
 (import io.vertx.codegen.testmodel.RefedInterface1)
 

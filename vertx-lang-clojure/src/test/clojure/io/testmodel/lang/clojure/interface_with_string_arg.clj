@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.interface-with-string-arg)
+(ns io.testmodel.lang.clojure.interface-with-string-arg)
 
 (import io.vertx.codegen.testmodel.InterfaceWithStringArg)
 

@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.factory)
+(ns io.testmodel.lang.clojure.factory)
 
 (import io.vertx.codegen.testmodel.Factory)
 (import io.vertx.core.Handler)

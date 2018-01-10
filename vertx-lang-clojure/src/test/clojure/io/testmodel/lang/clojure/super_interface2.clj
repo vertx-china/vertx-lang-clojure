@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.super-interface2)
+(ns io.testmodel.lang.clojure.super-interface2)
 
 (import io.vertx.codegen.testmodel.SuperInterface2)
 

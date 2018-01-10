@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.nullable-tck)
+(ns io.testmodel.lang.clojure.nullable-tck)
 
 (import io.vertx.codegen.testmodel.NullableTCK)
 (import io.vertx.core.json.JsonArray)

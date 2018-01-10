@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.generics-tck)
+(ns io.testmodel.lang.clojure.generics-tck)
 
 (import io.vertx.codegen.testmodel.GenericsTCK)
 (import io.vertx.codegen.testmodel.GenericRefedInterface)

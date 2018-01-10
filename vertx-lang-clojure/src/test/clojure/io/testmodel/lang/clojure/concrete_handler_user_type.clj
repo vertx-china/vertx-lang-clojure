@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.concrete-handler-user-type)
+(ns io.testmodel.lang.clojure.concrete-handler-user-type)
 
 (import io.vertx.codegen.testmodel.ConcreteHandlerUserType)
 (import io.vertx.codegen.testmodel.RefedInterface1)

@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.generic-nullable-refed-interface)
+(ns io.testmodel.lang.clojure.generic-nullable-refed-interface)
 
 (import io.vertx.codegen.testmodel.GenericNullableRefedInterface)
 

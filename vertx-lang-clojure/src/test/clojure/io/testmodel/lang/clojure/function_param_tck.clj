@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.function-param-tck)
+(ns io.testmodel.lang.clojure.function-param-tck)
 
 (import io.vertx.codegen.testmodel.FunctionParamTCK)
 (import java.util.function.Function)

@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.generic-refed-interface)
+(ns io.testmodel.lang.clojure.generic-refed-interface)
 
 (import io.vertx.codegen.testmodel.GenericRefedInterface)
 

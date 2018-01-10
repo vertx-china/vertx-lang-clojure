@@ -1,4 +1,4 @@
-(ns io.testmodel.clojure.test-interface)
+(ns io.testmodel.lang.clojure.test-interface)
 
 (import io.vertx.codegen.testmodel.TestInterface)
 (import io.vertx.core.json.JsonArray)
