@@ -9,7 +9,209 @@ To obtain a DnsClient instance you will create a new via the Vertx instance.
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "10.0.0.1")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+  }
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -26,14 +228,209 @@ To lookup the A / AAAA record for "vertx.io" you would typically use it like:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.lookup("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    println(ar.result())
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -46,14 +443,209 @@ To lookup the A record for "vertx.io" you would typically use it like:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.lookup4("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    println(ar.result())
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -66,14 +658,209 @@ To lookup the A record for "vertx.io" you would typically use it like:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.lookup6("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    println(ar.result())
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -86,17 +873,209 @@ To lookup all the A records for "vertx.io" you would typically do:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolveA("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    var records = ar.result()
-    for (record in records) {
-      println(record)
-    }
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -109,17 +1088,209 @@ To lookup all the AAAAA records for "vertx.io" you would typically do:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolveAAAA("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    var records = ar.result()
-    for (record in records) {
-      println(record)
-    }
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -132,17 +1303,209 @@ To lookup all the CNAME records for "vertx.io" you would typically do:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolveCNAME("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    var records = ar.result()
-    for (record in records) {
-      println(record)
-    }
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -155,17 +1518,209 @@ To lookup all the MX records for "vertx.io" you would typically do:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolveMX("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    var records = ar.result()
-    for (record in records) {
-      println(record)
-    }
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -176,8 +1731,209 @@ The `link:../../apidocs/io/vertx/core/dns/MxRecord.html[MxRecord]` allows you to
 
 [source,clojure]
 ----
-record.priority()
-record.name()
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+  }
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -189,17 +1945,209 @@ To resolve all the TXT records for "vertx.io" you could use something along thes
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolveTXT("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    var records = ar.result()
-    for (record in records) {
-      println(record)
-    }
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -212,17 +2160,209 @@ To resolve all the NS records for "vertx.io" you could use something along these
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolveNS("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    var records = ar.result()
-    for (record in records) {
-      println(record)
-    }
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -235,17 +2375,209 @@ To lookup all the SRV records for "vertx.io" you would typically do:
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolveSRV("vertx.io", { ar ->
-  if (ar.succeeded()) {
-    var records = ar.result()
-    for (record in records) {
-      println(record)
-    }
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -256,13 +2588,209 @@ The `link:../../apidocs/io/vertx/core/dns/SrvRecord.html[SrvRecord]` allows you 
 
 [source,clojure]
 ----
-record.priority()
-record.name()
-record.weight()
-record.port()
-record.protocol()
-record.service()
-record.target()
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
+  }
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -276,15 +2804,209 @@ To resolve the PTR record for the ipaddress 10.0.0.1 you would use the PTR notio
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.resolvePTR("1.0.0.10.in-addr.arpa", { ar ->
-  if (ar.succeeded()) {
-    var record = ar.result()
-    println(record)
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 
@@ -297,15 +3019,209 @@ To do a reverse lookup for the ipaddress 10.0.0.1 do something similar like this
 
 [source,clojure]
 ----
-var client = vertx.createDnsClient(53, "9.9.9.9")
-client.reverseLookup("10.0.0.1", { ar ->
-  if (ar.succeeded()) {
-    var record = ar.result()
-    println(record)
-  } else {
-    println("Failed to resolve entry${ar.cause()}")
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.dns.DnsClient;
+import io.vertx.core.dns.MxRecord;
+import io.vertx.core.dns.SrvRecord;
+
+import java.util.List;
+
+/**
+ * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+ */
+public class DNSExamples {
+
+  public void example1(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "10.0.0.1");
   }
-})
+
+  public void example2(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example3(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup4("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example4(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.lookup6("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        System.out.println(ar.result());
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example5(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example6(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveAAAA("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example7(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveCNAME("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record : records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example8(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveMX("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<MxRecord> records = ar.result();
+        for (MxRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example9(MxRecord record) {
+    record.priority();
+    record.name();
+  }
+
+  public void example10(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveTXT("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example11(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveNS("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<String> records = ar.result();
+        for (String record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example12(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolveSRV("vertx.io", ar -> {
+      if (ar.succeeded()) {
+        List<SrvRecord> records = ar.result();
+        for (SrvRecord record: records) {
+          System.out.println(record);
+        }
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  private static SrvRecord getSrvRecord() {
+    return null;
+  }
+
+  public void example13(SrvRecord record) {
+    record.priority();
+    record.name();
+    record.weight();
+    record.port();
+    record.protocol();
+    record.service();
+    record.target();
+  }
+
+  public void example14(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.resolvePTR("1.0.0.10.in-addr.arpa", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+
+  public void example15(Vertx vertx) {
+    DnsClient client = vertx.createDnsClient(53, "9.9.9.9");
+    client.reverseLookup("10.0.0.1", ar -> {
+      if (ar.succeeded()) {
+        String record = ar.result();
+        System.out.println(record);
+      } else {
+        System.out.println("Failed to resolve entry" + ar.cause());
+      }
+    });
+  }
+}
 
 ----
 

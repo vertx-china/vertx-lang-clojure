@@ -29,17 +29,161 @@ describe options and arguments:
 
 [source,clojure]
 ----
-var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option(
-  longName = "directory",
-  shortName = "R",
-  description = "enables directory support",
-  flag = true)).addArgument(Argument(
-  index = 0,
-  description = "The source",
-  argName = "source")).addArgument(Argument(
-  index = 1,
-  description = "The destination",
-  argName = "target"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -61,18 +205,161 @@ configure the option to receive several values using `link:../../apidocs/io/vert
 
 [source,clojure]
 ----
-var cli = CLI.create("some-name").setSummary("A command line interface illustrating the options valuation.").addOption(Option(
-  longName = "flag",
-  shortName = "f",
-  flag = true,
-  description = "a flag")).addOption(Option(
-  longName = "single",
-  shortName = "s",
-  description = "a single-valued option")).addOption(Option(
-  longName = "multiple",
-  shortName = "m",
-  multiValued = true,
-  description = "a multi-valued option"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -81,10 +368,161 @@ the parsing:
 
 [source,clojure]
 ----
-var cli = CLI.create("some-name").addOption(Option(
-  longName = "mandatory",
-  required = true,
-  description = "a mandatory option"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -93,10 +531,161 @@ the command line:
 
 [source,clojure]
 ----
-var cli = CLI.create("some-name").addOption(Option(
-  longName = "optional",
-  defaultValue = "hello",
-  description = "an optional option with a default value"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -107,11 +696,161 @@ If the option value is contrained to a fixed set, you can set the different acce
 
 [source,clojure]
 ----
-var cli = CLI.create("some-name").addOption(Option(
-  longName = "color",
-  defaultValue = "green",
-  choices = listOf("blue", "red", "green"),
-  description = "a color"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -127,13 +866,161 @@ index `0`:
 
 [source,clojure]
 ----
-var cli = CLI.create("some-name").addArgument(Argument(
-  index = 0,
-  description = "the first argument",
-  argName = "arg1")).addArgument(Argument(
-  index = 1,
-  description = "the second argument",
-  argName = "arg2"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -141,11 +1028,161 @@ If you don't set the argument indexes, it computes it automatically by using the
 
 [source,clojure]
 ----
-var cli = CLI.create("some-name").addArgument(Argument(
-  description = "the first argument",
-  argName = "arg1")).addArgument(Argument(
-  description = "the second argument",
-  argName = "arg2"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -167,20 +1204,161 @@ Once your `link:../../apidocs/io/vertx/core/cli/CLI.html[CLI]` instance is confi
 
 [source,clojure]
 ----
-var cli = CLI.create("copy").setSummary("A command line interface to copy files.").addOption(Option(
-  longName = "directory",
-  shortName = "R",
-  description = "enables directory support",
-  flag = true)).addArgument(Argument(
-  index = 0,
-  description = "The source",
-  argName = "source")).addArgument(Argument(
-  index = 0,
-  description = "The destination",
-  argName = "target"))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
 
-var builder = java.lang.StringBuilder()
-cli.usage(builder)
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -204,7 +1382,161 @@ each option and argument:
 
 [source,clojure]
 ----
-var commandLine = cli.parse(userCommandLineArguments)
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -225,10 +1557,161 @@ method:
 
 [source,clojure]
 ----
-var commandLine = cli.parse(userCommandLineArguments)
-var opt = commandLine.getOptionValue<Any>("my-option")
-var flag = commandLine.isFlagEnabled("my-flag")
-var arg0 = commandLine.getArgumentValue<Any>(0)
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
+
+package examples.cli;
+
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
+}
 
 ----
 
@@ -237,21 +1720,160 @@ won't failed, but give you the opportunity to check if the user asks for help:
 
 [source,clojure]
 ----
-var cli = CLI.create("test").addOption(Option(
-  longName = "help",
-  shortName = "h",
-  flag = true,
-  help = true)).addOption(Option(
-  longName = "mandatory",
-  required = true))
+/*
+ * Copyright (c) 2011-2017 Contributors to the Eclipse Foundation
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+ * which is available at https://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+ */
 
-var line = cli.parse(java.util.Collections.singletonList("-h"))
+package examples.cli;
 
-// The parsing does not fail and let you do:
-if (!line.isValid() && line.isAskingForHelp()) {
-  var builder = java.lang.StringBuilder()
-  cli.usage(builder)
-  stream.print(builder.toString())
+import io.vertx.core.cli.Argument;
+import io.vertx.core.cli.CLI;
+import io.vertx.core.cli.CommandLine;
+import io.vertx.core.cli.Option;
+
+import java.io.PrintStream;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * @author <a href="http://escoffier.me">Clement Escoffier</a>
+ */
+public class CLIExamples {
+
+  public void example1() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("The destination")
+            .setArgName("target"));
+  }
+
+  public void example2() {
+    CLI cli = CLI.create("some-name")
+        .setSummary("A command line interface illustrating the options valuation.")
+        .addOption(new Option()
+            .setLongName("flag").setShortName("f").setFlag(true).setDescription("a flag"))
+        .addOption(new Option()
+            .setLongName("single").setShortName("s").setDescription("a single-valued option"))
+        .addOption(new Option()
+            .setLongName("multiple").setShortName("m").setMultiValued(true)
+            .setDescription("a multi-valued option"));
+  }
+
+  public void example3() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("mandatory")
+            .setRequired(true)
+            .setDescription("a mandatory option"));
+  }
+
+  public void example4() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("optional")
+            .setDefaultValue("hello")
+            .setDescription("an optional option with a default value"));
+  }
+
+  public void example41() {
+    CLI cli = CLI.create("some-name")
+        .addOption(new Option()
+            .setLongName("color")
+            .setDefaultValue("green")
+            .addChoice("blue").addChoice("red").addChoice("green")
+            .setDescription("a color"));
+  }
+
+  public void example5() {
+    CLI cli = CLI.create("some-name")
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        .addArgument(new Argument()
+            .setIndex(1)
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example51() {
+    CLI cli = CLI.create("some-name")
+        // will have the index 0
+        .addArgument(new Argument()
+            .setDescription("the first argument")
+            .setArgName("arg1"))
+        // will have the index 1
+        .addArgument(new Argument()
+            .setDescription("the second argument")
+            .setArgName("arg2"));
+  }
+
+  public void example6() {
+    CLI cli = CLI.create("copy")
+        .setSummary("A command line interface to copy files.")
+        .addOption(new Option()
+            .setLongName("directory")
+            .setShortName("R")
+            .setDescription("enables directory support")
+            .setFlag(true))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The source")
+            .setArgName("source"))
+        .addArgument(new Argument()
+            .setIndex(0)
+            .setDescription("The destination")
+            .setArgName("target"));
+
+    StringBuilder builder = new StringBuilder();
+    cli.usage(builder);
+  }
+
+  public void example7(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+  }
+
+  public void example8(CLI cli, List<String> userCommandLineArguments) {
+    CommandLine commandLine = cli.parse(userCommandLineArguments);
+    String opt = commandLine.getOptionValue("my-option");
+    boolean flag = commandLine.isFlagEnabled("my-flag");
+    String arg0 = commandLine.getArgumentValue(0);
+  }
+
+  public void example9(PrintStream stream) {
+    CLI cli = CLI.create("test")
+        .addOption(
+            new Option().setLongName("help").setShortName("h").setFlag(true).setHelp(true))
+        .addOption(
+            new Option().setLongName("mandatory").setRequired(true));
+
+    CommandLine line = cli.parse(Collections.singletonList("-h"));
+
+    // The parsing does not fail and let you do:
+    if (!line.isValid() && line.isAskingForHelp()) {
+      StringBuilder builder = new StringBuilder();
+      cli.usage(builder);
+      stream.print(builder.toString());
+    }
+  }
 }
 
 ----
