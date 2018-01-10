@@ -28,6 +28,10 @@ public class ClojureVerticleFactory implements VerticleFactory {
 
     String ns = VerticleFactory.removePrefix(verticleName);
 
+    if(ns.endsWith("."+prefix())){
+      ns = ns.substring(0,ns.indexOf("."+prefix()));
+    }
+
     //change SNAKE_CASE to KEBAB_CASE since in the namespace, clojure uses Kebab case, while Snake case in file name.
     ns = ns.replace("_","-");
 
