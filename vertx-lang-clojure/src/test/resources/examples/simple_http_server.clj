@@ -11,7 +11,7 @@
   do
   (def response (request/response req))
   (response/put-header response "content-type" "text/plain")
-  (response/end response"Hello from Vert.x!"))
+  (response/end response "Hello from Vert.x!"))
 
 (defn start [vertx]
   do

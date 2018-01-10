@@ -1,7 +1,6 @@
 package io.vertx.lang.clojure;
 
 import io.vertx.codetrans.CodeTranslator;
-import io.vertx.codetrans.lang.kotlin.KotlinLang;
 import io.vertx.docgen.Coordinate;
 import io.vertx.docgen.DocGenerator;
 import io.vertx.docgen.JavaDocGenerator;
@@ -30,9 +29,9 @@ public class ClojureDocGenerator implements DocGenerator {
 
   @Override
   public String renderSource(ExecutableElement elt, String source) {
-    KotlinLang lang = new KotlinLang();
+//    ClojureLang lang = new ClojureLang();
     try {
-      return translator.translate(elt, lang);
+      return source;//translator.translate(elt, lang);
     } catch (Exception e) {
       System.out.println("Cannot generate " + elt.getEnclosingElement().getSimpleName() + "#" + elt.getSimpleName() + " : " + e.getMessage());
       return "Code not translatable";
