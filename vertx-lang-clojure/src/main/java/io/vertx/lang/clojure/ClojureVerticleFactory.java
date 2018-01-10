@@ -35,6 +35,7 @@ public class ClojureVerticleFactory implements VerticleFactory {
       ns = ns.substring((prefix()+":").length());
     }
 
+    //change SNAKE_CASE to KEBAB_CASE since in the namespace, clojure uses Kebab case, while Snake case in file name.
     ns = ns.replace("_","-");
 
     return new ClojureVerticle(ns);
