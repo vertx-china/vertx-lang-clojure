@@ -231,7 +231,7 @@
                                 <processor>io.vertx.docgen.DocGenProcessor</processor>
                             </processors>
                             <optionMap>
-                                <docgen.output>${project.basedir}/src/main/asciidoc/clojure</docgen.output>
+                                <docgen.output>${asciidoc.dir}/clojure</docgen.output>
                                 <maven.groupId>${project.groupId}</maven.groupId>
                                 <maven.artifactId>${project.artifactId}</maven.artifactId>
                                 <maven.version>${project.version}</maven.version>
@@ -252,8 +252,7 @@
                                 <processor>io.vertx.docgen.DocGenProcessor</processor>
                             </processors>
                             <optionMap>
-                                <!--${asciidoc.dir}/clojure-->
-                                <docgen.output>${project.basedir}/src/main/asciidoc/clojure</docgen.output>
+                                <docgen.output>${asciidoc.dir}/clojure</docgen.output>
                                 <maven.groupId>${project.groupId}</maven.groupId>
                                 <maven.artifactId>${project.artifactId}</maven.artifactId>
                                 <maven.version>${project.version}</maven.version>
