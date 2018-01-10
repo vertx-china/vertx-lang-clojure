@@ -8,9 +8,10 @@
  '[io.vertx.lang.clojure.http-server-response :as response])
 
 (defn handle-request [req]
-  (response/end
-   (request/response req)
-   "Hello from Vert.x!"))
+  do
+  (def response (request/response req))
+  (response/put-header response "content-type" "text/plain")
+  (response/end response"Hello from Vert.x!"))
 
 (defn start [vertx]
   do

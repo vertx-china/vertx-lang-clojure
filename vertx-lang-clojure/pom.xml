@@ -81,12 +81,7 @@
             <version>2.2.6.Final</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- Test dependencies -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-codegen</artifactId>
@@ -105,6 +100,19 @@
             <classifier>sources</classifier>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>io.netty</groupId>
