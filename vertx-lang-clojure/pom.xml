@@ -275,6 +275,11 @@
                 <artifactId>clojure-maven-plugin</artifactId>
                 <version>${clojure.plugin.version}</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <copiedNamespaces>
+                        <copiedNamespace>!.*</copiedNamespace>
+                    </copiedNamespaces>
+                </configuration>
             </plugin>
         </plugins>
     </build>

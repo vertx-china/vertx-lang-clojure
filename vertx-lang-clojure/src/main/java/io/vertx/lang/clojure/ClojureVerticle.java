@@ -18,8 +18,15 @@ public class ClojureVerticle implements Verticle {
   private Vertx vertx;
   private Context context;
 
+  private boolean requireCompiling = false;
+
   public ClojureVerticle(String ns) {
     this.ns = ns;
+  }
+
+  public ClojureVerticle(String ns, boolean requireCompiling) {
+    this.ns = ns;
+    this.requireCompiling = requireCompiling;
   }
 
   @Override
@@ -35,45 +42,56 @@ public class ClojureVerticle implements Verticle {
 
   @Override
   public void start(Future<Void> startFuture) {
+
     try {
-      synchronized (Clojure.class) {
-        IFn iFn;
-
-        iFn = Clojure.var("clojure.core", "require");
-        iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
-
-        iFn = Clojure.var("clojure.core", "require");
-        iFn.invoke(Clojure.read(ns));
-
-        iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "exists");
-        if (iFn.invoke(ns + "/start") == null)
-          throw new Exception("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
-
-        Map objectMap = new HashMap() {{
-          put("vertx", vertx);
-          put("context", context);
-        }};
-
-        IFn startIFn = Clojure.var(ns, "start");
-        IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
-        String rawParams = getInfo.invoke(startIFn).toString();
-        rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
-        String[] paramNames = rawParams.split(" ");
-        switch (paramNames.length) {
-          case 1:
-            startIFn.invoke(objectMap.get(paramNames[0]));
-            break;
-          case 2:
-            startIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
-            break;
-          default:
-            startIFn.invoke();
-            break;
+      if (requireCompiling) {
+        //concurrently compile clj files may cause exception,make it serial
+        synchronized (Clojure.class){
+          start();
         }
+      }else{//the source file should have already been compiled
+        start();
       }
+
       startFuture.complete();
     } catch (Throwable e) {
       startFuture.fail(e);
+    }
+  }
+
+  private void start(){
+    IFn iFn;
+
+    iFn = Clojure.var("clojure.core", "require");
+    iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
+
+    IFn require = Clojure.var("clojure.core", "require");
+    require.invoke(Clojure.read(ns));
+
+//        iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "exists");
+//        if (iFn.invoke(ns + "/start") == null)
+//          throw new Exception("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
+
+    Map objectMap = new HashMap() {{
+      put("vertx", vertx);
+      put("context", context);
+    }};
+
+    IFn startIFn = Clojure.var(ns, "start");
+    IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
+    String rawParams = getInfo.invoke(startIFn).toString();
+    rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
+    String[] paramNames = rawParams.split(" ");
+    switch (paramNames.length) {
+      case 1:
+        startIFn.invoke(objectMap.get(paramNames[0]));
+        break;
+      case 2:
+        startIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
+        break;
+      default:
+        startIFn.invoke();
+        break;
     }
   }
 
