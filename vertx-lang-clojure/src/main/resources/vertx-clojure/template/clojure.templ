@@ -1,63 +1,63 @@
 (ns io.@{type.raw.moduleName}.clojure.@{type.raw.getSimpleName(CASE_KEBAB)})\n
 @code{
-    /*clojure does not allow different functions with the same name, thus combine the functions with the same name first
-    use their name as map key, methods as value list*/
-    import java.util.TreeMap;
-    import java.util.HashMap;
-    import java.util.HashSet;
-    import java.util.ArrayList;
+  /*clojure does not allow different functions with the same name, thus combine the functions with the same name first
+  use their name as map key, methods as value list*/
+  import java.util.TreeMap;
+  import java.util.HashMap;
+  import java.util.HashSet;
+  import java.util.ArrayList;
 
-    var methodsMap = new TreeMap();
-    var paramsMap = new HashMap();
-    var importClassSet = new HashSet();
-    foreach (method : methods) {
-        if(methodsMap[method.name] == null){
-            methodsMap[method.name] = [method];
-            var params = new ArrayList();
-            for(param:method.params){
-                params.add(param.name);
-            }
-            paramsMap[method.name +"-"+params.size()] = params;
-        }else{
-            /*Can't have 2 overloads with same arity, the method with same name and params numbers will be combined
-              e.g. (req [uri] ...)& (req [options] ...) -> (req [uri-or-options] ...)*/
-            var thereIsAnExistingMethodWithSameParameterNumber = false;
+  var methodsMap = new TreeMap();
+  var paramsMap = new HashMap();
+  var importClassSet = new HashSet();
+  foreach (method : methods) {
+    if(methodsMap[method.name] == null){
+      methodsMap[method.name] = [method];
+      var params = new ArrayList();
+      for(param:method.params){
+        params.add(param.name);
+      }
+      paramsMap[method.name +"-"+params.size()] = params;
+    }else{
+      /*Can't have 2 overloads with same arity, the method with same name and params numbers will be combined
+        e.g. (req [uri] ...)& (req [options] ...) -> (req [uri-or-options] ...)*/
+      var thereIsAnExistingMethodWithSameParameterNumber = false;
 
-            if(paramsMap[method.name+"-"+method.params.size()] != null){
-                thereIsAnExistingMethodWithSameParameterNumber = true;
+      if(paramsMap[method.name+"-"+method.params.size()] != null){
+        thereIsAnExistingMethodWithSameParameterNumber = true;
 
-                var list = new ArrayList();
+        var list = new ArrayList();
 
-                var paramNames = paramsMap[method.name+"-"+method.params.size()];
-                var params = method.params;
-                /*combine parameters' name e.g. option-or-request-uri*/
-                for(int j=0;j<params.size();j++){
-                    if(!paramNames.get(j).contains(params.get(j).name)){
-                        list.add(params.get(j).name + "-or-"+ paramNames.get(j));
-                    }else{
-                        list.add(paramNames.get(j));
-                    }
-                }
-
-                paramsMap[method.name+"-"+method.params.size()] = list;
-            }
-
-            if(!thereIsAnExistingMethodWithSameParameterNumber){
-                methodsMap[method.name].add(method);
-                var params = new ArrayList();
-                for(param:method.params){
-                    params.add(param.name);
-                }
-                paramsMap[method.name+"-"+params.size()] = params;
-            }
+        var paramNames = paramsMap[method.name+"-"+method.params.size()];
+        var params = method.params;
+        /*combine parameters' name e.g. option-or-request-uri*/
+        for(int j=0;j<params.size();j++){
+          if(!paramNames.get(j).contains(params.get(j).name)){
+            list.add(params.get(j).name + "-or-"+ paramNames.get(j));
+          }else{
+            list.add(paramNames.get(j));
+          }
         }
-        /*for import statements*/
-        foreach(param:method.params){
-            if(param.type.getName().startsWith("io.vertx.")||param.type.getName().startsWith("java.util.")){
-                importClassSet.add(param.type.raw)
-            }
+
+        paramsMap[method.name+"-"+method.params.size()] = list;
+      }
+
+      if(!thereIsAnExistingMethodWithSameParameterNumber){
+        methodsMap[method.name].add(method);
+        var params = new ArrayList();
+        for(param:method.params){
+          params.add(param.name);
         }
+        paramsMap[method.name+"-"+params.size()] = params;
+      }
     }
+    /*for import statements*/
+    foreach(param:method.params){
+      if(param.type.getName().startsWith("io.vertx.")||param.type.getName().startsWith("java.util.")){
+        importClassSet.add(param.type.raw)
+      }
+    }
+  }
 
 }
 \n(import @{type.raw})
