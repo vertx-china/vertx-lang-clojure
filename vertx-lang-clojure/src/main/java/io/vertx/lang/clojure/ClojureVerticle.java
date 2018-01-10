@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class ClojureVerticle implements Verticle {
 
+  private static final String NS_IO_VERTX_CLOJURE_CORE_CORE = "io.vertx.clojure.core.core";
+
   private String ns;
   private Vertx vertx;
   private Context context;
@@ -35,12 +37,12 @@ public class ClojureVerticle implements Verticle {
   public void start(Future<Void> startFuture) {
     try {
       IFn iFn = Clojure.var("clojure.core", "require");
-      iFn.invoke(Clojure.read("io.vertx.clojure.core"));
+      iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
 
       iFn = Clojure.var("clojure.core", "require");
       iFn.invoke(Clojure.read(ns));
 
-      iFn = Clojure.var("io.vertx.clojure.core","exists");
+      iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE,"exists");
       if(iFn.invoke(ns+"/start")==null) throw new Exception("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
 
       Map objectMap = new HashMap() {{
@@ -49,7 +51,7 @@ public class ClojureVerticle implements Verticle {
       }};
 
       IFn startIFn = Clojure.var(ns, "start");
-      IFn getInfo = Clojure.var("io.vertx.clojure.core", "get-method-parameters");
+      IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
       String rawParams = getInfo.invoke(startIFn).toString();
       rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
       String[] paramNames = rawParams.split(" ");
@@ -74,12 +76,12 @@ public class ClojureVerticle implements Verticle {
   public void stop(Future<Void> stopFuture) {
     try {
       IFn iFn = Clojure.var("clojure.core", "require");
-      iFn.invoke(Clojure.read("io.vertx.clojure.core"));
+      iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
 
       iFn = Clojure.var("clojure.core", "require");
       iFn.invoke(Clojure.read(ns));
 
-      iFn = Clojure.var("io.vertx.clojure.core","exists");
+      iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE,"exists");
       if(iFn.invoke(ns+"/stop")==null){
         stopFuture.complete();
         return;
@@ -91,7 +93,7 @@ public class ClojureVerticle implements Verticle {
       }};
 
       IFn stopIFn = Clojure.var(ns, "stop");
-      IFn getInfo = Clojure.var("io.vertx.clojure.core", "get-method-parameters");
+      IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
       String rawParams = getInfo.invoke(stopIFn).toString();
       rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
       String[] paramNames = rawParams.split(" ");

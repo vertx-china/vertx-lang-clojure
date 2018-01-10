@@ -1,4 +1,4 @@
-(ns io.vertx.clojure.core)
+(ns io.vertx.clojure.core.core)
 
 (defn get-method-parameters [f]
   (first (-> f meta :arglists)))
