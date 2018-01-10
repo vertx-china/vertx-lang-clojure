@@ -28,11 +28,11 @@ public class ClojureVerticleFactory implements VerticleFactory {
 
     String ns = verticleName;
 
-    if (ns.endsWith("clj")) {
-      ns = ns.substring(0, ns.indexOf(".clj"));
+    if (ns.endsWith("."+prefix())) {
+      ns = ns.substring(0, ns.indexOf("."+prefix()));
     }
-    if (ns.startsWith("clojure:")) {
-      ns = ns.substring("clojure:".length());
+    if (ns.startsWith(prefix()+":")) {
+      ns = ns.substring((prefix()+":").length());
     }
 
     ns = ns.replace("_","-");

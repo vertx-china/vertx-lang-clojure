@@ -10,7 +10,7 @@ import org.junit.Test;
 public class VerticleTest extends VertxTestBase {
   @Test
   public void testHttpServer() {
-    vertx.deployVerticle("examples.simple_http_server.clj", ar -> {
+    vertx.deployVerticle("clj:examples.simple_http_server", ar -> {
       assertTrue(ar.succeeded());
       HttpClient client = vertx.createHttpClient(new HttpClientOptions());
       HttpClientRequest req = client.request(HttpMethod.GET, 8080, "localhost", "/");
