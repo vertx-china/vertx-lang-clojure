@@ -1,6 +1,5 @@
 package io.vertx.lang.clojure;
 
-import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpClientRequest;
@@ -11,7 +10,6 @@ import org.junit.Test;
 public class VerticleTest extends VertxTestBase {
   @Test
   public void testHttpServer() {
-    vertx.registerVerticleFactory(new ClojureVerticleFactory());
     vertx.deployVerticle("examples.simple_http_server.clj", ar -> {
       assertTrue(ar.succeeded());
       HttpClient client = vertx.createHttpClient(new HttpClientOptions());
