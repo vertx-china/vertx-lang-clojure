@@ -8,8 +8,9 @@ import io.vertx.test.core.VertxTestBase;
 import org.junit.Test;
 
 public class VerticleTest extends VertxTestBase {
+
   @Test
-  public void testHttpServer() {
+  public void testHttpServer(){
     vertx.deployVerticle("clj:examples.simple_http_server", ar -> {
       assertTrue(ar.succeeded());
       HttpClient client = vertx.createHttpClient(new HttpClientOptions());

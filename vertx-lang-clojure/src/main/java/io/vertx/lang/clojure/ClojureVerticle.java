@@ -36,35 +36,40 @@ public class ClojureVerticle implements Verticle {
   @Override
   public void start(Future<Void> startFuture) {
     try {
-      IFn iFn = Clojure.var("clojure.core", "require");
-      iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
+      synchronized (Clojure.class) {
+        IFn iFn;
 
-      iFn = Clojure.var("clojure.core", "require");
-      iFn.invoke(Clojure.read(ns));
+        iFn = Clojure.var("clojure.core", "require");
+        iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
 
-      iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE,"exists");
-      if(iFn.invoke(ns+"/start")==null) throw new Exception("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
+        iFn = Clojure.var("clojure.core", "require");
+        iFn.invoke(Clojure.read(ns));
 
-      Map objectMap = new HashMap() {{
-        put("vertx", vertx);
-        put("context", context);
-      }};
+        iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "exists");
+        if (iFn.invoke(ns + "/start") == null)
+          throw new Exception("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
 
-      IFn startIFn = Clojure.var(ns, "start");
-      IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
-      String rawParams = getInfo.invoke(startIFn).toString();
-      rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
-      String[] paramNames = rawParams.split(" ");
-      switch (paramNames.length) {
-        case 1:
-          startIFn.invoke(objectMap.get(paramNames[0]));
-          break;
-        case 2:
-          startIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
-          break;
-        default:
-          startIFn.invoke();
-          break;
+        Map objectMap = new HashMap() {{
+          put("vertx", vertx);
+          put("context", context);
+        }};
+
+        IFn startIFn = Clojure.var(ns, "start");
+        IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
+        String rawParams = getInfo.invoke(startIFn).toString();
+        rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
+        String[] paramNames = rawParams.split(" ");
+        switch (paramNames.length) {
+          case 1:
+            startIFn.invoke(objectMap.get(paramNames[0]));
+            break;
+          case 2:
+            startIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
+            break;
+          default:
+            startIFn.invoke();
+            break;
+        }
       }
       startFuture.complete();
     } catch (Throwable e) {
@@ -75,38 +80,40 @@ public class ClojureVerticle implements Verticle {
   @Override
   public void stop(Future<Void> stopFuture) {
     try {
-      IFn iFn = Clojure.var("clojure.core", "require");
-      iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
+      synchronized (Clojure.class) {
+        IFn iFn = Clojure.var("clojure.core", "require");
+        iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
 
-      iFn = Clojure.var("clojure.core", "require");
-      iFn.invoke(Clojure.read(ns));
+        iFn = Clojure.var("clojure.core", "require");
+        iFn.invoke(Clojure.read(ns));
 
-      iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE,"exists");
-      if(iFn.invoke(ns+"/stop")==null){
-        stopFuture.complete();
-        return;
-      }
+        iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "exists");
+        if (iFn.invoke(ns + "/stop") == null) {
+          stopFuture.complete();
+          return;
+        }
 
-      Map objectMap = new HashMap() {{
-        put("vertx", vertx);
-        put("context", context);
-      }};
+        Map objectMap = new HashMap() {{
+          put("vertx", vertx);
+          put("context", context);
+        }};
 
-      IFn stopIFn = Clojure.var(ns, "stop");
-      IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
-      String rawParams = getInfo.invoke(stopIFn).toString();
-      rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
-      String[] paramNames = rawParams.split(" ");
-      switch (paramNames.length) {
-        case 1:
-          stopIFn.invoke(objectMap.get(paramNames[0]));
-          break;
-        case 2:
-          stopIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
-          break;
-        default:
-          stopIFn.invoke();
-          break;
+        IFn stopIFn = Clojure.var(ns, "stop");
+        IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
+        String rawParams = getInfo.invoke(stopIFn).toString();
+        rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
+        String[] paramNames = rawParams.split(" ");
+        switch (paramNames.length) {
+          case 1:
+            stopIFn.invoke(objectMap.get(paramNames[0]));
+            break;
+          case 2:
+            stopIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
+            break;
+          default:
+            stopIFn.invoke();
+            break;
+        }
       }
       stopFuture.complete();
     } catch (Throwable e) {

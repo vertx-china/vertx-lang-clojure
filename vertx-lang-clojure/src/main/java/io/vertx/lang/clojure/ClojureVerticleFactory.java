@@ -26,14 +26,7 @@ public class ClojureVerticleFactory implements VerticleFactory {
   @Override
   public Verticle createVerticle(String verticleName, ClassLoader classLoader) throws Exception {
 
-    String ns = verticleName;
-
-    if (ns.endsWith("."+prefix())) {
-      ns = ns.substring(0, ns.indexOf("."+prefix()));
-    }
-    if (ns.startsWith(prefix()+":")) {
-      ns = ns.substring((prefix()+":").length());
-    }
+    String ns = VerticleFactory.removePrefix(verticleName);
 
     //change SNAKE_CASE to KEBAB_CASE since in the namespace, clojure uses Kebab case, while Snake case in file name.
     ns = ns.replace("_","-");
