@@ -2,10 +2,10 @@
 
 (require
  '[io.vertx.clojure.core :as vertx.core]
- '[io.vertx.clojure.vertx :as vertx.vertx]
- '[io.vertx.clojure.http-server :as server]
- '[io.vertx.clojure.http-server-request :as request]
- '[io.vertx.clojure.http-server-response :as response])
+ '[io.vertx.lang.clojure.vertx :as vertx.vertx]
+ '[io.vertx.lang.clojure.http-server :as server]
+ '[io.vertx.lang.clojure.http-server-request :as request]
+ '[io.vertx.lang.clojure.http-server-response :as response])
 
 (defn handle-request [req]
   (response/end

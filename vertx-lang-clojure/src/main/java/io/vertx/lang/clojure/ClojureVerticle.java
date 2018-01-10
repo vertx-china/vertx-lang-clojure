@@ -6,7 +6,6 @@ import io.vertx.core.Context;
 import io.vertx.core.Future;
 import io.vertx.core.Verticle;
 import io.vertx.core.Vertx;
-import io.vertx.core.impl.Deployment;
 
 import java.util.HashMap;
 import java.util.Map;
