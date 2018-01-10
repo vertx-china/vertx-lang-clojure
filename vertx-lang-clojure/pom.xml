@@ -125,7 +125,7 @@
             <plugin>
                 <groupId>com.theoryinpractise</groupId>
                 <artifactId>clojure-maven-plugin</artifactId>
-                <version>1.8.1</version>
+                <version>${clojure.plugin.version}</version>
                 <extensions>true</extensions>
             </plugin>
             <plugin>

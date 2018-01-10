@@ -23,6 +23,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <clojure.version>1.9.0</clojure.version>
+        <clojure.plugin.version>1.8.1</clojure.plugin.version>
         <junit.version>4.12</junit.version>
         <stack.version>3.5.1-SNAPSHOT</stack.version>
     </properties>
