@@ -4,7 +4,6 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
-  
   ([^JsonObject json] (new Argument json)))
 
 (defn set-arg-name [^Argument argument arg-name] (.setArgName argument arg-name))

@@ -12,7 +12,7 @@
 \n(import io.vertx.core.json.JsonObject)
 \n
 \n(defn new-instance
-\n  @if{classKeBabName.endsWith("options")}([] (new @{type.raw.getSimpleName()}))@end{}
+@if{classKeBabName.endsWith("options")}\n  ([] (new @{type.raw.getSimpleName()}))@end{}
 \n  ([^JsonObject json] (new @{type.raw.getSimpleName()} json)))
 \n
 @foreach{property:properties}
