@@ -22,11 +22,23 @@
 
 (defn add [^JsonArray array & values] (reduce add-value array values))
 
+;remove method will return removed object from the collection
 (defn remove [json field-or-pos] (Json/remove json field-or-pos))
 
-(defn delete [json field-or-pos] (remove json field-or-pos))
+(defn delete-element [json field-or-pos]
+  (remove json field-or-pos)
+  json)
+
+;delete will return json rather then removed object
+(defn delete [json & field-or-pos]
+  (reduce delete-element json field-or-pos))
 
 (defn size [json] (.size json))
 
 (defn length [json] (size json))
+
+(defn delete-value [json value] (Json/removeValue json value))
+
+;complexity o(n^2)
+(defn delete-values [json & values] (reduce delete-value json values))
 

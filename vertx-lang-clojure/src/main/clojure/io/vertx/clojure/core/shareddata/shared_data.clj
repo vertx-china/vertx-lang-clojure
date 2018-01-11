@@ -3,6 +3,8 @@
 (import io.vertx.core.shareddata.SharedData)
 (import io.vertx.core.Handler)
 
+(defn get-async-map
+  ([shared-data name result-handler] (.getAsyncMap shared-data name result-handler)))
 (defn get-cluster-wide-map
   ([shared-data name result-handler] (.getClusterWideMap shared-data name result-handler)))
 (defn get-counter
