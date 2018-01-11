@@ -2,8 +2,13 @@
   "name": "Clojure",
   "generators": [
     {
+      "kind": "dataObject",
+      "fileName": "'clojure/io/' + type.raw.moduleName + '/lang/clojure/' + type.raw.getSimpleName(CASE_SNAKE) + '.clj'",
+      "templateFileName": "vertx-clojure/template/dataobject.templ"
+    },
+    {
     "kind": "class",
     "fileName": "'clojure/io/' + type.raw.moduleName + '/lang/clojure/' + type.raw.getSimpleName(CASE_SNAKE) + '.clj'",
-    "templateFileName": "vertx-clojure/template/clojure.templ"
+    "templateFileName": "vertx-clojure/template/class.templ"
   }]
 }
