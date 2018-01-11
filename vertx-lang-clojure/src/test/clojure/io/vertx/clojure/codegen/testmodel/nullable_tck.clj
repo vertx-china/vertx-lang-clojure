@@ -920,3 +920,8 @@
   ([nullable-tck param] (.methodWithSetNullableStringParam nullable-tck param)))
 (defn method-with-set-nullable-string-return
   ([nullable-tck ] (.methodWithSetNullableStringReturn nullable-tck )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

@@ -164,3 +164,13 @@
   ([generics-tck ] (.methodWithStringParameterizedReturn generics-tck )))
 (defn method-with-user-type-parameterized-return
   ([generics-tck ] (.methodWithUserTypeParameterizedReturn generics-tck )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))
+(defn function [f]
+  (reify
+   java.util.function.Function
+   (apply [this para]
+           (f para))))

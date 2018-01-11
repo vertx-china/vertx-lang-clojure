@@ -150,3 +150,8 @@
   ([collection-tck ] (.methodWithSetStringReturn collection-tck )))
 (defn method-with-set-vertx-gen-return
   ([collection-tck ] (.methodWithSetVertxGenReturn collection-tck )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

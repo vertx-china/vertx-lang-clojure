@@ -9,3 +9,8 @@
   ([handler] (Factory/createConcreteHandlerUserType handler)))
 (defn create-concrete-handler-user-type-extension
   ([handler] (Factory/createConcreteHandlerUserTypeExtension handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

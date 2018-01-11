@@ -4,7 +4,6 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
-   
   ([^JsonObject json] (new DataObjectWithMapAdders json)))
 
 (defn add-boolean-value [^DataObjectWithMapAdders data-object-with-map-adders boolean-values] (.addBooleanValue data-object-with-map-adders boolean-values))

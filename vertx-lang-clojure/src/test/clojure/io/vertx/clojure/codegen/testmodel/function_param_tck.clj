@@ -52,3 +52,8 @@
   ([function-param-tck arg func] (.methodWithUserTypeParam function-param-tck arg func)))
 (defn method-with-void-param
   ([function-param-tck func] (.methodWithVoidParam function-param-tck func)))
+(defn function [f]
+  (reify
+   java.util.function.Function
+   (apply [this para]
+           (f para))))

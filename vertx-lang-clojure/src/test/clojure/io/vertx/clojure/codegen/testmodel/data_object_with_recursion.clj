@@ -4,7 +4,6 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
-   
   ([^JsonObject json] (new DataObjectWithRecursion json)))
 
 (defn set-data [^DataObjectWithRecursion data-object-with-recursion data] (.setData data-object-with-recursion data))

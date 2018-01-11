@@ -178,3 +178,8 @@
   ([foo] (TestInterface/staticFactoryMethod foo)))
 (defn super-method-overloaded-by-subclass
   ([test-interface s] (.superMethodOverloadedBySubclass test-interface s)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))
