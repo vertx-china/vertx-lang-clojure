@@ -1,10 +1,10 @@
 (ns examples.simple-http-server
   (:require
    [io.vertx.clojure.core.core :as core]
-   [io.vertx.lang.clojure.vertx :as vertx]
-   [io.vertx.lang.clojure.http-server :as server]
-   [io.vertx.lang.clojure.http-server-request :as request]
-   [io.vertx.lang.clojure.http-server-response :as response]))
+   [io.vertx.clojure.core.vertx :as vertx]
+   [io.vertx.clojure.core.http.http-server :as server]
+   [io.vertx.clojure.core.http.http-server-request :as request]
+   [io.vertx.clojure.core.http.http-server-response :as response]))
 
 (defn handle-request [req]
   (let [response (request/response req)]

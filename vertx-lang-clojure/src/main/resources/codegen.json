@@ -1,14 +1,12 @@
 {
   "name": "Clojure",
-  "generators": [
-    {
-      "kind": "dataObject",
-      "fileName": "'clojure/io/' + type.raw.moduleName + '/lang/clojure/' + type.raw.getSimpleName(CASE_SNAKE) + '.clj'",
-      "templateFileName": "vertx-clojure/template/dataobject.templ"
-    },
-    {
+  "generators": [{
+    "kind": "dataObject",
+    "fileName": "'clojure/' + CASE_SNAKE.format(CASE_CAMEL.parse(module.translateQualifiedName(fqn, 'clojure'))).replace('._', '.').replace('.', '/') + '.clj'",
+    "templateFileName": "vertx-clojure/template/dataobject.templ"
+  },{
     "kind": "class",
-    "fileName": "'clojure/io/' + type.raw.moduleName + '/lang/clojure/' + type.raw.getSimpleName(CASE_SNAKE) + '.clj'",
+    "fileName": "'clojure/' + CASE_SNAKE.format(CASE_CAMEL.parse(module.translateQualifiedName(fqn, 'clojure'))).replace('._', '.').replace('.', '/') + '.clj'",
     "templateFileName": "vertx-clojure/template/class.templ"
   }]
 }
