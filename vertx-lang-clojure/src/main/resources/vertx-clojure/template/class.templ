@@ -62,7 +62,9 @@
 }
 \n(import @{type.raw.name})
 @foreach{clazz:importClassSet}
+@if{clazz!=type.raw.name}
 \n(import @{clazz})
+@end{}
 @end{}
 \n
 @foreach{methodName:methodsMap.keySet()}
@@ -92,4 +94,13 @@ new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-
 \n   (handle [this para]
 \n           (f para))))
 @end{}
+
+@if{name == "java.util.function.Function"}
+\n(defn function [f]
+\n  (reify
+\n   java.util.function.Function
+\n   (apply [this para]
+\n           (f para))))
 @end{}
+@end{}
+

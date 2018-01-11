@@ -106,3 +106,8 @@
    io.vertx.core.Handler
    (handle [this para]
            (f para))))
+(defn function [f]
+  (reify
+   java.util.function.Function
+   (apply [this para]
+           (f para))))

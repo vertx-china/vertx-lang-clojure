@@ -1,7 +1,6 @@
 (ns io.vertx.clojure.core.composite-future)
 
 (import io.vertx.core.CompositeFuture)
-(import io.vertx.core.CompositeFuture)
 (import java.util.List)
 (import io.vertx.core.Handler)
 (import io.vertx.core.Future)
@@ -67,4 +66,9 @@
   (reify
    io.vertx.core.Handler
    (handle [this para]
+           (f para))))
+(defn function [f]
+  (reify
+   java.util.function.Function
+   (apply [this para]
            (f para))))

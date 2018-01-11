@@ -1,7 +1,6 @@
 (ns io.vertx.clojure.core.multi-map)
 
 (import io.vertx.core.MultiMap)
-(import io.vertx.core.MultiMap)
 
 (defn add
   ([multi-map name value] (.add multi-map name value)))

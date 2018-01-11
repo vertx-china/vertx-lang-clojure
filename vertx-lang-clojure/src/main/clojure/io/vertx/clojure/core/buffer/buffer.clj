@@ -1,7 +1,6 @@
 (ns io.vertx.clojure.core.buffer.buffer)
 
 (import io.vertx.core.buffer.Buffer)
-(import io.vertx.core.buffer.Buffer)
 
 (defn append-buffer
   ([buffer buff] (.appendBuffer buffer buff))

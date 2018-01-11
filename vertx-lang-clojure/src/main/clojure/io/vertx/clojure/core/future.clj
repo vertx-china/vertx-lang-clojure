@@ -2,7 +2,6 @@
 
 (import io.vertx.core.Future)
 (import io.vertx.core.Handler)
-(import io.vertx.core.Future)
 (import java.util.function.Function)
 
 (defn cause
@@ -54,4 +53,9 @@
   (reify
    io.vertx.core.Handler
    (handle [this para]
+           (f para))))
+(defn function [f]
+  (reify
+   java.util.function.Function
+   (apply [this para]
            (f para))))
