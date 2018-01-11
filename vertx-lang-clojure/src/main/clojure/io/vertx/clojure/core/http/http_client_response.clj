@@ -18,6 +18,11 @@
 (defn get-trailer
   ([http-client-response trailer-name] (.getTrailer http-client-response trailer-name)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([http-client-response handler] (.handler http-client-response handler)))
 (defn headers
   ([http-client-response ] (.headers http-client-response )))
@@ -37,8 +42,3 @@
   ([http-client-response ] (.trailers http-client-response )))
 (defn version
   ([http-client-response ] (.version http-client-response )))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

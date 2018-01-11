@@ -15,6 +15,11 @@
 (defn exception-handler
   ([datagram-socket handler] (.exceptionHandler datagram-socket handler)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([datagram-socket handler] (.handler datagram-socket handler)))
 (defn is-metrics-enabled
   ([datagram-socket ] (.isMetricsEnabled datagram-socket )))
@@ -37,8 +42,3 @@
 (defn unlisten-multicast-group
   ([datagram-socket multicast-address handler] (.unlistenMulticastGroup datagram-socket multicast-address handler))
   ([datagram-socket multicast-address network-interface source handler] (.unlistenMulticastGroup datagram-socket multicast-address network-interface source handler)))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

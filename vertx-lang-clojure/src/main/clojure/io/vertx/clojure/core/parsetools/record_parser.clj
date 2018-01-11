@@ -16,6 +16,11 @@
 (defn handle
   ([record-parser buffer] (.handle record-parser buffer)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([record-parser handler] (.handler record-parser handler)))
 (defn new-delimited
   ([delim stream-or-output] (RecordParser/newDelimited delim stream-or-output))
@@ -29,8 +34,3 @@
   ([record-parser ] (.resume record-parser )))
 (defn set-output
   ([record-parser output] (.setOutput record-parser output)))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

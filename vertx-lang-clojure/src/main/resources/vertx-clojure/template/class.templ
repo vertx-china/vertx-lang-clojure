@@ -67,11 +67,37 @@
 @end{}
 @end{}
 \n
+
+@code{
+var handlerIsDefined = false;
+var functionIsDefined = false;
+}
+
 @foreach{methodName:methodsMap.keySet()}
 
 \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(methodName))}
 
-@foreach{method:methodsMap[methodName]}\n  (
+@foreach{method:methodsMap[methodName]}\n
+
+@if{method.name == "handler"}@comment{special case for handler & function}
+  ([f]
+\n    (reify
+\n     io.vertx.core.Handler
+\n     (handle [this para]
+\n           (f para))))
+\n
+@code{handlerIsDefined = true;}
+@else{method.name == "function"}
+ [f]
+\n  (reify
+\n   java.util.function.Function
+\n   (apply [this para]
+\n           (f para))))
+\n
+@code{functionIsDefined = true;}
+@end{}
+
+  (
 @code{var paramsSize = method.params.size()}
 @if{method.name == type.raw.getSimpleName()}[@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
 new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
@@ -79,13 +105,15 @@ new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-
 @else{method.staticMethod}[@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
 @{type.raw.getSimpleName}/@{method.name} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
-@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+@else{}
+[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
 .@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
 @end{})
 @end{})
 @end{}
 
+@if{!handlerIsDefined}
 @foreach{name:importClassSet}
 @if{name == "io.vertx.core.Handler"}
 \n(defn handler [f]
@@ -94,7 +122,11 @@ new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-
 \n   (handle [this para]
 \n           (f para))))
 @end{}
+@end{}
+@end{}
 
+@if{!functionIsDefined}
+@foreach{name:importClassSet}
 @if{name == "java.util.function.Function"}
 \n(defn function [f]
 \n  (reify
@@ -103,4 +135,4 @@ new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-
 \n           (f para))))
 @end{}
 @end{}
-
+@end{}

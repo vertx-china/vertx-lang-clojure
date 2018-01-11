@@ -16,6 +16,11 @@
 (defn get-max-buffered-messages
   ([message-consumer ] (.getMaxBufferedMessages message-consumer )))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([message-consumer handler] (.handler message-consumer handler)))
 (defn is-registered
   ([message-consumer ] (.isRegistered message-consumer )))
@@ -28,8 +33,3 @@
 (defn unregister
   ([message-consumer ] (.unregister message-consumer ))
   ([message-consumer completion-handler] (.unregister message-consumer completion-handler)))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

@@ -18,6 +18,11 @@
 (defn handle
   ([json-parser event] (.handle json-parser event)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([json-parser handler] (.handler json-parser handler)))
 (defn new-parser
   ([] (JsonParser/newParser ))
@@ -32,8 +37,3 @@
   ([json-parser ] (.resume json-parser )))
 (defn write
   ([json-parser buffer] (.write json-parser buffer)))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

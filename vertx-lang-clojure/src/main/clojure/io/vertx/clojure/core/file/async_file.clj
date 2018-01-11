@@ -20,6 +20,11 @@
   ([async-file ] (.flush async-file ))
   ([async-file handler] (.flush async-file handler)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([async-file handler] (.handler async-file handler)))
 (defn pause
   ([async-file ] (.pause async-file )))
@@ -40,8 +45,3 @@
   ([async-file buffer position handler] (.write async-file buffer position handler)))
 (defn write-queue-full
   ([async-file ] (.writeQueueFull async-file )))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

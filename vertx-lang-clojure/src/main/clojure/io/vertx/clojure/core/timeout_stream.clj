@@ -10,13 +10,13 @@
 (defn exception-handler
   ([timeout-stream handler] (.exceptionHandler timeout-stream handler)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([timeout-stream handler] (.handler timeout-stream handler)))
 (defn pause
   ([timeout-stream ] (.pause timeout-stream )))
 (defn resume
   ([timeout-stream ] (.resume timeout-stream )))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

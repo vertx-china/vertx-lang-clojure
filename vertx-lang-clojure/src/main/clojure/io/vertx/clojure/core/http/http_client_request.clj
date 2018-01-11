@@ -28,6 +28,11 @@
 (defn get-raw-method
   ([http-client-request ] (.getRawMethod http-client-request )))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([http-client-request handler] (.handler http-client-request handler)))
 (defn headers
   ([http-client-request ] (.headers http-client-request )))
@@ -77,8 +82,3 @@
   ([http-client-request frame] (.writeCustomFrame http-client-request frame)))
 (defn write-queue-full
   ([http-client-request ] (.writeQueueFull http-client-request )))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

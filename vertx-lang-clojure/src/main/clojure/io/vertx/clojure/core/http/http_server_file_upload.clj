@@ -16,6 +16,11 @@
 (defn filename
   ([http-server-file-upload ] (.filename http-server-file-upload )))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([http-server-file-upload handler] (.handler http-server-file-upload handler)))
 (defn is-size-available
   ([http-server-file-upload ] (.isSizeAvailable http-server-file-upload )))
@@ -29,8 +34,3 @@
   ([http-server-file-upload ] (.size http-server-file-upload )))
 (defn stream-to-file-system
   ([http-server-file-upload filename] (.streamToFileSystem http-server-file-upload filename)))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

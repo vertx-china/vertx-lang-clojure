@@ -18,6 +18,11 @@
 (defn exception-handler
   ([net-socket handler] (.exceptionHandler net-socket handler)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([net-socket handler] (.handler net-socket handler)))
 (defn indicated-server-name
   ([net-socket ] (.indicatedServerName net-socket )))
@@ -48,8 +53,3 @@
   ([net-socket ] (.writeHandlerID net-socket )))
 (defn write-queue-full
   ([net-socket ] (.writeQueueFull net-socket )))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

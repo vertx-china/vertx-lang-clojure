@@ -25,6 +25,11 @@
 (defn frame-handler
   ([web-socket handler] (.frameHandler web-socket handler)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([web-socket handler] (.handler web-socket handler)))
 (defn is-ssl
   ([web-socket ] (.isSsl web-socket )))
@@ -64,8 +69,3 @@
   ([web-socket ] (.writeQueueFull web-socket )))
 (defn write-text-message
   ([web-socket text] (.writeTextMessage web-socket text)))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))

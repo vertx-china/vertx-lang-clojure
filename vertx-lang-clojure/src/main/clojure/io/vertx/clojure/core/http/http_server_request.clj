@@ -24,6 +24,11 @@
 (defn get-param
   ([http-server-request param-name] (.getParam http-server-request param-name)))
 (defn handler
+  ([f]
+    (reify
+     io.vertx.core.Handler
+     (handle [this para]
+           (f para))))
   ([http-server-request handler] (.handler http-server-request handler)))
 (defn headers
   ([http-server-request ] (.headers http-server-request )))
@@ -69,8 +74,3 @@
   ([http-server-request ] (.uri http-server-request )))
 (defn version
   ([http-server-request ] (.version http-server-request )))
-(defn handler [f]
-  (reify
-   io.vertx.core.Handler
-   (handle [this para]
-           (f para))))
