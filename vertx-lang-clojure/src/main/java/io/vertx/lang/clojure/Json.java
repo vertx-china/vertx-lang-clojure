@@ -11,4 +11,12 @@ public class Json {
   public static Object get(JsonObject jsonObject, String key){
     return jsonObject.getValue(key);
   }
+
+  public static Object remove(JsonArray jsonArray, int pos){
+    return jsonArray.remove(pos);
+  }
+
+  public static Object remove(JsonObject jsonObject, String key){
+    return jsonObject.remove(key);
+  }
 }

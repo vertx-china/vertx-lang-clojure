@@ -22,3 +22,11 @@
 
 (defn add [^JsonArray array & values] (reduce add-value array values))
 
+(defn remove [json field-or-pos] (Json/remove json field-or-pos))
+
+(defn delete [json field-or-pos] (remove json field-or-pos))
+
+(defn size [json] (.size json))
+
+(defn length [json] (size json))
+
