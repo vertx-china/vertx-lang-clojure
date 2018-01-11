@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.codegen.testmodel.test-data-object)
 
 (import io.vertx.codegen.testmodel.TestDataObject)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^TestDataObject json] (new TestDataObject json))
+(defn new-instance
+   
+  ([^JsonObject json] (new TestDataObject json)))
 
 (defn set-bar [^TestDataObject test-data-object bar] (.setBar test-data-object bar))
 (defn get-bar [^TestDataObject test-data-object] (.getBar test-data-object))

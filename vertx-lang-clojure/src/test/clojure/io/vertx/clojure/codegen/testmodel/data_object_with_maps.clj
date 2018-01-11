@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.codegen.testmodel.data-object-with-maps)
 
 (import io.vertx.codegen.testmodel.DataObjectWithMaps)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DataObjectWithMaps json] (new DataObjectWithMaps json))
+(defn new-instance
+   
+  ([^JsonObject json] (new DataObjectWithMaps json)))
 
 (defn set-boolean-values [^DataObjectWithMaps data-object-with-maps boolean-values] (.setBooleanValues data-object-with-maps boolean-values))
 (defn set-data-object-values [^DataObjectWithMaps data-object-with-maps data-object-values] (.setDataObjectValues data-object-with-maps data-object-values))

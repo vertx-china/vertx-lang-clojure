@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.http.http-client-options)
 
 (import io.vertx.core.http.HttpClientOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^HttpClientOptions json] (new HttpClientOptions json))
+(defn new-instance
+  ([] (new HttpClientOptions))
+  ([^JsonObject json] (new HttpClientOptions json)))
 
 (defn set-alpn-versions [^HttpClientOptions http-client-options alpn-versions] (.setAlpnVersions http-client-options alpn-versions))
 (defn get-alpn-versions [^HttpClientOptions http-client-options] (.getAlpnVersions http-client-options))

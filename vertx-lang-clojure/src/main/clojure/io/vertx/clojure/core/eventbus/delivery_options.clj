@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.eventbus.delivery-options)
 
 (import io.vertx.core.eventbus.DeliveryOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DeliveryOptions json] (new DeliveryOptions json))
+(defn new-instance
+  ([] (new DeliveryOptions))
+  ([^JsonObject json] (new DeliveryOptions json)))
 
 (defn set-codec-name [^DeliveryOptions delivery-options codec-name] (.setCodecName delivery-options codec-name))
 (defn get-codec-name [^DeliveryOptions delivery-options] (.getCodecName delivery-options))

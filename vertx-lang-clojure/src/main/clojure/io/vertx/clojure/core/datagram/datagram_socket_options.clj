@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.datagram.datagram-socket-options)
 
 (import io.vertx.core.datagram.DatagramSocketOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DatagramSocketOptions json] (new DatagramSocketOptions json))
+(defn new-instance
+  ([] (new DatagramSocketOptions))
+  ([^JsonObject json] (new DatagramSocketOptions json)))
 
 (defn set-broadcast [^DatagramSocketOptions datagram-socket-options broadcast] (.setBroadcast datagram-socket-options broadcast))
 (defn is-broadcast [^DatagramSocketOptions datagram-socket-options] (.isBroadcast datagram-socket-options))

@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.tcpssl-options)
 
 (import io.vertx.core.net.TCPSSLOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^TCPSSLOptions json] (new TCPSSLOptions json))
+(defn new-instance
+  ([] (new TCPSSLOptions))
+  ([^JsonObject json] (new TCPSSLOptions json)))
 
 (defn add-crl-path [^TCPSSLOptions t-cpssl-options crl-paths] (.addCrlPath t-cpssl-options crl-paths))
 (defn get-crl-paths [^TCPSSLOptions t-cpssl-options] (.getCrlPaths t-cpssl-options))

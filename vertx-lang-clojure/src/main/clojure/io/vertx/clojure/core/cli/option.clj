@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.cli.option)
 
 (import io.vertx.core.cli.Option)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^Option json] (new Option json))
+(defn new-instance
+  
+  ([^JsonObject json] (new Option json)))
 
 (defn set-arg-name [^Option option arg-name] (.setArgName option arg-name))
 (defn get-arg-name [^Option option] (.getArgName option))

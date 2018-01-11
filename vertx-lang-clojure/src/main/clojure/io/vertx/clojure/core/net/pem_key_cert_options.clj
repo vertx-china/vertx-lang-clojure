@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.pem-key-cert-options)
 
 (import io.vertx.core.net.PemKeyCertOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^PemKeyCertOptions json] (new PemKeyCertOptions json))
+(defn new-instance
+  ([] (new PemKeyCertOptions))
+  ([^JsonObject json] (new PemKeyCertOptions json)))
 
 (defn set-cert-path [^PemKeyCertOptions pem-key-cert-options cert-path] (.setCertPath pem-key-cert-options cert-path))
 (defn set-cert-paths [^PemKeyCertOptions pem-key-cert-options cert-paths] (.setCertPaths pem-key-cert-options cert-paths))

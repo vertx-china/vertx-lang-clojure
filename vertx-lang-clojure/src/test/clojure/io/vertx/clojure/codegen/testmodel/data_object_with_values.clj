@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.codegen.testmodel.data-object-with-values)
 
 (import io.vertx.codegen.testmodel.DataObjectWithValues)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DataObjectWithValues json] (new DataObjectWithValues json))
+(defn new-instance
+   
+  ([^JsonObject json] (new DataObjectWithValues json)))
 
 (defn set-boolean-value [^DataObjectWithValues data-object-with-values boolean-value] (.setBooleanValue data-object-with-values boolean-value))
 (defn set-boxed-boolean-value [^DataObjectWithValues data-object-with-values boxed-boolean-value] (.setBoxedBooleanValue data-object-with-values boxed-boolean-value))

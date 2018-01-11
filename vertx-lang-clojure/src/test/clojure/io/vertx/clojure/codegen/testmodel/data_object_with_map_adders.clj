@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.codegen.testmodel.data-object-with-map-adders)
 
 (import io.vertx.codegen.testmodel.DataObjectWithMapAdders)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DataObjectWithMapAdders json] (new DataObjectWithMapAdders json))
+(defn new-instance
+   
+  ([^JsonObject json] (new DataObjectWithMapAdders json)))
 
 (defn add-boolean-value [^DataObjectWithMapAdders data-object-with-map-adders boolean-values] (.addBooleanValue data-object-with-map-adders boolean-values))
 (defn add-data-object-value [^DataObjectWithMapAdders data-object-with-map-adders data-object-values] (.addDataObjectValue data-object-with-map-adders data-object-values))

@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.open-ssl-engine-options)
 
 (import io.vertx.core.net.OpenSSLEngineOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^OpenSSLEngineOptions json] (new OpenSSLEngineOptions json))
+(defn new-instance
+  ([] (new OpenSSLEngineOptions))
+  ([^JsonObject json] (new OpenSSLEngineOptions json)))
 
 (defn is-alpn-available [^OpenSSLEngineOptions open-ssl-engine-options] (.isAlpnAvailable open-ssl-engine-options))
 (defn is-available [^OpenSSLEngineOptions open-ssl-engine-options] (.isAvailable open-ssl-engine-options))

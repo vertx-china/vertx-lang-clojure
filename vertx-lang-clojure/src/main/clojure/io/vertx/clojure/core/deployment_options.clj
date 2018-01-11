@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.deployment-options)
 
 (import io.vertx.core.DeploymentOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DeploymentOptions json] (new DeploymentOptions json))
+(defn new-instance
+  ([] (new DeploymentOptions))
+  ([^JsonObject json] (new DeploymentOptions json)))
 
 (defn set-config [^DeploymentOptions deployment-options config] (.setConfig deployment-options config))
 (defn get-config [^DeploymentOptions deployment-options] (.getConfig deployment-options))

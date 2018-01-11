@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.vertx-options)
 
 (import io.vertx.core.VertxOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^VertxOptions json] (new VertxOptions json))
+(defn new-instance
+  ([] (new VertxOptions))
+  ([^JsonObject json] (new VertxOptions json)))
 
 (defn set-address-resolver-options [^VertxOptions vertx-options address-resolver-options] (.setAddressResolverOptions vertx-options address-resolver-options))
 (defn get-address-resolver-options [^VertxOptions vertx-options] (.getAddressResolverOptions vertx-options))

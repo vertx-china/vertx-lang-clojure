@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.http.http2-settings)
 
 (import io.vertx.core.http.Http2Settings)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^Http2Settings json] (new Http2Settings json))
+(defn new-instance
+  
+  ([^JsonObject json] (new Http2Settings json)))
 
 (defn set-header-table-size [^Http2Settings http2-settings header-table-size] (.setHeaderTableSize http2-settings header-table-size))
 (defn get-header-table-size [^Http2Settings http2-settings] (.getHeaderTableSize http2-settings))

@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.codegen.testmodel.data-object-with-lists)
 
 (import io.vertx.codegen.testmodel.DataObjectWithLists)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DataObjectWithLists json] (new DataObjectWithLists json))
+(defn new-instance
+   
+  ([^JsonObject json] (new DataObjectWithLists json)))
 
 (defn set-boolean-values [^DataObjectWithLists data-object-with-lists boolean-values] (.setBooleanValues data-object-with-lists boolean-values))
 (defn set-data-object-values [^DataObjectWithLists data-object-with-lists data-object-values] (.setDataObjectValues data-object-with-lists data-object-values))

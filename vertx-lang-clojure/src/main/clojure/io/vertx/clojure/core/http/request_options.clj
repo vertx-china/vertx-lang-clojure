@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.http.request-options)
 
 (import io.vertx.core.http.RequestOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^RequestOptions json] (new RequestOptions json))
+(defn new-instance
+  ([] (new RequestOptions))
+  ([^JsonObject json] (new RequestOptions json)))
 
 (defn set-host [^RequestOptions request-options host] (.setHost request-options host))
 (defn get-host [^RequestOptions request-options] (.getHost request-options))

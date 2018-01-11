@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.eventbus.event-bus-options)
 
 (import io.vertx.core.eventbus.EventBusOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^EventBusOptions json] (new EventBusOptions json))
+(defn new-instance
+  ([] (new EventBusOptions))
+  ([^JsonObject json] (new EventBusOptions json)))
 
 (defn set-accept-backlog [^EventBusOptions event-bus-options accept-backlog] (.setAcceptBacklog event-bus-options accept-backlog))
 (defn get-accept-backlog [^EventBusOptions event-bus-options] (.getAcceptBacklog event-bus-options))

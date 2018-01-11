@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.http.http-server-options)
 
 (import io.vertx.core.http.HttpServerOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^HttpServerOptions json] (new HttpServerOptions json))
+(defn new-instance
+  ([] (new HttpServerOptions))
+  ([^JsonObject json] (new HttpServerOptions json)))
 
 (defn set-accept-backlog [^HttpServerOptions http-server-options accept-backlog] (.setAcceptBacklog http-server-options accept-backlog))
 (defn get-accept-backlog [^HttpServerOptions http-server-options] (.getAcceptBacklog http-server-options))

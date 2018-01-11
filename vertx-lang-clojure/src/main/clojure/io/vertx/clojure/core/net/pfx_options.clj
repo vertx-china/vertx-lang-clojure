@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.pfx-options)
 
 (import io.vertx.core.net.PfxOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^PfxOptions json] (new PfxOptions json))
+(defn new-instance
+  ([] (new PfxOptions))
+  ([^JsonObject json] (new PfxOptions json)))
 
 (defn set-password [^PfxOptions pfx-options password] (.setPassword pfx-options password))
 (defn get-password [^PfxOptions pfx-options] (.getPassword pfx-options))

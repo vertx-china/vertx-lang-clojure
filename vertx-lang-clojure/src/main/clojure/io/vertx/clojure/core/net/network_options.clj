@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.network-options)
 
 (import io.vertx.core.net.NetworkOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^NetworkOptions json] (new NetworkOptions json))
+(defn new-instance
+  ([] (new NetworkOptions))
+  ([^JsonObject json] (new NetworkOptions json)))
 
 (defn set-log-activity [^NetworkOptions network-options log-activity] (.setLogActivity network-options log-activity))
 (defn get-log-activity [^NetworkOptions network-options] (.getLogActivity network-options))

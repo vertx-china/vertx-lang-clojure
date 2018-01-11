@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.file.open-options)
 
 (import io.vertx.core.file.OpenOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^OpenOptions json] (new OpenOptions json))
+(defn new-instance
+  ([] (new OpenOptions))
+  ([^JsonObject json] (new OpenOptions json)))
 
 (defn set-append [^OpenOptions open-options append] (.setAppend open-options append))
 (defn is-append [^OpenOptions open-options] (.isAppend open-options))

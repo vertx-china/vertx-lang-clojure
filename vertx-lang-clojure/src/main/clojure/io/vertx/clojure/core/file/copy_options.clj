@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.file.copy-options)
 
 (import io.vertx.core.file.CopyOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^CopyOptions json] (new CopyOptions json))
+(defn new-instance
+  ([] (new CopyOptions))
+  ([^JsonObject json] (new CopyOptions json)))
 
 (defn set-atomic-move [^CopyOptions copy-options atomic-move] (.setAtomicMove copy-options atomic-move))
 (defn is-atomic-move [^CopyOptions copy-options] (.isAtomicMove copy-options))

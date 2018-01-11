@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.proxy-options)
 
 (import io.vertx.core.net.ProxyOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^ProxyOptions json] (new ProxyOptions json))
+(defn new-instance
+  ([] (new ProxyOptions))
+  ([^JsonObject json] (new ProxyOptions json)))
 
 (defn set-host [^ProxyOptions proxy-options host] (.setHost proxy-options host))
 (defn get-host [^ProxyOptions proxy-options] (.getHost proxy-options))

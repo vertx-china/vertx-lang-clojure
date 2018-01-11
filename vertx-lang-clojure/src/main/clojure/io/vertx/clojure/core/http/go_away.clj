@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.http.go-away)
 
 (import io.vertx.core.http.GoAway)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^GoAway json] (new GoAway json))
+(defn new-instance
+  
+  ([^JsonObject json] (new GoAway json)))
 
 (defn set-debug-data [^GoAway go-away debug-data] (.setDebugData go-away debug-data))
 (defn get-debug-data [^GoAway go-away] (.getDebugData go-away))

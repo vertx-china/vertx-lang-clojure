@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.pem-trust-options)
 
 (import io.vertx.core.net.PemTrustOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^PemTrustOptions json] (new PemTrustOptions json))
+(defn new-instance
+  ([] (new PemTrustOptions))
+  ([^JsonObject json] (new PemTrustOptions json)))
 
 (defn add-cert-path [^PemTrustOptions pem-trust-options cert-paths] (.addCertPath pem-trust-options cert-paths))
 (defn get-cert-paths [^PemTrustOptions pem-trust-options] (.getCertPaths pem-trust-options))

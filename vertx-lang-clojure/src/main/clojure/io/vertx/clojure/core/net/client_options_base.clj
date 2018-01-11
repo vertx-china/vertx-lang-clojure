@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.client-options-base)
 
 (import io.vertx.core.net.ClientOptionsBase)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^ClientOptionsBase json] (new ClientOptionsBase json))
+(defn new-instance
+  
+  ([^JsonObject json] (new ClientOptionsBase json)))
 
 (defn set-connect-timeout [^ClientOptionsBase client-options-base connect-timeout] (.setConnectTimeout client-options-base connect-timeout))
 (defn get-connect-timeout [^ClientOptionsBase client-options-base] (.getConnectTimeout client-options-base))

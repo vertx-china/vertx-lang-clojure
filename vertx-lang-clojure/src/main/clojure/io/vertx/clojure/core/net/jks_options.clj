@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.jks-options)
 
 (import io.vertx.core.net.JksOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^JksOptions json] (new JksOptions json))
+(defn new-instance
+  ([] (new JksOptions))
+  ([^JsonObject json] (new JksOptions json)))
 
 (defn set-password [^JksOptions jks-options password] (.setPassword jks-options password))
 (defn get-password [^JksOptions jks-options] (.getPassword jks-options))

@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.codegen.testmodel.data-object-with-nested-buffer)
 
 (import io.vertx.codegen.testmodel.DataObjectWithNestedBuffer)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DataObjectWithNestedBuffer json] (new DataObjectWithNestedBuffer json))
+(defn new-instance
+   
+  ([^JsonObject json] (new DataObjectWithNestedBuffer json)))
 
 (defn set-buffer [^DataObjectWithNestedBuffer data-object-with-nested-buffer buffer] (.setBuffer data-object-with-nested-buffer buffer))
 (defn get-buffer [^DataObjectWithNestedBuffer data-object-with-nested-buffer] (.getBuffer data-object-with-nested-buffer))

@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.dns.address-resolver-options)
 
 (import io.vertx.core.dns.AddressResolverOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^AddressResolverOptions json] (new AddressResolverOptions json))
+(defn new-instance
+  ([] (new AddressResolverOptions))
+  ([^JsonObject json] (new AddressResolverOptions json)))
 
 (defn set-cache-max-time-to-live [^AddressResolverOptions address-resolver-options cache-max-time-to-live] (.setCacheMaxTimeToLive address-resolver-options cache-max-time-to-live))
 (defn get-cache-max-time-to-live [^AddressResolverOptions address-resolver-options] (.getCacheMaxTimeToLive address-resolver-options))

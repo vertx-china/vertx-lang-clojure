@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.cli.argument)
 
 (import io.vertx.core.cli.Argument)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^Argument json] (new Argument json))
+(defn new-instance
+  
+  ([^JsonObject json] (new Argument json)))
 
 (defn set-arg-name [^Argument argument arg-name] (.setArgName argument arg-name))
 (defn get-arg-name [^Argument argument] (.getArgName argument))

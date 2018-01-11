@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.core.net.net-server-options)
 
 (import io.vertx.core.net.NetServerOptions)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^NetServerOptions json] (new NetServerOptions json))
+(defn new-instance
+  ([] (new NetServerOptions))
+  ([^JsonObject json] (new NetServerOptions json)))
 
 (defn set-accept-backlog [^NetServerOptions net-server-options accept-backlog] (.setAcceptBacklog net-server-options accept-backlog))
 (defn get-accept-backlog [^NetServerOptions net-server-options] (.getAcceptBacklog net-server-options))

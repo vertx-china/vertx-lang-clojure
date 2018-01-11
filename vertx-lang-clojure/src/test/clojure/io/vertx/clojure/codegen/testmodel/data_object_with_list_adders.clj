@@ -1,8 +1,11 @@
 (ns io.vertx.clojure.codegen.testmodel.data-object-with-list-adders)
 
 (import io.vertx.codegen.testmodel.DataObjectWithListAdders)
+(import io.vertx.core.json.JsonObject)
 
-(defn from-json [^DataObjectWithListAdders json] (new DataObjectWithListAdders json))
+(defn new-instance
+   
+  ([^JsonObject json] (new DataObjectWithListAdders json)))
 
 (defn add-boolean-value [^DataObjectWithListAdders data-object-with-list-adders boolean-values] (.addBooleanValue data-object-with-list-adders boolean-values))
 (defn add-data-object-value [^DataObjectWithListAdders data-object-with-list-adders data-object-values] (.addDataObjectValue data-object-with-list-adders data-object-values))
