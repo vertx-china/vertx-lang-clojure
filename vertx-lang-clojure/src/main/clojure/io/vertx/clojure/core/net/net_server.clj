@@ -22,3 +22,8 @@
   ([net-server local-address-or-port-or-listen-handler] (.listen net-server local-address-or-port-or-listen-handler))
   ([net-server local-address-or-port listen-handler-or-host] (.listen net-server local-address-or-port listen-handler-or-host))
   ([net-server port host listen-handler] (.listen net-server port host listen-handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

@@ -101,3 +101,8 @@
   ([http-client port host request-uri headers version sub-protocols] (.websocketStream http-client port host request-uri headers version sub-protocols)))
 (defn websocket-stream-abs
   ([http-client url headers version sub-protocols] (.websocketStreamAbs http-client url headers version sub-protocols)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ClojureVerticle implements Verticle {
 
-  private static final String NS_IO_VERTX_CLOJURE_CORE_CORE = "io.vertx.clojure.core.core";
+  private static final String NS_IO_VERTX_LANG_CLOJURE_VERTICLE = "io.vertx.lang.clojure.verticle";
 
   private String ns;
   private Vertx vertx;
@@ -63,7 +63,7 @@ public class ClojureVerticle implements Verticle {
     IFn iFn;
 
     iFn = Clojure.var("clojure.core", "require");
-    iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
+    iFn.invoke(Clojure.read(NS_IO_VERTX_LANG_CLOJURE_VERTICLE));
 
     IFn require = Clojure.var("clojure.core", "require");
     require.invoke(Clojure.read(ns));
@@ -78,7 +78,7 @@ public class ClojureVerticle implements Verticle {
     }};
 
     IFn startIFn = Clojure.var(ns, "start");
-    IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
+    IFn getInfo = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "get-method-parameters");
     String rawParams = getInfo.invoke(startIFn).toString();
     rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
     String[] paramNames = rawParams.split(" ");
@@ -100,12 +100,12 @@ public class ClojureVerticle implements Verticle {
     try {
       synchronized (Clojure.class) {
         IFn iFn = Clojure.var("clojure.core", "require");
-        iFn.invoke(Clojure.read(NS_IO_VERTX_CLOJURE_CORE_CORE));
+        iFn.invoke(Clojure.read(NS_IO_VERTX_LANG_CLOJURE_VERTICLE));
 
         iFn = Clojure.var("clojure.core", "require");
         iFn.invoke(Clojure.read(ns));
 
-        iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "exists");
+        iFn = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "exists");
         if (iFn.invoke(ns + "/stop") == null) {
           stopFuture.complete();
           return;
@@ -117,7 +117,7 @@ public class ClojureVerticle implements Verticle {
         }};
 
         IFn stopIFn = Clojure.var(ns, "stop");
-        IFn getInfo = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "get-method-parameters");
+        IFn getInfo = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "get-method-parameters");
         String rawParams = getInfo.invoke(stopIFn).toString();
         rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
         String[] paramNames = rawParams.split(" ");

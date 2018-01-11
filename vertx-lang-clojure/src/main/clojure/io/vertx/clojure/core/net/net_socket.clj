@@ -48,3 +48,8 @@
   ([net-socket ] (.writeHandlerID net-socket )))
 (defn write-queue-full
   ([net-socket ] (.writeQueueFull net-socket )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

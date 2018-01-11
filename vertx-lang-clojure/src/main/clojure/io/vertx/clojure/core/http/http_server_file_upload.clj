@@ -29,3 +29,8 @@
   ([http-server-file-upload ] (.size http-server-file-upload )))
 (defn stream-to-file-system
   ([http-server-file-upload filename] (.streamToFileSystem http-server-file-upload filename)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

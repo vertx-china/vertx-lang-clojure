@@ -54,13 +54,13 @@
     /*for import statements*/
     foreach(param:method.params){
       if(param.type.getName().startsWith("io.vertx.")||param.type.getName().startsWith("java.util.")){
-        importClassSet.add(param.type.raw)
+        importClassSet.add(param.type.raw.name)
       }
     }
   }
 
 }
-\n(import @{type.raw})
+\n(import @{type.raw.name})
 @foreach{clazz:importClassSet}
 \n(import @{clazz})
 @end{}
@@ -70,15 +70,26 @@
 \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(methodName))}
 
 @foreach{method:methodsMap[methodName]}\n  (
-@if{method.name == type.raw.getSimpleName()}[@foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
-new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
+@code{var paramsSize = method.params.size()}
+@if{method.name == type.raw.getSimpleName()}[@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
-@else{method.staticMethod}[@foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
-@{type.raw.getSimpleName}/@{method.name} @foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
+@else{method.staticMethod}[@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+@{type.raw.getSimpleName}/@{method.name} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
-@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
-.@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+method.params.size()]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
+@else{}[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+.@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
 @end{})
 @end{})
+@end{}
+
+@foreach{name:importClassSet}
+@if{name == "io.vertx.core.Handler"}
+\n(defn handler [f]
+\n  (reify
+\n   io.vertx.core.Handler
+\n   (handle [this para]
+\n           (f para))))
+@end{}
 @end{}

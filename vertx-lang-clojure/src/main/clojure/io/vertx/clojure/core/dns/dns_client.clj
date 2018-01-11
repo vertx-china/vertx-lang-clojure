@@ -27,3 +27,8 @@
   ([dns-client name handler] (.resolveTXT dns-client name handler)))
 (defn reverse-lookup
   ([dns-client ipaddress handler] (.reverseLookup dns-client ipaddress handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

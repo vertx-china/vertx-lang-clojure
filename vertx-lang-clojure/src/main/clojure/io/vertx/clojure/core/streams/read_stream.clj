@@ -13,3 +13,8 @@
   ([read-stream ] (.pause read-stream )))
 (defn resume
   ([read-stream ] (.resume read-stream )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

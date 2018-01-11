@@ -47,3 +47,8 @@
 (defn update-settings
   ([http-connection settings] (.updateSettings http-connection settings))
   ([http-connection settings completion-handler] (.updateSettings http-connection settings completion-handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

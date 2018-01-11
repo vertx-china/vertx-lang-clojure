@@ -50,3 +50,8 @@
   ([future ] (.tryComplete future )))
 (defn try-fail
   ([future failure-message-or-cause] (.tryFail future failure-message-or-cause)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

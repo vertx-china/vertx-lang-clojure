@@ -37,3 +37,8 @@
   ([http-client-response ] (.trailers http-client-response )))
 (defn version
   ([http-client-response ] (.version http-client-response )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

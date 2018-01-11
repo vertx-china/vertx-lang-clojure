@@ -84,3 +84,8 @@
 (defn vertx
   ([] (Vertx/vertx ))
   ([options] (Vertx/vertx options)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

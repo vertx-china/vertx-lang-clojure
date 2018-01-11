@@ -29,3 +29,8 @@
 (defn sender
   ([event-bus address] (.sender event-bus address))
   ([event-bus address options] (.sender event-bus address options)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

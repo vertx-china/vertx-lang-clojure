@@ -112,3 +112,8 @@
   ([file-system path data handler] (.writeFile file-system path data handler)))
 (defn write-file-blocking
   ([file-system path data] (.writeFileBlocking file-system path data)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

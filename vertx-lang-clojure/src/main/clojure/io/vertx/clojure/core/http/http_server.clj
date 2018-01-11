@@ -27,3 +27,8 @@
   ([http-server handler] (.websocketHandler http-server handler)))
 (defn websocket-stream
   ([http-server ] (.websocketStream http-server )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

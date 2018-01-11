@@ -37,3 +37,8 @@
 (defn unlisten-multicast-group
   ([datagram-socket multicast-address handler] (.unlistenMulticastGroup datagram-socket multicast-address handler))
   ([datagram-socket multicast-address network-interface source handler] (.unlistenMulticastGroup datagram-socket multicast-address network-interface source handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

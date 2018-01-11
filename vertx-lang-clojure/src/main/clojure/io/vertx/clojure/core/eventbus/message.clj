@@ -20,3 +20,8 @@
   ([message message options reply-handler] (.reply message message options reply-handler)))
 (defn reply-address
   ([message ] (.replyAddress message )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

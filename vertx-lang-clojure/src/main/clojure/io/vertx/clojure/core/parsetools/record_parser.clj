@@ -29,3 +29,8 @@
   ([record-parser ] (.resume record-parser )))
 (defn set-output
   ([record-parser output] (.setOutput record-parser output)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

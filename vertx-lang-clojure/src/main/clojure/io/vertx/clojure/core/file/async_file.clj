@@ -40,3 +40,8 @@
   ([async-file buffer position handler] (.write async-file buffer position handler)))
 (defn write-queue-full
   ([async-file ] (.writeQueueFull async-file )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

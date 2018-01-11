@@ -63,3 +63,8 @@
 (defn try-complete
   ([composite-future result] (.tryComplete composite-future result))
   ([composite-future ] (.tryComplete composite-future )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

@@ -79,3 +79,8 @@
   ([http-server-response frame] (.writeCustomFrame http-server-response frame)))
 (defn write-queue-full
   ([http-server-response ] (.writeQueueFull http-server-response )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

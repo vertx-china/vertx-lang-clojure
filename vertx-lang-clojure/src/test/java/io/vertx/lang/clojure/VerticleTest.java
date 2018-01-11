@@ -12,6 +12,9 @@ public class VerticleTest extends VertxTestBase {
   @Test
   public void testHttpServer(){
     vertx.deployVerticle("examples.simple_http_server.clj", ar -> {
+//      if(!ar.succeeded()){
+//        ar.cause().printStackTrace();
+//      }
       assertTrue(ar.succeeded());
       HttpClient client = vertx.createHttpClient(new HttpClientOptions());
       HttpClientRequest req = client.request(HttpMethod.GET, 8080, "localhost", "/");

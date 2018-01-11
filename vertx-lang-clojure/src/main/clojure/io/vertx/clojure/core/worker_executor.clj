@@ -10,3 +10,8 @@
   ([worker-executor blocking-code-handler result-handler] (.executeBlocking worker-executor blocking-code-handler result-handler)))
 (defn is-metrics-enabled
   ([worker-executor ] (.isMetricsEnabled worker-executor )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

@@ -12,3 +12,8 @@
   ([net-client remote-address connect-handler] (.connect net-client remote-address connect-handler)))
 (defn is-metrics-enabled
   ([net-client ] (.isMetricsEnabled net-client )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

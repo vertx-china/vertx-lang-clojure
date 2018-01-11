@@ -69,3 +69,8 @@
   ([http-server-request ] (.uri http-server-request )))
 (defn version
   ([http-server-request ] (.version http-server-request )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

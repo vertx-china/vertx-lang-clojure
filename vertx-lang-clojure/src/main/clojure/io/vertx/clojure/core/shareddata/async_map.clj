@@ -23,3 +23,8 @@
   ([async-map k old-value new-value result-handler] (.replaceIfPresent async-map k old-value new-value result-handler)))
 (defn size
   ([async-map result-handler] (.size async-map result-handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

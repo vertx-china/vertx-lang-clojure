@@ -16,3 +16,8 @@
   ([write-stream data] (.write write-stream data)))
 (defn write-queue-full
   ([write-stream ] (.writeQueueFull write-stream )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

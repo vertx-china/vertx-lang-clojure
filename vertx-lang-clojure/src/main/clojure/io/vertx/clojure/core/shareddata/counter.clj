@@ -17,3 +17,8 @@
   ([counter result-handler] (.getAndIncrement counter result-handler)))
 (defn increment-and-get
   ([counter result-handler] (.incrementAndGet counter result-handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

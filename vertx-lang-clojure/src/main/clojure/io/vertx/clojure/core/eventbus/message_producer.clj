@@ -26,3 +26,8 @@
   ([message-producer data] (.write message-producer data)))
 (defn write-queue-full
   ([message-producer ] (.writeQueueFull message-producer )))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

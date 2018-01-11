@@ -38,3 +38,8 @@
   ([context key] (.remove context key)))
 (defn run-on-context
   ([context action] (.runOnContext context action)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

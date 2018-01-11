@@ -28,3 +28,8 @@
 (defn unregister
   ([message-consumer ] (.unregister message-consumer ))
   ([message-consumer completion-handler] (.unregister message-consumer completion-handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

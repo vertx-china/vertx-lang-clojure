@@ -64,3 +64,8 @@
   ([web-socket ] (.writeQueueFull web-socket )))
 (defn write-text-message
   ([web-socket text] (.writeTextMessage web-socket text)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))

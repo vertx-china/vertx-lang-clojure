@@ -13,3 +13,8 @@
   ([shared-data name result-handler] (.getLock shared-data name result-handler)))
 (defn get-lock-with-timeout
   ([shared-data name timeout result-handler] (.getLockWithTimeout shared-data name timeout result-handler)))
+(defn handler [f]
+  (reify
+   io.vertx.core.Handler
+   (handle [this para]
+           (f para))))
