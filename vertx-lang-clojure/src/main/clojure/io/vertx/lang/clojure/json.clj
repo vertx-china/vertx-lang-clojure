@@ -6,8 +6,12 @@
 (import io.vertx.core.json.JsonArray)
 (import io.vertx.lang.clojure.Json)
 
-(defn new-json-array ([] (new JsonArray)))
-(defn new-json-object [] (new JsonObject))
+(defn new-json-array
+  ([] (new JsonArray))
+  ([list] (new JsonArray list)))
+(defn new-json-object
+  ([] (new JsonObject))
+  ([map] (new JsonObject map)))
 (defn new-instance [] (new-json-object))
 ;put key-value pair to a jsonobject
 (defn put [^JsonObject json field value] (.put json field value))
@@ -44,4 +48,8 @@
 ;delete all entries with multiple values
 (defn delete-values [json & values] (reduce delete-value json values))
 
-;todo key-set value-set
+(defn key-set [^JsonObject json]
+  (into #{} (.keySet (.getMap json))))
+
+(defn values [json]
+  (into [] (Json/values json)))

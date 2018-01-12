@@ -4,6 +4,7 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
+  ([] (new DataObjectWithValues))
   ([^JsonObject json] (new DataObjectWithValues json)))
 
 (defn set-boolean-value [^DataObjectWithValues data-object-with-values boolean-value] (.setBooleanValue data-object-with-values boolean-value))

@@ -64,4 +64,10 @@
     (test/is (= nil (json/remove obj "3")))
     (test/is (= nil (json/remove array 3)))))
 
+(test/deftest test-json-nil-return
+  (let [obj   (json/new-json-object {"ok" 1 :key 2 3 2})
+        array (json/new-json-array [1 2 3 2])]
+    (test/is (= 1 (json/get obj "ok")))
+    (test/is (= 2 (json/get array 1)))))
+
 (test/run-tests 'io.vertx.lang.clojure.json-test)

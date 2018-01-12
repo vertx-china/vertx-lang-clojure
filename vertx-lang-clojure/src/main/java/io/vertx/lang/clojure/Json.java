@@ -3,6 +3,7 @@ package io.vertx.lang.clojure;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +54,23 @@ public class Json {
     return jsonObject;
   }
 
-  public static void main(String[] args){
-    JsonArray jsonArray = new JsonArray().add(3);
-    System.out.println(get(jsonArray, 0));
+  public static Object values(JsonObject jsonObject){
+    return jsonObject.getMap().values();
+  }
+
+  public static Object values(JsonArray jsonArray){
+    return jsonArray.getList();
+  }
+
+  public static Object keySet(JsonObject jsonObject){
+    return jsonObject.getMap().keySet();
+  }
+
+  public static Object keySet(JsonArray jsonArray){
+    List list = new ArrayList();
+    for(int i=0;i<jsonArray.size();i++){
+      list.add(i);
+    }
+    return list;
   }
 }

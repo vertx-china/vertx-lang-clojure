@@ -4,6 +4,7 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
+  ([] (new DataObjectWithNestedBuffer))
   ([^JsonObject json] (new DataObjectWithNestedBuffer json)))
 
 (defn set-buffer [^DataObjectWithNestedBuffer data-object-with-nested-buffer buffer] (.setBuffer data-object-with-nested-buffer buffer))

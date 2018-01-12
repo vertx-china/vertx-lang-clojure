@@ -4,6 +4,7 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
+  ([] (new TestDataObject))
   ([^JsonObject json] (new TestDataObject json)))
 
 (defn set-bar [^TestDataObject test-data-object bar] (.setBar test-data-object bar))
