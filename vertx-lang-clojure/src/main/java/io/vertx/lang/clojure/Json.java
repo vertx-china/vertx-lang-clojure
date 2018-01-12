@@ -35,7 +35,7 @@ public class Json {
   }
 
   public static Object removeValue(JsonObject jsonObject, Object value){
-    jsonObject.getMap().entrySet().removeIf(entry -> (entry.getValue()==value || entry.getValue().equals("test")));
+    jsonObject.getMap().entrySet().removeIf(entry -> (entry.getValue()==value || entry.getValue().equals(value)));
     return jsonObject;
   }
 
