@@ -58,13 +58,12 @@
       }
     }
   }
-
+  /*import corresponding java class*/
+  importClassSet.add(type.raw.name);
 }
-\n(import @{type.raw.name})
+
 @foreach{clazz:importClassSet}
-@if{clazz!=type.raw.name}
 \n(import @{clazz})
-@end{}
 @end{}
 \n
 

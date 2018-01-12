@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.streams.pump)
 
-(import io.vertx.core.streams.Pump)
 (import io.vertx.core.streams.WriteStream)
 (import io.vertx.core.streams.ReadStream)
+(import io.vertx.core.streams.Pump)
 
 (defn number-pumped
   ([pump ] (.numberPumped pump )))

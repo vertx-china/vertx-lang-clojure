@@ -1,6 +1,5 @@
 (ns examples.simple-http-server
-  (:require
-   [io.vertx.clojure.core.vertx :as vertx]
+  (:require [io.vertx.clojure.core.vertx :as vertx]
    [io.vertx.clojure.core.http.http-server :as server]
    [io.vertx.clojure.core.http.http-server-request :as request]
    [io.vertx.clojure.core.http.http-server-response :as response]))

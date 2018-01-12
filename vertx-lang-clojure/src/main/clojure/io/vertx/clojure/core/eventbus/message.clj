@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.eventbus.message)
 
-(import io.vertx.core.eventbus.Message)
 (import io.vertx.core.eventbus.DeliveryOptions)
+(import io.vertx.core.eventbus.Message)
 (import io.vertx.core.Handler)
 
 (defn address

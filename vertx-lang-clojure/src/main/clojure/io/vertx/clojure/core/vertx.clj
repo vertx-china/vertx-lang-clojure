@@ -1,9 +1,9 @@
 (ns io.vertx.clojure.core.vertx)
 
-(import io.vertx.core.Vertx)
 (import io.vertx.core.net.NetServerOptions)
 (import io.vertx.core.DeploymentOptions)
 (import io.vertx.core.dns.DnsClientOptions)
+(import io.vertx.core.Vertx)
 (import io.vertx.core.VertxOptions)
 (import io.vertx.core.http.HttpServerOptions)
 (import io.vertx.core.http.HttpClientOptions)

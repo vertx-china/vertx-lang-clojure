@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.web-socket)
 
-(import io.vertx.core.http.WebSocket)
 (import io.vertx.core.buffer.Buffer)
+(import io.vertx.core.http.WebSocket)
 (import io.vertx.core.Handler)
 (import io.vertx.core.http.WebSocketFrame)
 

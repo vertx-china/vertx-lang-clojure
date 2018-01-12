@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.net.net-socket)
 
-(import io.vertx.core.net.NetSocket)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.Handler)
+(import io.vertx.core.net.NetSocket)
 
 (defn close
   ([net-socket ] (.close net-socket )))

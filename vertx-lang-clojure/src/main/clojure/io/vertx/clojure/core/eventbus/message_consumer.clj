@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.eventbus.message-consumer)
 
-(import io.vertx.core.eventbus.MessageConsumer)
 (import io.vertx.core.Handler)
+(import io.vertx.core.eventbus.MessageConsumer)
 
 (defn address
   ([message-consumer ] (.address message-consumer )))

@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.cli.cli)
 
-(import io.vertx.core.cli.CLI)
 (import io.vertx.core.cli.Option)
 (import java.util.List)
+(import io.vertx.core.cli.CLI)
 (import io.vertx.core.cli.Argument)
 
 (defn add-argument

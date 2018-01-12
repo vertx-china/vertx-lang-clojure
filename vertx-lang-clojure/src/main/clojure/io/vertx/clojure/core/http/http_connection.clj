@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.http.http-connection)
 
-(import io.vertx.core.http.HttpConnection)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.http.Http2Settings)
+(import io.vertx.core.http.HttpConnection)
 (import io.vertx.core.Handler)
 
 (defn close

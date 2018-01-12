@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.parsetools.json-parser)
 
-(import io.vertx.core.parsetools.JsonParser)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.streams.ReadStream)
+(import io.vertx.core.parsetools.JsonParser)
 (import io.vertx.core.Handler)
 
 (defn array-event-mode

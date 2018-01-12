@@ -1,9 +1,9 @@
 (ns io.vertx.clojure.core.http.http-server-response)
 
-(import io.vertx.core.http.HttpServerResponse)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.http.HttpFrame)
 (import io.vertx.core.http.HttpMethod)
+(import io.vertx.core.http.HttpServerResponse)
 (import io.vertx.core.MultiMap)
 (import io.vertx.core.Handler)
 

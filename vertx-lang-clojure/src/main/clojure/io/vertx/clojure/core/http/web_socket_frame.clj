@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.web-socket-frame)
 
-(import io.vertx.core.http.WebSocketFrame)
 (import io.vertx.core.buffer.Buffer)
+(import io.vertx.core.http.WebSocketFrame)
 
 (defn binary-data
   ([web-socket-frame ] (.binaryData web-socket-frame )))

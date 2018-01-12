@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.cli.command-line)
 
-(import io.vertx.core.cli.CommandLine)
 (import io.vertx.core.cli.Option)
+(import io.vertx.core.cli.CommandLine)
 (import io.vertx.core.cli.CLI)
 (import io.vertx.core.cli.Argument)
 

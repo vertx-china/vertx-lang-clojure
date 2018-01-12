@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.net.net-client)
 
-(import io.vertx.core.net.NetClient)
 (import io.vertx.core.Handler)
+(import io.vertx.core.net.NetClient)
 (import io.vertx.core.net.SocketAddress)
 
 (defn close

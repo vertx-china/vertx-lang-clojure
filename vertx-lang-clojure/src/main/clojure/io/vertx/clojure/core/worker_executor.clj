@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.worker-executor)
 
-(import io.vertx.core.WorkerExecutor)
 (import io.vertx.core.Handler)
+(import io.vertx.core.WorkerExecutor)
 
 (defn close
   ([worker-executor ] (.close worker-executor )))

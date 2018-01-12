@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.shareddata.shared-data)
 
-(import io.vertx.core.shareddata.SharedData)
 (import io.vertx.core.Handler)
+(import io.vertx.core.shareddata.SharedData)
 
 (defn get-async-map
   ([shared-data name result-handler] (.getAsyncMap shared-data name result-handler)))
