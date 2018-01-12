@@ -1,5 +1,6 @@
 package io.vertx.lang.clojure;
 
+import io.vertx.codegen.PropertyInfo;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpClientRequest;
@@ -27,4 +28,6 @@ public class VerticleTest extends VertxTestBase {
     });
     await();
   }
+
+//  PropertyInfo
 }

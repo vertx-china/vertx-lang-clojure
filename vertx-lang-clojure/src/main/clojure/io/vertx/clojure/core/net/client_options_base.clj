@@ -4,6 +4,7 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
+  ([] (new ClientOptionsBase))
   ([^JsonObject json] (new ClientOptionsBase json)))
 
 (defn set-connect-timeout [^ClientOptionsBase client-options-base connect-timeout] (.setConnectTimeout client-options-base connect-timeout))

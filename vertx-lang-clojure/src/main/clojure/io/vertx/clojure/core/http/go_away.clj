@@ -4,6 +4,7 @@
 (import io.vertx.core.json.JsonObject)
 
 (defn new-instance
+  ([] (new GoAway))
   ([^JsonObject json] (new GoAway json)))
 
 (defn set-debug-data [^GoAway go-away debug-data] (.setDebugData go-away debug-data))
