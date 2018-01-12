@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.streams.read-stream)
 
-(import io.vertx.core.streams.ReadStream)
 (import io.vertx.core.Handler)
+(import io.vertx.core.streams.ReadStream)
 
 (defn end-handler
   ([read-stream end-handler] (.endHandler read-stream end-handler)))

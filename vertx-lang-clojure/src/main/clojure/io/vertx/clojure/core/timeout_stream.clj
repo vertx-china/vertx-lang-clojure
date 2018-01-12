@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.timeout-stream)
 
-(import io.vertx.core.TimeoutStream)
 (import io.vertx.core.Handler)
+(import io.vertx.core.TimeoutStream)
 
 (defn cancel
   ([timeout-stream ] (.cancel timeout-stream )))

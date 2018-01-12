@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.http-client-response)
 
-(import io.vertx.core.http.HttpClientResponse)
 (import io.vertx.core.Handler)
+(import io.vertx.core.http.HttpClientResponse)
 
 (defn body-handler
   ([http-client-response body-handler] (.bodyHandler http-client-response body-handler)))

@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.http-server-request)
 
-(import io.vertx.core.http.HttpServerRequest)
 (import io.vertx.core.Handler)
+(import io.vertx.core.http.HttpServerRequest)
 
 (defn absolute-uri
   ([http-server-request ] (.absoluteURI http-server-request )))

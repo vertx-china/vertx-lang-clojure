@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.eventbus.event-bus)
 
+(import io.vertx.core.Handler)
 (import io.vertx.core.eventbus.DeliveryOptions)
 (import io.vertx.core.eventbus.EventBus)
-(import io.vertx.core.Handler)
 
 (defn add-interceptor
   ([event-bus interceptor] (.addInterceptor event-bus interceptor)))

@@ -1,12 +1,12 @@
 (ns io.vertx.clojure.core.http.http-client)
 
-(import io.vertx.core.http.HttpMethod)
+(import io.vertx.core.Handler)
 (import io.vertx.core.MultiMap)
+(import io.vertx.core.http.HttpClient)
+(import io.vertx.core.http.HttpMethod)
 (import io.vertx.core.http.RequestOptions)
 (import io.vertx.core.http.WebsocketVersion)
-(import io.vertx.core.Handler)
 (import java.util.function.Function)
-(import io.vertx.core.http.HttpClient)
 
 (defn close
   ([http-client ] (.close http-client )))

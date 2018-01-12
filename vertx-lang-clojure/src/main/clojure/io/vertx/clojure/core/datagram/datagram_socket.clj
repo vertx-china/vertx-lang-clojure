@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.datagram.datagram-socket)
 
+(import io.vertx.core.Handler)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.datagram.DatagramSocket)
-(import io.vertx.core.Handler)
 
 (defn block-multicast-group
   ([datagram-socket multicast-address source-to-block handler] (.blockMulticastGroup datagram-socket multicast-address source-to-block handler))

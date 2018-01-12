@@ -1,9 +1,9 @@
 (ns io.vertx.clojure.core.composite-future)
 
 (import io.vertx.core.CompositeFuture)
-(import java.util.List)
-(import io.vertx.core.Handler)
 (import io.vertx.core.Future)
+(import io.vertx.core.Handler)
+(import java.util.List)
 (import java.util.function.Function)
 
 (defn all

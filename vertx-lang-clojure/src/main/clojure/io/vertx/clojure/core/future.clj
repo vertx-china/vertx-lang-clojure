@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.future)
 
-(import io.vertx.core.Handler)
 (import io.vertx.core.Future)
+(import io.vertx.core.Handler)
 (import java.util.function.Function)
 
 (defn cause

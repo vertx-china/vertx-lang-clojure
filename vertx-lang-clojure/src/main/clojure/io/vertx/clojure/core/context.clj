@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.context)
 
-(import io.vertx.core.Handler)
 (import io.vertx.core.Context)
+(import io.vertx.core.Handler)
 
 (defn config
   ([context ] (.config context )))

@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.net.net-server)
 
-(import io.vertx.core.net.NetServer)
 (import io.vertx.core.Handler)
+(import io.vertx.core.net.NetServer)
 (import io.vertx.core.net.SocketAddress)
 
 (defn actual-port

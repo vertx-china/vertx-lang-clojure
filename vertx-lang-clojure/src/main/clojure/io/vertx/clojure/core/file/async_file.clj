@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.file.async-file)
 
-(import io.vertx.core.file.AsyncFile)
-(import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.Handler)
+(import io.vertx.core.buffer.Buffer)
+(import io.vertx.core.file.AsyncFile)
 
 (defn close
   ([async-file ] (.close async-file ))

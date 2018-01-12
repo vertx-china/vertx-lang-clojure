@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.shareddata.async-map)
 
-(import io.vertx.core.shareddata.AsyncMap)
 (import io.vertx.core.Handler)
+(import io.vertx.core.shareddata.AsyncMap)
 
 (defn clear
   ([async-map result-handler] (.clear async-map result-handler)))

@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.http.server-web-socket)
 
-(import io.vertx.core.http.ServerWebSocket)
-(import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.Handler)
+(import io.vertx.core.buffer.Buffer)
+(import io.vertx.core.http.ServerWebSocket)
 (import io.vertx.core.http.WebSocketFrame)
 
 (defn accept

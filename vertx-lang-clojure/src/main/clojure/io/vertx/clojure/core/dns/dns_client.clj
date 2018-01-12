@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.dns.dns-client)
 
-(import io.vertx.core.dns.DnsClient)
 (import io.vertx.core.Handler)
+(import io.vertx.core.dns.DnsClient)
 
 (defn lookup
   ([dns-client name handler] (.lookup dns-client name handler)))

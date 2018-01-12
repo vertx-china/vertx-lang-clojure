@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.http-server-file-upload)
 
-(import io.vertx.core.http.HttpServerFileUpload)
 (import io.vertx.core.Handler)
+(import io.vertx.core.http.HttpServerFileUpload)
 
 (defn charset
   ([http-server-file-upload ] (.charset http-server-file-upload )))

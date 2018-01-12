@@ -1,9 +1,9 @@
 (ns io.vertx.clojure.core.http.http-client-request)
 
-(import io.vertx.core.http.HttpClientRequest)
-(import io.vertx.core.buffer.Buffer)
-(import io.vertx.core.http.HttpFrame)
 (import io.vertx.core.Handler)
+(import io.vertx.core.buffer.Buffer)
+(import io.vertx.core.http.HttpClientRequest)
+(import io.vertx.core.http.HttpFrame)
 
 (defn absolute-uri
   ([http-client-request ] (.absoluteURI http-client-request )))

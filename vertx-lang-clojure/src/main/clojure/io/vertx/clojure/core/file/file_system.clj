@@ -1,10 +1,10 @@
 (ns io.vertx.clojure.core.file.file-system)
 
+(import io.vertx.core.Handler)
 (import io.vertx.core.buffer.Buffer)
-(import io.vertx.core.file.OpenOptions)
 (import io.vertx.core.file.CopyOptions)
 (import io.vertx.core.file.FileSystem)
-(import io.vertx.core.Handler)
+(import io.vertx.core.file.OpenOptions)
 
 (defn chmod
   ([file-system path perms handler] (.chmod file-system path perms handler)))

@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.core.http.web-socket-base)
 
+(import io.vertx.core.Handler)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.http.WebSocketBase)
-(import io.vertx.core.Handler)
 (import io.vertx.core.http.WebSocketFrame)
 
 (defn binary-handler-id

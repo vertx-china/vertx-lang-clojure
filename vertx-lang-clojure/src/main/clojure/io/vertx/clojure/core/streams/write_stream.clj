@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.streams.write-stream)
 
-(import io.vertx.core.streams.WriteStream)
 (import io.vertx.core.Handler)
+(import io.vertx.core.streams.WriteStream)
 
 (defn drain-handler
   ([write-stream handler] (.drainHandler write-stream handler)))

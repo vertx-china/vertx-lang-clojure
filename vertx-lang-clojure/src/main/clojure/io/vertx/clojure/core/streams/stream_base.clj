@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.streams.stream-base)
 
-(import io.vertx.core.streams.StreamBase)
 (import io.vertx.core.Handler)
+(import io.vertx.core.streams.StreamBase)
 
 (defn exception-handler
   ([stream-base handler] (.exceptionHandler stream-base handler)))

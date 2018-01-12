@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.http-server)
 
-(import io.vertx.core.http.HttpServer)
 (import io.vertx.core.Handler)
+(import io.vertx.core.http.HttpServer)
 
 (defn actual-port
   ([http-server ] (.actualPort http-server )))

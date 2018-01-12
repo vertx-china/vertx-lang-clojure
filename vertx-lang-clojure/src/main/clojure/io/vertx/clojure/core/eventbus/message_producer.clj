@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.eventbus.message-producer)
 
-(import io.vertx.core.eventbus.DeliveryOptions)
 (import io.vertx.core.Handler)
+(import io.vertx.core.eventbus.DeliveryOptions)
 (import io.vertx.core.eventbus.MessageProducer)
 
 (defn address

@@ -1,9 +1,9 @@
 (ns io.vertx.clojure.core.parsetools.record-parser)
 
-(import io.vertx.core.buffer.Buffer)
-(import io.vertx.core.streams.ReadStream)
-(import io.vertx.core.parsetools.RecordParser)
 (import io.vertx.core.Handler)
+(import io.vertx.core.buffer.Buffer)
+(import io.vertx.core.parsetools.RecordParser)
+(import io.vertx.core.streams.ReadStream)
 
 (defn delimited-mode
   ([record-parser delim] (.delimitedMode record-parser delim)))

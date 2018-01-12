@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.shareddata.counter)
 
-(import io.vertx.core.shareddata.Counter)
 (import io.vertx.core.Handler)
+(import io.vertx.core.shareddata.Counter)
 
 (defn add-and-get
   ([counter value result-handler] (.addAndGet counter value result-handler)))

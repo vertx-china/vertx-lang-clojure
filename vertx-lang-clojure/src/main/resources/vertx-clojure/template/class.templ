@@ -4,12 +4,12 @@
   use their name as map key, methods as value list*/
   import java.util.TreeMap;
   import java.util.HashMap;
-  import java.util.HashSet;
+  import java.util.TreeSet;
   import java.util.ArrayList;
-
+  /*using tree map & set here only because we need to keep the order in source files*/
   var methodsMap = new TreeMap();
   var paramsMap = new HashMap();
-  var importClassSet = new HashSet();
+  var importClassSet = new TreeSet();
   foreach (method : methods) {
     if(methodsMap[method.name] == null){
       methodsMap[method.name] = [method];
