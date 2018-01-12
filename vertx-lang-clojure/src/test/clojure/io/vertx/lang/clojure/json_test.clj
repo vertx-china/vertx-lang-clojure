@@ -12,10 +12,10 @@
         (json/put "redundant" "redundant")
         (json/del "redundant" "male")
         (json/put "redundant" "not really"))
-    (test/is (= 30 (json/get json"age")))
-    (test/is (= "cn" (json/get json"country")))
-    (test/is (< 180 (json/get json"height")))
-    (test/is (= nil (json/get json"male")))
+    (test/is (= 30 (json/get json "age")))
+    (test/is (= "cn" (json/get json "country")))
+    (test/is (< 180 (json/get json "height")))
+    (test/is (= nil (json/get json "male")))
     (test/is (= 4 (json/size json)))))
 
 (test/deftest test-json-array
@@ -29,7 +29,7 @@
     (test/is (= 4 (json/size array)))))
 
 (test/deftest test-json-delete
-  (let [obj (json/new-json-object)
+  (let [obj   (json/new-json-object)
         array (json/new-json-array)]
 
     (-> obj
@@ -40,8 +40,28 @@
         (json/delete-values "cn" 30))
     (test/is (= 2 (json/size obj)))
 
-    (json/add  array 1 2 "3" false true obj)
-    (json/delete-values array"3" 2 7)
+    (json/add array 1 2 "3" false true obj)
+    (json/delete-values array "3" 2 7)
     (test/is (= 4 (json/size array)))))
+
+(test/deftest test-json-set
+  (let [obj   (json/new-json-object)
+        array (json/new-json-array)]
+    (-> array
+        (json/set 3 1)
+        (json/set 2 2)
+        (json/set 1 3)
+        (json/set 0 4)
+        (json/insert 0 0)
+        (json/del 1))
+    (test/is (= 4 (json/size array)))))
+
+(test/deftest test-json-nil-return
+  (let [obj   (json/new-json-object)
+        array (json/new-json-array)]
+    (test/is (= nil (json/get array 3)))
+    (test/is (= nil (json/get obj "3")))
+    (test/is (= nil (json/remove obj "3")))
+    (test/is (= nil (json/remove array 3)))))
 
 (test/run-tests 'io.vertx.lang.clojure.json-test)

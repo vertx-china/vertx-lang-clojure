@@ -4,10 +4,23 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Json {
+  public static Object set(JsonArray jsonArray, int pos, Object value){
+    List list = jsonArray.getList();
+    if(pos > list.size()) list.add(value);
+    else list.add(pos,value);
+    return jsonArray;
+  }
+
+  public static Object set(JsonObject jsonObject, String key, Object value){
+    return jsonObject.put(key,value);
+  }
+
   public static Object get(JsonArray jsonArray, int pos){
+    if(pos >= jsonArray.size()) return null;
     return jsonArray.getValue(pos);
   }
 
@@ -16,6 +29,7 @@ public class Json {
   }
 
   public static Object remove(JsonArray jsonArray, int pos){
+    if(pos >= jsonArray.size()) return null;
     return jsonArray.remove(pos);
   }
 
@@ -39,4 +53,8 @@ public class Json {
     return jsonObject;
   }
 
+  public static void main(String[] args){
+    JsonArray jsonArray = new JsonArray().add(3);
+    System.out.println(get(jsonArray, 0));
+  }
 }

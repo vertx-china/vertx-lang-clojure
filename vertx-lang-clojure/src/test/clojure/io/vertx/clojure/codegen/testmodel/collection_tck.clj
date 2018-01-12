@@ -1,10 +1,10 @@
 (ns io.vertx.clojure.codegen.testmodel.collection-tck)
 
 (import io.vertx.codegen.testmodel.CollectionTCK)
+(import io.vertx.core.Handler)
 (import java.util.List)
 (import java.util.Map)
 (import java.util.Set)
-(import io.vertx.core.Handler)
 
 (defn method-with-handler-async-result-list-abstract-vertx-gen
   ([collection-tck list-handler] (.methodWithHandlerAsyncResultListAbstractVertxGen collection-tck list-handler)))

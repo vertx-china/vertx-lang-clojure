@@ -1,13 +1,13 @@
 (ns io.vertx.clojure.codegen.testmodel.data-object-tck)
 
 (import io.vertx.codegen.testmodel.DataObjectTCK)
-(import io.vertx.codegen.testmodel.DataObjectWithMaps)
-(import io.vertx.codegen.testmodel.DataObjectWithRecursion)
-(import io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor)
-(import io.vertx.codegen.testmodel.DataObjectWithMapAdders)
 (import io.vertx.codegen.testmodel.DataObjectWithListAdders)
 (import io.vertx.codegen.testmodel.DataObjectWithLists)
+(import io.vertx.codegen.testmodel.DataObjectWithMapAdders)
+(import io.vertx.codegen.testmodel.DataObjectWithMaps)
 (import io.vertx.codegen.testmodel.DataObjectWithNestedBuffer)
+(import io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor)
+(import io.vertx.codegen.testmodel.DataObjectWithRecursion)
 (import io.vertx.codegen.testmodel.DataObjectWithValues)
 
 (defn get-data-object-with-lists

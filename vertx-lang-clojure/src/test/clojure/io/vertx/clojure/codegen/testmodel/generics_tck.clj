@@ -1,10 +1,10 @@
 (ns io.vertx.clojure.codegen.testmodel.generics-tck)
 
-(import io.vertx.codegen.testmodel.GenericsTCK)
 (import io.vertx.codegen.testmodel.GenericRefedInterface)
+(import io.vertx.codegen.testmodel.GenericsTCK)
+(import io.vertx.codegen.testmodel.RefedInterface1)
 (import io.vertx.core.Handler)
 (import java.util.function.Function)
-(import io.vertx.codegen.testmodel.RefedInterface1)
 
 (defn interface-with-api-arg
   ([generics-tck value] (.interfaceWithApiArg generics-tck value)))

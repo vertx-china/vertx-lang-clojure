@@ -1,8 +1,8 @@
 (ns io.vertx.clojure.codegen.testmodel.function-param-tck)
 
 (import io.vertx.codegen.testmodel.FunctionParamTCK)
-(import java.util.function.Function)
 (import io.vertx.codegen.testmodel.RefedInterface1)
+(import java.util.function.Function)
 
 (defn method-with-basic-param
   ([function-param-tck byte-func short-func integer-func long-func float-func double-func boolean-func char-func string-func] (.methodWithBasicParam function-param-tck byte-func short-func integer-func long-func float-func double-func boolean-func char-func string-func)))

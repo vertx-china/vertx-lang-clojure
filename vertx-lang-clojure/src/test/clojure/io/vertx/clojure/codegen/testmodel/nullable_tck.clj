@@ -1,16 +1,16 @@
 (ns io.vertx.clojure.codegen.testmodel.nullable-tck)
 
 (import io.vertx.codegen.testmodel.NullableTCK)
-(import io.vertx.core.json.JsonArray)
-(import java.util.List)
+(import io.vertx.codegen.testmodel.RefedInterface1)
+(import io.vertx.codegen.testmodel.TestDataObject)
 (import io.vertx.codegen.testmodel.TestEnum)
+(import io.vertx.codegen.testmodel.TestGenEnum)
+(import io.vertx.core.Handler)
+(import io.vertx.core.json.JsonArray)
+(import io.vertx.core.json.JsonObject)
+(import java.util.List)
 (import java.util.Map)
 (import java.util.Set)
-(import io.vertx.core.json.JsonObject)
-(import io.vertx.codegen.testmodel.TestDataObject)
-(import io.vertx.core.Handler)
-(import io.vertx.codegen.testmodel.RefedInterface1)
-(import io.vertx.codegen.testmodel.TestGenEnum)
 
 (defn method-with-list-nullable-api-handler
   ([nullable-tck handler] (.methodWithListNullableApiHandler nullable-tck handler)))
