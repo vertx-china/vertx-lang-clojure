@@ -24,3 +24,4 @@
 (defn set-long-value [^DataObjectWithValues data-object-with-values long-value] (.setLongValue data-object-with-values long-value))
 (defn set-short-value [^DataObjectWithValues data-object-with-values short-value] (.setShortValue data-object-with-values short-value))
 (defn set-string-value [^DataObjectWithValues data-object-with-values string-value] (.setStringValue data-object-with-values string-value))
+(defn to-json [^DataObjectWithValues data-object-with-values] (.toJson data-object-with-values))

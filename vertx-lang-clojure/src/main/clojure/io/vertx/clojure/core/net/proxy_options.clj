@@ -17,3 +17,4 @@
 (defn get-type [^ProxyOptions proxy-options] (.getType proxy-options))
 (defn set-username [^ProxyOptions proxy-options username] (.setUsername proxy-options username))
 (defn get-username [^ProxyOptions proxy-options] (.getUsername proxy-options))
+(defn to-json [^ProxyOptions proxy-options] (.toJson proxy-options))

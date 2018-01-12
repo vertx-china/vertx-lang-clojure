@@ -32,3 +32,4 @@
 (defn get-short-name [^Option option] (.getShortName option))
 (defn set-single-valued [^Option option single-valued] (.setSingleValued option single-valued))
 (defn is-single-valued [^Option option] (.isSingleValued option))
+(defn to-json [^Option option] (.toJson option))

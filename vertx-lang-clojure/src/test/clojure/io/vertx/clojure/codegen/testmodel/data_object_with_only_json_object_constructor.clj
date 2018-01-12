@@ -7,3 +7,4 @@
   ([^JsonObject json] (new DataObjectWithOnlyJsonObjectConstructor json)))
 
 (defn get-foo [^DataObjectWithOnlyJsonObjectConstructor data-object-with-only-json-object-constructor] (.getFoo data-object-with-only-json-object-constructor))
+(defn to-json [^DataObjectWithOnlyJsonObjectConstructor data-object-with-only-json-object-constructor] (.toJson data-object-with-only-json-object-constructor))

@@ -79,3 +79,4 @@
 (defn is-use-alpn [^NetClientOptions net-client-options] (.isUseAlpn net-client-options))
 (defn set-use-pooled-buffers [^NetClientOptions net-client-options use-pooled-buffers] (.setUsePooledBuffers net-client-options use-pooled-buffers))
 (defn is-use-pooled-buffers [^NetClientOptions net-client-options] (.isUsePooledBuffers net-client-options))
+(defn to-json [^NetClientOptions net-client-options] (.toJson net-client-options))

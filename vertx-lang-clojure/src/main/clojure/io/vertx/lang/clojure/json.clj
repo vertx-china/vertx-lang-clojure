@@ -33,6 +33,9 @@
 (defn delete [json & field-or-pos]
   (reduce delete-element json field-or-pos))
 
+(defn del [json & field-or-pos]
+  (reduce delete-element json field-or-pos))
+
 (defn size [json] (.size json))
 
 (defn length [json] (size json))
@@ -42,3 +45,4 @@
 ;complexity o(n^2)
 (defn delete-values [json & values] (reduce delete-value json values))
 
+;todo insert key-set value-set

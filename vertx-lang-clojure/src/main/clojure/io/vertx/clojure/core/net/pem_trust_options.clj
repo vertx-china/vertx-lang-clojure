@@ -11,3 +11,4 @@
 (defn get-cert-paths [^PemTrustOptions pem-trust-options] (.getCertPaths pem-trust-options))
 (defn add-cert-value [^PemTrustOptions pem-trust-options cert-values] (.addCertValue pem-trust-options cert-values))
 (defn get-cert-values [^PemTrustOptions pem-trust-options] (.getCertValues pem-trust-options))
+(defn to-json [^PemTrustOptions pem-trust-options] (.toJson pem-trust-options))

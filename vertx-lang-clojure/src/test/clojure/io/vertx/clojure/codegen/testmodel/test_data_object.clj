@@ -12,3 +12,4 @@
 (defn get-foo [^TestDataObject test-data-object] (.getFoo test-data-object))
 (defn set-wibble [^TestDataObject test-data-object wibble] (.setWibble test-data-object wibble))
 (defn get-wibble [^TestDataObject test-data-object] (.getWibble test-data-object))
+(defn to-json [^TestDataObject test-data-object] (.toJson test-data-object))

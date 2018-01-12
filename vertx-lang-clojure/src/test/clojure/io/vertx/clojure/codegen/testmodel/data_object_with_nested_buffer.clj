@@ -12,3 +12,4 @@
 (defn get-buffers [^DataObjectWithNestedBuffer data-object-with-nested-buffer] (.getBuffers data-object-with-nested-buffer))
 (defn set-nested [^DataObjectWithNestedBuffer data-object-with-nested-buffer nested] (.setNested data-object-with-nested-buffer nested))
 (defn get-nested [^DataObjectWithNestedBuffer data-object-with-nested-buffer] (.getNested data-object-with-nested-buffer))
+(defn to-json [^DataObjectWithNestedBuffer data-object-with-nested-buffer] (.toJson data-object-with-nested-buffer))

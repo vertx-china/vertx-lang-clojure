@@ -19,3 +19,4 @@
 (defn get-send-buffer-size [^NetworkOptions network-options] (.getSendBufferSize network-options))
 (defn set-traffic-class [^NetworkOptions network-options traffic-class] (.setTrafficClass network-options traffic-class))
 (defn get-traffic-class [^NetworkOptions network-options] (.getTrafficClass network-options))
+(defn to-json [^NetworkOptions network-options] (.toJson network-options))

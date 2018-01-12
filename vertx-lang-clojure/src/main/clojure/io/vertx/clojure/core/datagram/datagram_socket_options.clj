@@ -29,3 +29,4 @@
 (defn get-send-buffer-size [^DatagramSocketOptions datagram-socket-options] (.getSendBufferSize datagram-socket-options))
 (defn set-traffic-class [^DatagramSocketOptions datagram-socket-options traffic-class] (.setTrafficClass datagram-socket-options traffic-class))
 (defn get-traffic-class [^DatagramSocketOptions datagram-socket-options] (.getTrafficClass datagram-socket-options))
+(defn to-json [^DatagramSocketOptions datagram-socket-options] (.toJson datagram-socket-options))

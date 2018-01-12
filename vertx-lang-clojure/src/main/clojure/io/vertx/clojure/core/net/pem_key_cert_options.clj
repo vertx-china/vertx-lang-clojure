@@ -19,3 +19,4 @@
 (defn set-key-value [^PemKeyCertOptions pem-key-cert-options key-value] (.setKeyValue pem-key-cert-options key-value))
 (defn set-key-values [^PemKeyCertOptions pem-key-cert-options key-values] (.setKeyValues pem-key-cert-options key-values))
 (defn get-key-values [^PemKeyCertOptions pem-key-cert-options] (.getKeyValues pem-key-cert-options))
+(defn to-json [^PemKeyCertOptions pem-key-cert-options] (.toJson pem-key-cert-options))

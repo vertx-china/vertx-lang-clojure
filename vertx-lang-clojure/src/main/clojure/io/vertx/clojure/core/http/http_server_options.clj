@@ -105,3 +105,4 @@
 (defn is-use-pooled-buffers [^HttpServerOptions http-server-options] (.isUsePooledBuffers http-server-options))
 (defn set-websocket-sub-protocols [^HttpServerOptions http-server-options websocket-sub-protocols] (.setWebsocketSubProtocols http-server-options websocket-sub-protocols))
 (defn get-websocket-sub-protocols [^HttpServerOptions http-server-options] (.getWebsocketSubProtocols http-server-options))
+(defn to-json [^HttpServerOptions http-server-options] (.toJson http-server-options))

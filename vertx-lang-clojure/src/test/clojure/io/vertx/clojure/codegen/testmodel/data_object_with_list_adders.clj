@@ -18,3 +18,4 @@
 (defn add-long-value [^DataObjectWithListAdders data-object-with-list-adders long-values] (.addLongValue data-object-with-list-adders long-values))
 (defn add-short-value [^DataObjectWithListAdders data-object-with-list-adders short-values] (.addShortValue data-object-with-list-adders short-values))
 (defn add-string-value [^DataObjectWithListAdders data-object-with-list-adders string-values] (.addStringValue data-object-with-list-adders string-values))
+(defn to-json [^DataObjectWithListAdders data-object-with-list-adders] (.toJson data-object-with-list-adders))

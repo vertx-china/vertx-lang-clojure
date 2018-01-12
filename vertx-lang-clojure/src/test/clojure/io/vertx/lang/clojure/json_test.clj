@@ -10,7 +10,7 @@
         (json/put "male" true)
         (json/put "height" 181.5)
         (json/put "redundant" "redundant")
-        (json/delete "redundant" "male")
+        (json/del "redundant" "male")
         (json/put "redundant" "not really"))
     (test/is (= 30 (json/get json"age")))
     (test/is (= "cn" (json/get json"country")))
@@ -24,7 +24,7 @@
     (test/is (= 1 (json/get array 0)))
     (json/add array 1 3 5 7 9)
     (test/is (= 3 (json/get array 2)))
-    (json/delete array 3 4)
+    (json/del array 3 4)
     (test/is (= 7 (json/get array 3)))
     (test/is (= 4 (json/size array)))))
 

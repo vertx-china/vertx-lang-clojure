@@ -10,3 +10,4 @@
 (defn get-data [^DataObjectWithRecursion data-object-with-recursion] (.getData data-object-with-recursion))
 (defn set-next [^DataObjectWithRecursion data-object-with-recursion next] (.setNext data-object-with-recursion next))
 (defn get-next [^DataObjectWithRecursion data-object-with-recursion] (.getNext data-object-with-recursion))
+(defn to-json [^DataObjectWithRecursion data-object-with-recursion] (.toJson data-object-with-recursion))

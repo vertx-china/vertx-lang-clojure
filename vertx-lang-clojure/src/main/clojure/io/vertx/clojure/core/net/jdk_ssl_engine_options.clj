@@ -8,3 +8,4 @@
   ([^JsonObject json] (new JdkSSLEngineOptions json)))
 
 (defn is-alpn-available [^JdkSSLEngineOptions jdk-ssl-engine-options] (.isAlpnAvailable jdk-ssl-engine-options))
+(defn to-json [^JdkSSLEngineOptions jdk-ssl-engine-options] (.toJson jdk-ssl-engine-options))

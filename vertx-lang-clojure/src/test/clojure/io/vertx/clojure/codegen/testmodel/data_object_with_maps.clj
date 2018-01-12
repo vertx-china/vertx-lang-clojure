@@ -18,3 +18,4 @@
 (defn set-long-values [^DataObjectWithMaps data-object-with-maps long-values] (.setLongValues data-object-with-maps long-values))
 (defn set-short-values [^DataObjectWithMaps data-object-with-maps short-values] (.setShortValues data-object-with-maps short-values))
 (defn set-string-values [^DataObjectWithMaps data-object-with-maps string-values] (.setStringValues data-object-with-maps string-values))
+(defn to-json [^DataObjectWithMaps data-object-with-maps] (.toJson data-object-with-maps))

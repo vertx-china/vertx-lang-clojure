@@ -9,3 +9,4 @@
 
 (defn set-enabled [^MetricsOptions metrics-options enabled] (.setEnabled metrics-options enabled))
 (defn is-enabled [^MetricsOptions metrics-options] (.isEnabled metrics-options))
+(defn to-json [^MetricsOptions metrics-options] (.toJson metrics-options))

@@ -18,3 +18,4 @@
 (defn get-max-header-list-size [^Http2Settings http2-settings] (.getMaxHeaderListSize http2-settings))
 (defn set-push-enabled [^Http2Settings http2-settings push-enabled] (.setPushEnabled http2-settings push-enabled))
 (defn is-push-enabled [^Http2Settings http2-settings] (.isPushEnabled http2-settings))
+(defn to-json [^Http2Settings http2-settings] (.toJson http2-settings))

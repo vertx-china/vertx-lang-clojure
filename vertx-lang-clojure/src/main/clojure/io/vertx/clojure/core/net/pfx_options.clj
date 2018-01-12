@@ -13,3 +13,4 @@
 (defn get-path [^PfxOptions pfx-options] (.getPath pfx-options))
 (defn set-value [^PfxOptions pfx-options value] (.setValue pfx-options value))
 (defn get-value [^PfxOptions pfx-options] (.getValue pfx-options))
+(defn to-json [^PfxOptions pfx-options] (.toJson pfx-options))

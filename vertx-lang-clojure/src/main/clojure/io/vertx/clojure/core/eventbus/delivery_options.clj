@@ -12,3 +12,4 @@
 (defn add-header [^DeliveryOptions delivery-options headers] (.addHeader delivery-options headers))
 (defn set-send-timeout [^DeliveryOptions delivery-options send-timeout] (.setSendTimeout delivery-options send-timeout))
 (defn get-send-timeout [^DeliveryOptions delivery-options] (.getSendTimeout delivery-options))
+(defn to-json [^DeliveryOptions delivery-options] (.toJson delivery-options))

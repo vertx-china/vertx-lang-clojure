@@ -13,3 +13,4 @@
 (defn get-port [^DnsClientOptions dns-client-options] (.getPort dns-client-options))
 (defn set-query-timeout [^DnsClientOptions dns-client-options query-timeout] (.setQueryTimeout dns-client-options query-timeout))
 (defn get-query-timeout [^DnsClientOptions dns-client-options] (.getQueryTimeout dns-client-options))
+(defn to-json [^DnsClientOptions dns-client-options] (.toJson dns-client-options))

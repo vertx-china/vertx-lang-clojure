@@ -35,3 +35,4 @@
 (defn add-server [^AddressResolverOptions address-resolver-options servers] (.addServer address-resolver-options servers))
 (defn set-servers [^AddressResolverOptions address-resolver-options servers] (.setServers address-resolver-options servers))
 (defn get-servers [^AddressResolverOptions address-resolver-options] (.getServers address-resolver-options))
+(defn to-json [^AddressResolverOptions address-resolver-options] (.toJson address-resolver-options))

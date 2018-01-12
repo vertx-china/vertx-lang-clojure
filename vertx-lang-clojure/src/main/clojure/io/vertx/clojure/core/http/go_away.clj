@@ -12,3 +12,4 @@
 (defn get-error-code [^GoAway go-away] (.getErrorCode go-away))
 (defn set-last-stream-id [^GoAway go-away last-stream-id] (.setLastStreamId go-away last-stream-id))
 (defn get-last-stream-id [^GoAway go-away] (.getLastStreamId go-away))
+(defn to-json [^GoAway go-away] (.toJson go-away))

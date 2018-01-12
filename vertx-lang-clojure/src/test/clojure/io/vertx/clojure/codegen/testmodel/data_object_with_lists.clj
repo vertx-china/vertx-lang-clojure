@@ -18,3 +18,4 @@
 (defn set-long-values [^DataObjectWithLists data-object-with-lists long-values] (.setLongValues data-object-with-lists long-values))
 (defn set-short-values [^DataObjectWithLists data-object-with-lists short-values] (.setShortValues data-object-with-lists short-values))
 (defn set-string-values [^DataObjectWithLists data-object-with-lists string-values] (.setStringValues data-object-with-lists string-values))
+(defn to-json [^DataObjectWithLists data-object-with-lists] (.toJson data-object-with-lists))

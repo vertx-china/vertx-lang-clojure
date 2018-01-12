@@ -29,3 +29,4 @@
 (defn get-worker-pool-name [^DeploymentOptions deployment-options] (.getWorkerPoolName deployment-options))
 (defn set-worker-pool-size [^DeploymentOptions deployment-options worker-pool-size] (.setWorkerPoolSize deployment-options worker-pool-size))
 (defn get-worker-pool-size [^DeploymentOptions deployment-options] (.getWorkerPoolSize deployment-options))
+(defn to-json [^DeploymentOptions deployment-options] (.toJson deployment-options))

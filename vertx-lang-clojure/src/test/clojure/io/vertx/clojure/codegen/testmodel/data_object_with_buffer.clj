@@ -8,3 +8,4 @@
 
 (defn set-buffer [^DataObjectWithBuffer data-object-with-buffer buffer] (.setBuffer data-object-with-buffer buffer))
 (defn get-buffer [^DataObjectWithBuffer data-object-with-buffer] (.getBuffer data-object-with-buffer))
+(defn to-json [^DataObjectWithBuffer data-object-with-buffer] (.toJson data-object-with-buffer))

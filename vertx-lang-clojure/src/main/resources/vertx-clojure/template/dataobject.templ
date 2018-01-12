@@ -35,3 +35,7 @@
 @end{}
 
 @end{}
+
+@if{jsonifiable}
+\n(defn to-json [^@{className} @{objKeBabName}] (.toJson @{objKeBabName}))
+@end{}

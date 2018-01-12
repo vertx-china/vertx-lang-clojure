@@ -123,3 +123,4 @@
 (defn is-use-pooled-buffers [^HttpClientOptions http-client-options] (.isUsePooledBuffers http-client-options))
 (defn set-verify-host [^HttpClientOptions http-client-options verify-host] (.setVerifyHost http-client-options verify-host))
 (defn is-verify-host [^HttpClientOptions http-client-options] (.isVerifyHost http-client-options))
+(defn to-json [^HttpClientOptions http-client-options] (.toJson http-client-options))

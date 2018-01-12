@@ -18,3 +18,4 @@
 (defn add-long-value [^DataObjectWithMapAdders data-object-with-map-adders long-values] (.addLongValue data-object-with-map-adders long-values))
 (defn add-short-value [^DataObjectWithMapAdders data-object-with-map-adders short-values] (.addShortValue data-object-with-map-adders short-values))
 (defn add-string-value [^DataObjectWithMapAdders data-object-with-map-adders string-values] (.addStringValue data-object-with-map-adders string-values))
+(defn to-json [^DataObjectWithMapAdders data-object-with-map-adders] (.toJson data-object-with-map-adders))

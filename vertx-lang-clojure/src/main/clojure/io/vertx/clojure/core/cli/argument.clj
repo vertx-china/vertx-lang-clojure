@@ -20,3 +20,4 @@
 (defn is-multi-valued [^Argument argument] (.isMultiValued argument))
 (defn set-required [^Argument argument required] (.setRequired argument required))
 (defn is-required [^Argument argument] (.isRequired argument))
+(defn to-json [^Argument argument] (.toJson argument))
