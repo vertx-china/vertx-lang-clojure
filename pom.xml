@@ -9,7 +9,8 @@
         <version>9</version>
     </parent>
 
-    <groupId>io.vertx</groupId>
+    <groupId>com.whitewoodcity</groupId>
+    <!--<groupId>io.vertx</groupId>-->
     <artifactId>vertx-lang-clojure-parent</artifactId>
 
     <version>3.5.1-SNAPSHOT</version>
