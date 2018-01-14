@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>com.whitewoodcity</groupId>
+        <groupId>com.w2v4</groupId>
         <!--<groupId>io.vertx</groupId>-->
         <artifactId>vertx-lang-clojure-parent</artifactId>
         <version>3.5.1-SNAPSHOT</version>
