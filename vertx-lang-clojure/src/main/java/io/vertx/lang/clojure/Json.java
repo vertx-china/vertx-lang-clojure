@@ -8,6 +8,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Clojure Json corresponding util class
+ * @author <a href="mailto:chengen.zhao@whitewoodcity.com">Chengen Zhao</a>
+ */
 public class Json {
   public static Object set(JsonArray jsonArray, int pos, Object value){
     List list = jsonArray.getList();

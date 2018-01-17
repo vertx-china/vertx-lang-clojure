@@ -10,6 +10,13 @@ import io.vertx.core.Vertx;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clojure language wrapper verticle, when the verticle is generated
+ * it will automatically load the corresponding Clojure namespace file
+ * and load its start method, currently supports several ways of start
+ * start[] start[vertx] start[vertx context] start[context] start[context vertx]
+ * @author <a href="mailto:chengen.zhao@whitewoodcity.com">Chengen Zhao</a>
+ */
 public class ClojureVerticle implements Verticle {
 
   private static final String NS_IO_VERTX_LANG_CLOJURE_VERTICLE = "io.vertx.lang.clojure.verticle";

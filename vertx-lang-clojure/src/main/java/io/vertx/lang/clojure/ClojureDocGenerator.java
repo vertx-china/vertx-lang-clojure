@@ -11,6 +11,10 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
+/**
+ * Clojure document generator
+ * @author <a href="mailto:chengen.zhao@whitewoodcity.com">Chengen Zhao</a>
+ */
 public class ClojureDocGenerator implements DocGenerator {
 
   private JavaDocGenerator javaGen = new JavaDocGenerator();

@@ -6,6 +6,13 @@ import io.vertx.core.spi.VerticleFactory;
 
 import java.io.File;
 
+/**
+ * Clojure language wrapper verticle factory, when the verticle is generated
+ * it will automatically load the corresponding Clojure namespace file
+ * and load its start method, currently supports several ways of start
+ * start[] start[vertx] start[vertx context] start[context] start[context vertx]
+ * @author <a href="mailto:chengen.zhao@whitewoodcity.com">Chengen Zhao</a>
+ */
 public class ClojureVerticleFactory implements VerticleFactory {
 
   private Vertx vertx;
