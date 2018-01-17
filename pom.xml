@@ -21,6 +21,66 @@
         <!--<module>vertx-lang-clojure-compiler</module>-->
     </modules>
 
+    <!--release to com.w2v4-->
+    <name>vertx-lang-clojure</name>
+    <description>Vert.x Clojure Implementation</description>
+    <url>https://github.com/whitewoodcity/vertx-lang-clojure</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>Eclipse Public License - v 1.0</name>
+            <url>http://www.eclipse.org/legal/epl-v10.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</connection>
+        <developerConnection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</developerConnection>
+        <url>git@github.com:whitewoodcity/vertx-lang-clojure.git</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>chengenzhao</id>
+            <organization>White Wood City</organization>
+            <email>chengen.zhao@whitewoodcity.com</email>
+        </developer>
+    </developers>
+
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    <!--end of release config-->
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <clojure.version>1.9.0</clojure.version>
@@ -65,4 +125,5 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
     </build>
+
 </project>
