@@ -14,6 +14,7 @@
 (defn add-enabled-cipher-suite [^TCPSSLOptions t-cpssl-options enabled-cipher-suites] (.addEnabledCipherSuite t-cpssl-options enabled-cipher-suites))
 (defn get-enabled-cipher-suites [^TCPSSLOptions t-cpssl-options] (.getEnabledCipherSuites t-cpssl-options))
 (defn add-enabled-secure-transport-protocol [^TCPSSLOptions t-cpssl-options enabled-secure-transport-protocols] (.addEnabledSecureTransportProtocol t-cpssl-options enabled-secure-transport-protocols))
+(defn set-enabled-secure-transport-protocols [^TCPSSLOptions t-cpssl-options enabled-secure-transport-protocols] (.setEnabledSecureTransportProtocols t-cpssl-options enabled-secure-transport-protocols))
 (defn get-enabled-secure-transport-protocols [^TCPSSLOptions t-cpssl-options] (.getEnabledSecureTransportProtocols t-cpssl-options))
 (defn set-idle-timeout [^TCPSSLOptions t-cpssl-options idle-timeout] (.setIdleTimeout t-cpssl-options idle-timeout))
 (defn get-idle-timeout [^TCPSSLOptions t-cpssl-options] (.getIdleTimeout t-cpssl-options))

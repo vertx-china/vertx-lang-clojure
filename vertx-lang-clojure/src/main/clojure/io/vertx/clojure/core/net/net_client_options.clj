@@ -16,6 +16,7 @@
 (defn add-enabled-cipher-suite [^NetClientOptions net-client-options enabled-cipher-suites] (.addEnabledCipherSuite net-client-options enabled-cipher-suites))
 (defn get-enabled-cipher-suites [^NetClientOptions net-client-options] (.getEnabledCipherSuites net-client-options))
 (defn add-enabled-secure-transport-protocol [^NetClientOptions net-client-options enabled-secure-transport-protocols] (.addEnabledSecureTransportProtocol net-client-options enabled-secure-transport-protocols))
+(defn set-enabled-secure-transport-protocols [^NetClientOptions net-client-options enabled-secure-transport-protocols] (.setEnabledSecureTransportProtocols net-client-options enabled-secure-transport-protocols))
 (defn get-enabled-secure-transport-protocols [^NetClientOptions net-client-options] (.getEnabledSecureTransportProtocols net-client-options))
 (defn set-hostname-verification-algorithm [^NetClientOptions net-client-options hostname-verification-algorithm] (.setHostnameVerificationAlgorithm net-client-options hostname-verification-algorithm))
 (defn get-hostname-verification-algorithm [^NetClientOptions net-client-options] (.getHostnameVerificationAlgorithm net-client-options))

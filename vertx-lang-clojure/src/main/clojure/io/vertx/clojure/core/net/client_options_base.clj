@@ -16,6 +16,7 @@
 (defn add-enabled-cipher-suite [^ClientOptionsBase client-options-base enabled-cipher-suites] (.addEnabledCipherSuite client-options-base enabled-cipher-suites))
 (defn get-enabled-cipher-suites [^ClientOptionsBase client-options-base] (.getEnabledCipherSuites client-options-base))
 (defn add-enabled-secure-transport-protocol [^ClientOptionsBase client-options-base enabled-secure-transport-protocols] (.addEnabledSecureTransportProtocol client-options-base enabled-secure-transport-protocols))
+(defn set-enabled-secure-transport-protocols [^ClientOptionsBase client-options-base enabled-secure-transport-protocols] (.setEnabledSecureTransportProtocols client-options-base enabled-secure-transport-protocols))
 (defn get-enabled-secure-transport-protocols [^ClientOptionsBase client-options-base] (.getEnabledSecureTransportProtocols client-options-base))
 (defn set-idle-timeout [^ClientOptionsBase client-options-base idle-timeout] (.setIdleTimeout client-options-base idle-timeout))
 (defn get-idle-timeout [^ClientOptionsBase client-options-base] (.getIdleTimeout client-options-base))

@@ -24,6 +24,7 @@
 (defn add-enabled-cipher-suite [^HttpClientOptions http-client-options enabled-cipher-suites] (.addEnabledCipherSuite http-client-options enabled-cipher-suites))
 (defn get-enabled-cipher-suites [^HttpClientOptions http-client-options] (.getEnabledCipherSuites http-client-options))
 (defn add-enabled-secure-transport-protocol [^HttpClientOptions http-client-options enabled-secure-transport-protocols] (.addEnabledSecureTransportProtocol http-client-options enabled-secure-transport-protocols))
+(defn set-enabled-secure-transport-protocols [^HttpClientOptions http-client-options enabled-secure-transport-protocols] (.setEnabledSecureTransportProtocols http-client-options enabled-secure-transport-protocols))
 (defn get-enabled-secure-transport-protocols [^HttpClientOptions http-client-options] (.getEnabledSecureTransportProtocols http-client-options))
 (defn set-force-sni [^HttpClientOptions http-client-options force-sni] (.setForceSni http-client-options force-sni))
 (defn is-force-sni [^HttpClientOptions http-client-options] (.isForceSni http-client-options))

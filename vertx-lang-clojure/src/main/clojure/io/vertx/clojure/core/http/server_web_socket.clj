@@ -12,7 +12,9 @@
 (defn binary-message-handler
   ([server-web-socket handler] (.binaryMessageHandler server-web-socket handler)))
 (defn close
-  ([server-web-socket ] (.close server-web-socket )))
+  ([server-web-socket ] (.close server-web-socket ))
+  ([server-web-socket status-code] (.close server-web-socket status-code))
+  ([server-web-socket status-code reason] (.close server-web-socket status-code reason)))
 (defn close-handler
   ([server-web-socket handler] (.closeHandler server-web-socket handler)))
 (defn drain-handler

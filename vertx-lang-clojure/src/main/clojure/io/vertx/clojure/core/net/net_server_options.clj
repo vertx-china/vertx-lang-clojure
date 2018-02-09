@@ -20,6 +20,7 @@
 (defn add-enabled-cipher-suite [^NetServerOptions net-server-options enabled-cipher-suites] (.addEnabledCipherSuite net-server-options enabled-cipher-suites))
 (defn get-enabled-cipher-suites [^NetServerOptions net-server-options] (.getEnabledCipherSuites net-server-options))
 (defn add-enabled-secure-transport-protocol [^NetServerOptions net-server-options enabled-secure-transport-protocols] (.addEnabledSecureTransportProtocol net-server-options enabled-secure-transport-protocols))
+(defn set-enabled-secure-transport-protocols [^NetServerOptions net-server-options enabled-secure-transport-protocols] (.setEnabledSecureTransportProtocols net-server-options enabled-secure-transport-protocols))
 (defn get-enabled-secure-transport-protocols [^NetServerOptions net-server-options] (.getEnabledSecureTransportProtocols net-server-options))
 (defn set-host [^NetServerOptions net-server-options host] (.setHost net-server-options host))
 (defn get-host [^NetServerOptions net-server-options] (.getHost net-server-options))

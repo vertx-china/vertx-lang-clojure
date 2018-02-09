@@ -11,7 +11,8 @@
 (defn clear
   ([multi-map ] (.clear multi-map )))
 (defn contains
-  ([multi-map name] (.contains multi-map name)))
+  ([multi-map name] (.contains multi-map name))
+  ([multi-map name value case-insensitive] (.contains multi-map name value case-insensitive)))
 (defn get
   ([multi-map name] (.get multi-map name)))
 (defn get-all

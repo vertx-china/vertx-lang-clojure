@@ -30,6 +30,7 @@
 (defn add-enabled-cipher-suite [^EventBusOptions event-bus-options enabled-cipher-suites] (.addEnabledCipherSuite event-bus-options enabled-cipher-suites))
 (defn get-enabled-cipher-suites [^EventBusOptions event-bus-options] (.getEnabledCipherSuites event-bus-options))
 (defn add-enabled-secure-transport-protocol [^EventBusOptions event-bus-options enabled-secure-transport-protocols] (.addEnabledSecureTransportProtocol event-bus-options enabled-secure-transport-protocols))
+(defn set-enabled-secure-transport-protocols [^EventBusOptions event-bus-options enabled-secure-transport-protocols] (.setEnabledSecureTransportProtocols event-bus-options enabled-secure-transport-protocols))
 (defn get-enabled-secure-transport-protocols [^EventBusOptions event-bus-options] (.getEnabledSecureTransportProtocols event-bus-options))
 (defn set-host [^EventBusOptions event-bus-options host] (.setHost event-bus-options host))
 (defn get-host [^EventBusOptions event-bus-options] (.getHost event-bus-options))

@@ -32,6 +32,7 @@
 (defn add-enabled-cipher-suite [^HttpServerOptions http-server-options enabled-cipher-suites] (.addEnabledCipherSuite http-server-options enabled-cipher-suites))
 (defn get-enabled-cipher-suites [^HttpServerOptions http-server-options] (.getEnabledCipherSuites http-server-options))
 (defn add-enabled-secure-transport-protocol [^HttpServerOptions http-server-options enabled-secure-transport-protocols] (.addEnabledSecureTransportProtocol http-server-options enabled-secure-transport-protocols))
+(defn set-enabled-secure-transport-protocols [^HttpServerOptions http-server-options enabled-secure-transport-protocols] (.setEnabledSecureTransportProtocols http-server-options enabled-secure-transport-protocols))
 (defn get-enabled-secure-transport-protocols [^HttpServerOptions http-server-options] (.getEnabledSecureTransportProtocols http-server-options))
 (defn set-handle100-continue-automatically [^HttpServerOptions http-server-options handle100-continue-automatically] (.setHandle100ContinueAutomatically http-server-options handle100-continue-automatically))
 (defn is-handle100-continue-automatically [^HttpServerOptions http-server-options] (.isHandle100ContinueAutomatically http-server-options))

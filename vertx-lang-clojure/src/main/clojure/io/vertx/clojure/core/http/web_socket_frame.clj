@@ -7,10 +7,16 @@
   ([web-socket-frame ] (.binaryData web-socket-frame )))
 (defn binary-frame
   ([data is-final] (WebSocketFrame/binaryFrame data is-final)))
+(defn close-reason
+  ([web-socket-frame ] (.closeReason web-socket-frame )))
+(defn close-status-code
+  ([web-socket-frame ] (.closeStatusCode web-socket-frame )))
 (defn continuation-frame
   ([data is-final] (WebSocketFrame/continuationFrame data is-final)))
 (defn is-binary
   ([web-socket-frame ] (.isBinary web-socket-frame )))
+(defn is-close
+  ([web-socket-frame ] (.isClose web-socket-frame )))
 (defn is-continuation
   ([web-socket-frame ] (.isContinuation web-socket-frame )))
 (defn is-final
