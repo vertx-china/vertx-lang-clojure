@@ -40,6 +40,41 @@ dependencies {
         (server/listen 8080))))
 ```
 
+### Verticle
+
+Verticle namespace files normally include a start function which is the entry point of verticle deployment.
+
+Here’s an example verticle:
+```clojure
+
+;Called when verticle is deployed
+(defn start [] )
+
+;Optional - called when verticle is undeployed
+(defn stop [] )
+
+```
+
+When Vert.x deploys the verticle it will call the start method, and when the method has completed the verticle will be considered started.
+
+You can also optionally provide vertx and context parameters. This will be used by developers when the functions are considered pure.
+
+```clojure
+
+;Following functions format are all allowed, pick one.
+(defn start [context vertx] )
+(defn start [vertx context] )
+(defn start [vertx] )
+(defn start [context] )
+
+;Following functions format are all allowed, pick one.
+(defn stop [context vertx] )
+(defn stop [vertx context] )
+(defn stop [vertx] )
+(defn stop [context] )
+
+```
+
 ;TODO
 
 - [x] Auto-generate thin wrap APIs by using Codegen
