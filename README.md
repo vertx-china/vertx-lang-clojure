@@ -1,7 +1,7 @@
 # vertx-lang-clojure
 Vert.x Clojure support
 
-###How to use?
+### How to use?
 
 Maven(in your pom.xml):
 ```xml
@@ -19,7 +19,7 @@ dependencies {
 }
 ```
 
-###Hello from Vert.x!
+### Hello from Vert.x!
 
 ```clojure
 (:require [io.vertx.clojure.core.vertx :as vertx]
