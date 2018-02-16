@@ -75,6 +75,20 @@ You can also optionally provide vertx and context parameters. This will be used 
 
 ```
 
+### Verticle Deployment
+
+You could deploy a Clojure verticle with ".clj" suffix or "clj:" prefix:
+
+```clojure
+(:require [io.vertx.clojure.core.vertx :as vertx])
+
+(defn start [vertx]
+  (vertx/deploy-verticle vertx "io.vertx.sample_verticle.clj"))
+;or
+(defn start [vertx]
+  (vertx/deploy-verticle vertx "clj:io.vertx.sample_verticle"))
+```
+
 ;TODO
 
 - [x] Auto-generate thin wrap APIs by using Codegen
