@@ -22,10 +22,11 @@ dependencies {
 ### Hello from Vert.x!
 
 ```clojure
-(:require [io.vertx.clojure.core.vertx :as vertx]
-            [io.vertx.clojure.core.http.http-server :as server]
-            [io.vertx.clojure.core.http.http-server-request :as request]
-            [io.vertx.clojure.core.http.http-server-response :as response])
+(ns example.server
+ (:require [io.vertx.clojure.core.vertx :as vertx]
+           [io.vertx.clojure.core.http.http-server :as server]
+           [io.vertx.clojure.core.http.http-server-request :as request]
+           [io.vertx.clojure.core.http.http-server-response :as response]))
 
 (defn handle-request [req]
   (let [response (request/response req)]
@@ -80,7 +81,8 @@ You can also optionally provide vertx and context parameters. This will be used 
 You could deploy a Clojure verticle with ".clj" suffix or "clj:" prefix:
 
 ```clojure
-(:require [io.vertx.clojure.core.vertx :as vertx])
+(ns example.verticle
+  (:require [io.vertx.clojure.core.vertx :as vertx]))
 
 (defn start [vertx]
   (vertx/deploy-verticle vertx "io.vertx.sample_verticle.clj"))
