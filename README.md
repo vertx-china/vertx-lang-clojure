@@ -45,13 +45,13 @@ dependencies {
 
 If you’re embedding Vert.x then you simply create an instance as follows:
 
-'''clojure
+```clojure
 (ns ...
   (:require [io.vertx.clojure.core.vertx :as vertx]))
 
 ;create a vertx instance
 (vertx/vertx)
-'''
+```
 
 ### Verticle
 
