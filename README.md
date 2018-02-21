@@ -49,7 +49,7 @@ If you’re embedding Vert.x then you simply create an instance as follows:
 (ns ...
   (:require [io.vertx.clojure.core.vertx :as vertx]))
 
-;return a vertx instance
+;create a vertx instance
 (vertx/vertx)
 '''
 
