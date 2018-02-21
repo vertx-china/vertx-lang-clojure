@@ -41,6 +41,18 @@ dependencies {
         (server/listen 8080))))
 ```
 
+### Vert.x instance
+
+If you’re embedding Vert.x then you simply create an instance as follows:
+
+'''clojure
+(ns ...
+  (:require [io.vertx.clojure.core.vertx :as vertx]))
+
+;return a vertx instance
+(vertx/vertx)
+'''
+
 ### Verticle
 
 Verticle namespace files normally include a start function which is the entry point of verticle deployment.
