@@ -21,7 +21,11 @@
 
 @if{property.getAdderMethod()!=null}
 @code{var method = property.getAdderMethod()}
+@if{property.kind.name == "MAP"}
+\n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method))} [^@{className} @{objKeBabName} key @{propertyKebabName}] (.@{method} @{objKeBabName} key @{propertyKebabName}))
+@else{}
 \n(defn @{CASE_KEBAB.format(CASE_CAMEL.parse(method))} [^@{className} @{objKeBabName} @{propertyKebabName}] (.@{method} @{objKeBabName} @{propertyKebabName}))
+@end{}
 @end{}
 
 @if{property.getSetterMethod()!=null}
