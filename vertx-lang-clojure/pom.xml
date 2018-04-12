@@ -117,7 +117,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-transport-native-epoll</artifactId>

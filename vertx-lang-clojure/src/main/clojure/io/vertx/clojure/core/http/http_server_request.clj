@@ -7,6 +7,8 @@
   ([http-server-request ] (.absoluteURI http-server-request )))
 (defn body-handler
   ([http-server-request body-handler] (.bodyHandler http-server-request body-handler)))
+(defn bytes-read
+  ([http-server-request ] (.bytesRead http-server-request )))
 (defn connection
   ([http-server-request ] (.connection http-server-request )))
 (defn custom-frame-handler
