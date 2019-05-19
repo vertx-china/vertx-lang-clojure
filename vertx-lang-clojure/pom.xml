@@ -175,7 +175,7 @@
                 <artifactId>maven-processor-plugin</artifactId>
                 <version>3.3.1</version>
                 <executions>
-                    <!-- Run the annotation processor on vertx-core and generate the js API -->
+                    <!-- Run the annotation processor on vertx-core and generate the clojure API -->
                     <execution>
                         <id>generate-vertx-core</id>
                         <goals>
