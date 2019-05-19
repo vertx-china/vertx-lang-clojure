@@ -1,7 +1,8 @@
 package io.vertx.lang.clojure;
 
 import clojure.java.api.Clojure;
-import clojure.lang.IFn;
+import clojure.lang.*;
+import clojure.lang.Compiler;
 import io.vertx.core.Context;
 import io.vertx.core.Future;
 import io.vertx.core.Verticle;
@@ -28,7 +29,7 @@ public class ClojureVerticle implements Verticle {
   private boolean requireCompiling = false;
 
   public ClojureVerticle(String ns) {
-    this.ns = ns;
+    this(ns, false);
   }
 
   public ClojureVerticle(String ns, boolean requireCompiling) {
@@ -66,18 +67,15 @@ public class ClojureVerticle implements Verticle {
     }
   }
 
-  private void start(){
-    IFn iFn;
+  private void start() {
+    final IFn require = Clojure.var("clojure.core", "require");
+    require.invoke(Symbol.intern(NS_IO_VERTX_LANG_CLOJURE_VERTICLE));
+    require.invoke(Symbol.intern(ns));
 
-    iFn = Clojure.var("clojure.core", "require");
-    iFn.invoke(Clojure.read(NS_IO_VERTX_LANG_CLOJURE_VERTICLE));
+    IFn iFn = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "exists");
+    if (iFn.invoke(ns + "/start") == null)
+      throw new RuntimeException("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
 
-    IFn require = Clojure.var("clojure.core", "require");
-    require.invoke(Clojure.read(ns));
-
-//        iFn = Clojure.var(NS_IO_VERTX_CLOJURE_CORE_CORE, "exists");
-//        if (iFn.invoke(ns + "/start") == null)
-//          throw new Exception("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
 
     Map objectMap = new HashMap() {{
       put("vertx", vertx);
@@ -86,6 +84,7 @@ public class ClojureVerticle implements Verticle {
 
     IFn startIFn = Clojure.var(ns, "start");
     IFn getInfo = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "get-method-parameters");
+
     String rawParams = getInfo.invoke(startIFn).toString();
     rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
     String[] paramNames = rawParams.split(" ");
