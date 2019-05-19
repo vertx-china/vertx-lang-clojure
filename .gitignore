@@ -1,0 +1,6 @@
+.idea
+target
+
+# Generated code
+vertx-lang-clojure/src/main/clojure/io/vertx/clojure
+vertx-lang-clojure/src/test/clojure/io/vertx/clojure
