@@ -1,119 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-parent</artifactId>
-        <version>13</version>
-    </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-parent</artifactId>
+    <version>13</version>
+  </parent>
 
-    <groupId>com.w2v4</groupId>
-    <!--<groupId>io.vertx</groupId>-->
-    <artifactId>vertx-lang-clojure-parent</artifactId>
+  <groupId>com.w2v4</groupId>
+  <artifactId>vertx-lang-clojure-parent</artifactId>
 
-    <version>3.7.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <version>3.7.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <modules>
-        <module>vertx-lang-clojure</module>
-        <!--<module>vertx-lang-clojure-compiler</module>-->
-    </modules>
+  <modules>
+    <module>vertx-lang-clojure</module>
+  </modules>
 
-    <!--release to com.w2v4-->
-    <name>vertx-lang-clojure</name>
-    <description>Vert.x Clojure Implementation</description>
-    <url>https://github.com/whitewoodcity/vertx-lang-clojure</url>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-        <license>
-            <name>Eclipse Public License - v 1.0</name>
-            <url>http://www.eclipse.org/legal/epl-v10.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <scm>
-        <connection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</connection>
-        <developerConnection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</developerConnection>
-        <url>git@github.com:whitewoodcity/vertx-lang-clojure.git</url>
-    </scm>
-    <developers>
-        <developer>
-            <id>chengenzhao</id>
-            <organization>White Wood City</organization>
-            <email>chengen.zhao@whitewoodcity.com</email>
-        </developer>
-    </developers>
+  <!--release to com.w2v4-->
+  <name>vertx-lang-clojure</name>
+  <description>Vert.x Clojure Implementation</description>
+  <url>https://github.com/whitewoodcity/vertx-lang-clojure</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>Eclipse Public License - v 1.0</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</connection>
+    <developerConnection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</developerConnection>
+    <url>git@github.com:whitewoodcity/vertx-lang-clojure.git</url>
+  </scm>
+  <developers>
+    <developer>
+      <id>chengenzhao</id>
+      <organization>White Wood City</organization>
+      <email>chengen.zhao@whitewoodcity.com</email>
+    </developer>
+  </developers>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <clojure.version>1.10.0</clojure.version>
-        <clojure.plugin.version>1.8.1</clojure.plugin.version>
-        <junit.version>4.12</junit.version>
-        <stack.version>3.7.0</stack.version>
-    </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-dependencies</artifactId>
-                <version>${stack.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <clojure.version>1.10.0</clojure.version>
+    <clojure.plugin.version>1.8.1</clojure.plugin.version>
+    <junit.version>4.12</junit.version>
+    <stack.version>3.7.1</stack.version>
+  </properties>
 
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>org.clojure</groupId>
-            <artifactId>clojure</artifactId>
-            <version>${clojure.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-core</artifactId>
-        </dependency>
+      <dependency>
+        <groupId>org.clojure</groupId>
+        <artifactId>clojure</artifactId>
+        <version>${clojure.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-dependencies</artifactId>
+        <version>${stack.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
     </dependencies>
+  </dependencyManagement>
 
-    <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
-    </build>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.clojure/clojure -->
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>${clojure.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

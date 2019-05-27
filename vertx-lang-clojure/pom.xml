@@ -3,7 +3,6 @@
 
   <parent>
     <groupId>com.w2v4</groupId>
-    <!--<groupId>io.vertx</groupId>-->
     <artifactId>vertx-lang-clojure-parent</artifactId>
     <version>3.7.0-SNAPSHOT</version>
   </parent>
