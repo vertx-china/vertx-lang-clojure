@@ -5,7 +5,7 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-parent</artifactId>
-    <version>13</version>
+    <version>14</version>
   </parent>
 
   <groupId>com.w2v4</groupId>
@@ -70,12 +70,10 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.clojure/clojure -->
     <dependency>
       <groupId>org.clojure</groupId>
       <artifactId>clojure</artifactId>

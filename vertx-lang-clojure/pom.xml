@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <parent>
     <groupId>com.w2v4</groupId>
     <artifactId>vertx-lang-clojure-parent</artifactId>
-    <version>3.7.0-SNAPSHOT</version>
+    <version>3.7.1-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>vertx-lang-clojure</artifactId>
-  <version>3.7.0-SNAPSHOT</version>
+  <version>3.7.1-SNAPSHOT</version>
 
   <properties>
-    <stack.version>3.7.0</stack.version>
+    <stack.version>3.7.1</stack.version>
     <log4j.version>1.2.17</log4j.version>
     <slf4j.version>1.7.21</slf4j.version>
     <log4j2.version>2.8.2</log4j2.version>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-dependencies</artifactId>
-        <version>${stack.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -55,22 +45,42 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-common</artifactId>
       <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-client</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-client</artifactId>
       <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
       <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-common</artifactId>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-common</artifactId>
       <version>${stack.version}</version>
+      <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -79,14 +89,31 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-jdbc</artifactId>
+      <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-htdigest</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-htdigest</artifactId>
+      <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-htpasswd</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-htpasswd</artifactId>
       <version>${stack.version}</version>
-      <optional>true</optional>
+      <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -95,8 +122,20 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-jwt</artifactId>
+      <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-mongo</artifactId>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-mongo</artifactId>
+      <version>${stack.version}</version>
+      <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -105,15 +144,32 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-oauth2</artifactId>
+      <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-shiro</artifactId>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-auth-shiro</artifactId>
+      <version>${stack.version}</version>
+      <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-jwt</artifactId>
       <optional>true</optional>
     </dependency>
-
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-jwt</artifactId>
+      <version>${stack.version}</version>
+      <classifier>sources</classifier>
+    </dependency>
 
     <dependency>
       <groupId>log4j</groupId>
@@ -145,6 +201,7 @@
       <version>2.2.6.Final</version>
       <scope>provided</scope>
     </dependency>
+
     <!-- Test dependencies -->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -195,6 +252,28 @@
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <includeGroupIds>io.vertx</includeGroupIds>
+          <includeArtifactIds>
+            vertx-core,
+            vertx-auth-common,
+            vertx-auth-jdbc,
+            vertx-auth-htdigest,
+            vertx-auth-htpasswd,
+            vertx-auth-jwt,
+            vertx-auth-mongo,
+            vertx-auth-oauth2,
+            vertx-auth-shiro,
+            vertx-jwt,
+            vertx-web-common,
+            vertx-web-client,
+            vertx-web
+          </includeArtifactIds>
+          <includeTypes>jar</includeTypes>
+          <includeClassifiers>sources</includeClassifiers>
+          <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
+        </configuration>
         <executions>
           <!-- Unpack Vert.x Core source code to target/vertx-core -->
           <execution>
@@ -204,25 +283,8 @@
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <includeGroupIds>io.vertx</includeGroupIds>
-              <includeArtifactIds>
-                vertx-core,
-                vertx-auth-common,
-                vertx-auth-jdbc,
-                vertx-auth-htdigest,
-                vertx-auth-htpasswd,
-                vertx-auth-jwt,
-                vertx-auth-mongo,
-                vertx-auth-oauth2,
-                vertx-auth-shiro,
-                vertx-jwt,
-                vertx-web-common,
-                vertx-web-client,
-                vertx-web
-              </includeArtifactIds>
-              <includeTypes>jar</includeTypes>
-              <includeClassifiers>sources</includeClassifiers>
-              <excludes>**/impl/**/*.java,io/vertx/groovy/**,io/vertx/reactivex/**,io/vertx/rxjava/**,examples/override/**</excludes>
+              <!-- Prevent AuthOptions (interface) to be generated with ctor -->
+              <excludes>**/impl/**/*.java,io/vertx/groovy/**,io/vertx/reactivex/**,io/vertx/rxjava/**,examples/override/**,io/vertx/ext/auth/AuthOptions.java</excludes>
               <outputDirectory>${project.build.directory}/sources/vertx-core</outputDirectory>
             </configuration>
           </execution>
@@ -243,6 +305,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
@@ -267,9 +330,6 @@
                 <codegen.generators>Clojure</codegen.generators>
               </optionMap>
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
-              <excludes>
-                <exclude>io/vertx/clojure/ext/auth/AuthOptions.java</exclude>
-              </excludes>
             </configuration>
           </execution>
           <!-- Run the annotation processor on codegen and generate the clojure codegen -->
