@@ -51,7 +51,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <clojure.version>1.9.0</clojure.version>
+        <clojure.version>1.10.0</clojure.version>
         <clojure.plugin.version>1.8.1</clojure.plugin.version>
         <junit.version>4.12</junit.version>
         <stack.version>3.7.0</stack.version>
@@ -70,7 +70,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.clojure/clojure -->
         <dependency>
             <groupId>org.clojure</groupId>
             <artifactId>clojure</artifactId>
@@ -82,7 +81,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
