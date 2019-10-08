@@ -1,23 +1,26 @@
 # vertx-lang-clojure
-Vert.x Clojure support
+Vert.x Clojure support.
+
+Currently this fork is SNAPSHOT, so you need to `mvn install` to use.
 
 ### How to use?
 
-Maven(in your pom.xml):
+Maven (in your pom.xml):
 ```xml
 <dependency>
   <groupId>com.w2v4</groupId>
   <artifactId>vertx-lang-clojure</artifactId>
-  <version>3.5.1.1</version>
+  <version>3.7.1-SNAPSHOT</version>
 </dependency>
 ```
 
-Gradle(in your build.gradle file):
-```groovy
-dependencies {
-  compile 'com.w2v4:vertx-lang-clojure:3.5.1.1'
-}
+Leiningen (in your `project.clj`):
+
+```clojure
+  :dependencies [[org.clojure/clojure "1.10.0"]
+                 [com.w2v4/vertx-lang-clojure "3.7.1-SNAPSHOT"]]
 ```
+
 
 ### Hello from Vert.x!
 
