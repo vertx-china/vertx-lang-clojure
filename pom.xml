@@ -11,7 +11,7 @@
   <groupId>com.w2v4</groupId>
   <artifactId>vertx-lang-clojure-parent</artifactId>
 
-  <version>3.7.1-SNAPSHOT</version>
+  <version>3.8.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -53,7 +53,7 @@
     <clojure.version>1.10.0</clojure.version>
     <clojure.plugin.version>1.8.1</clojure.plugin.version>
     <junit.version>4.12</junit.version>
-    <stack.version>3.7.1</stack.version>
+    <stack.version>3.8.2</stack.version>
   </properties>
 
   <dependencyManagement>
