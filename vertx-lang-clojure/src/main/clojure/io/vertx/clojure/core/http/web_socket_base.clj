@@ -12,14 +12,20 @@
   ([web-socket-base handler] (.binaryMessageHandler web-socket-base handler)))
 (defn close
   ([web-socket-base] (.close web-socket-base))
-  ([web-socket-base status-code] (.close web-socket-base status-code))
-  ([web-socket-base status-code reason] (.close web-socket-base status-code reason)))
+  ([web-socket-base status-code-or-handler] (.close web-socket-base status-code-or-handler))
+  ([web-socket-base status-code reason-or-handler] (.close web-socket-base status-code reason-or-handler))
+  ([web-socket-base status-code reason handler] (.close web-socket-base status-code reason handler)))
 (defn close-handler
   ([web-socket-base handler] (.closeHandler web-socket-base handler)))
+(defn close-reason
+  ([web-socket-base] (.closeReason web-socket-base)))
+(defn close-status-code
+  ([web-socket-base] (.closeStatusCode web-socket-base)))
 (defn drain-handler
   ([web-socket-base handler] (.drainHandler web-socket-base handler)))
 (defn end
-  ([web-socket-base t] (.end web-socket-base t))
+  ([web-socket-base handler-or-data] (.end web-socket-base handler-or-data))
+  ([web-socket-base data handler] (.end web-socket-base data handler))
   ([web-socket-base] (.end web-socket-base)))
 (defn end-handler
   ([web-socket-base end-handler] (.endHandler web-socket-base end-handler)))
@@ -36,6 +42,10 @@
      (handle [this para]
            (f para))))
   ([web-socket-base handler] (.handler web-socket-base handler)))
+(defn headers
+  ([web-socket-base] (.headers web-socket-base)))
+(defn is-closed
+  ([web-socket-base] (.isClosed web-socket-base)))
 (defn is-ssl
   ([web-socket-base] (.isSsl web-socket-base)))
 (defn local-address
@@ -62,15 +72,20 @@
 (defn text-message-handler
   ([web-socket-base handler] (.textMessageHandler web-socket-base handler)))
 (defn write
-  ([web-socket-base data] (.write web-socket-base data)))
+  ([web-socket-base data] (.write web-socket-base data))
+  ([web-socket-base data handler] (.write web-socket-base data handler)))
 (defn write-binary-message
-  ([web-socket-base data] (.writeBinaryMessage web-socket-base data)))
+  ([web-socket-base data] (.writeBinaryMessage web-socket-base data))
+  ([web-socket-base data handler] (.writeBinaryMessage web-socket-base data handler)))
 (defn write-final-binary-frame
-  ([web-socket-base data] (.writeFinalBinaryFrame web-socket-base data)))
+  ([web-socket-base data] (.writeFinalBinaryFrame web-socket-base data))
+  ([web-socket-base data handler] (.writeFinalBinaryFrame web-socket-base data handler)))
 (defn write-final-text-frame
-  ([web-socket-base text] (.writeFinalTextFrame web-socket-base text)))
+  ([web-socket-base text] (.writeFinalTextFrame web-socket-base text))
+  ([web-socket-base text handler] (.writeFinalTextFrame web-socket-base text handler)))
 (defn write-frame
-  ([web-socket-base frame] (.writeFrame web-socket-base frame)))
+  ([web-socket-base frame] (.writeFrame web-socket-base frame))
+  ([web-socket-base frame handler] (.writeFrame web-socket-base frame handler)))
 (defn write-ping
   ([web-socket-base data] (.writePing web-socket-base data)))
 (defn write-pong
@@ -78,4 +93,5 @@
 (defn write-queue-full
   ([web-socket-base] (.writeQueueFull web-socket-base)))
 (defn write-text-message
-  ([web-socket-base text] (.writeTextMessage web-socket-base text)))
+  ([web-socket-base text] (.writeTextMessage web-socket-base text))
+  ([web-socket-base text handler] (.writeTextMessage web-socket-base text handler)))

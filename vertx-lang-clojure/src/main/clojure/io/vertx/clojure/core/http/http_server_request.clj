@@ -12,6 +12,8 @@
   ([http-server-request] (.bytesRead http-server-request)))
 (defn connection
   ([http-server-request] (.connection http-server-request)))
+(defn cookie-count
+  ([http-server-request] (.cookieCount http-server-request)))
 (defn custom-frame-handler
   ([http-server-request handler] (.customFrameHandler http-server-request handler)))
 (defn end-handler
@@ -22,6 +24,8 @@
   ([http-server-request amount] (.fetch http-server-request amount)))
 (defn form-attributes
   ([http-server-request] (.formAttributes http-server-request)))
+(defn get-cookie
+  ([http-server-request name] (.getCookie http-server-request name)))
 (defn get-form-attribute
   ([http-server-request attribute-name] (.getFormAttribute http-server-request attribute-name)))
 (defn get-header

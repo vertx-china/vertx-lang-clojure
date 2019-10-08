@@ -5,7 +5,10 @@
 (import io.vertx.core.http.HttpClient)
 (import io.vertx.core.http.HttpMethod)
 (import io.vertx.core.http.RequestOptions)
+(import io.vertx.core.http.WebSocketConnectOptions)
 (import io.vertx.core.http.WebsocketVersion)
+(import io.vertx.core.net.SocketAddress)
+(import java.util.List)
 (import java.util.function.Function)
 
 (defn close
@@ -77,13 +80,21 @@
 (defn redirect-handler
   ([http-client handler] (.redirectHandler http-client handler)))
 (defn request
+  ([http-client method request-uri-or-options-or-host-or-server-address response-handler-or-request-uri-or-options] (.request http-client method request-uri-or-options-or-host-or-server-address response-handler-or-request-uri-or-options))
   ([http-client method request-uri-or-options] (.request http-client method request-uri-or-options))
-  ([http-client method host-or-port request-uri-or-host response-handler-or-request-uri] (.request http-client method host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client method request-uri-or-options-or-host response-handler-or-request-uri] (.request http-client method request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client method port host request-uri response-handler] (.request http-client method port host request-uri response-handler)))
+  ([http-client method host-or-server-address-or-port request-uri-or-options-or-host response-handler-or-request-uri] (.request http-client method host-or-server-address-or-port request-uri-or-options-or-host response-handler-or-request-uri))
+  ([http-client method port-or-server-address host-or-port request-uri-or-host response-handler-or-request-uri] (.request http-client method port-or-server-address host-or-port request-uri-or-host response-handler-or-request-uri))
+  ([http-client method server-address port host request-uri response-handler] (.request http-client method server-address port host request-uri response-handler)))
 (defn request-abs
   ([http-client method absolute-uri] (.requestAbs http-client method absolute-uri))
-  ([http-client method absolute-uri response-handler] (.requestAbs http-client method absolute-uri response-handler)))
+  ([http-client method absolute-uri-or-server-address response-handler-or-absolute-uri] (.requestAbs http-client method absolute-uri-or-server-address response-handler-or-absolute-uri))
+  ([http-client method server-address absolute-uri response-handler] (.requestAbs http-client method server-address absolute-uri response-handler)))
+(defn web-socket
+  ([http-client port host request-uri handler] (.webSocket http-client port host request-uri handler))
+  ([http-client host request-uri handler] (.webSocket http-client host request-uri handler))
+  ([http-client options-or-request-uri handler] (.webSocket http-client options-or-request-uri handler)))
+(defn web-socket-abs
+  ([http-client url headers version sub-protocols handler] (.webSocketAbs http-client url headers version sub-protocols handler)))
 (defn websocket
   ([http-client request-uri-or-options ws-connect] (.websocket http-client request-uri-or-options ws-connect))
   ([http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-ws-connect-or-request-uri failure-handler-or-ws-connect] (.websocket http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-ws-connect-or-request-uri failure-handler-or-ws-connect))

@@ -3,11 +3,14 @@
 (import io.vertx.core.Handler)
 (import io.vertx.core.MultiMap)
 (import io.vertx.core.buffer.Buffer)
+(import io.vertx.core.http.Cookie)
 (import io.vertx.core.http.HttpFrame)
 (import io.vertx.core.http.HttpMethod)
 (import io.vertx.core.http.HttpServerResponse)
 (import io.vertx.core.http.StreamPriority)
 
+(defn add-cookie
+  ([http-server-response cookie] (.addCookie http-server-response cookie)))
 (defn body-end-handler
   ([http-server-response handler] (.bodyEndHandler http-server-response handler)))
 (defn bytes-written
@@ -21,8 +24,9 @@
 (defn drain-handler
   ([http-server-response handler] (.drainHandler http-server-response handler)))
 (defn end
-  ([http-server-response chunk] (.end http-server-response chunk))
-  ([http-server-response chunk enc] (.end http-server-response chunk enc))
+  ([http-server-response chunk-or-handler] (.end http-server-response chunk-or-handler))
+  ([http-server-response chunk enc-or-handler] (.end http-server-response chunk enc-or-handler))
+  ([http-server-response chunk enc handler] (.end http-server-response chunk enc handler))
   ([http-server-response] (.end http-server-response)))
 (defn end-handler
   ([http-server-response handler] (.endHandler http-server-response handler)))
@@ -50,6 +54,9 @@
   ([http-server-response name value] (.putHeader http-server-response name value)))
 (defn put-trailer
   ([http-server-response name value] (.putTrailer http-server-response name value)))
+(defn remove-cookie
+  ([http-server-response name] (.removeCookie http-server-response name))
+  ([http-server-response name invalidate] (.removeCookie http-server-response name invalidate)))
 (defn reset
   ([http-server-response] (.reset http-server-response))
   ([http-server-response code] (.reset http-server-response code)))
@@ -74,7 +81,8 @@
   ([http-server-response] (.trailers http-server-response)))
 (defn write
   ([http-server-response chunk-or-data] (.write http-server-response chunk-or-data))
-  ([http-server-response chunk enc] (.write http-server-response chunk enc)))
+  ([http-server-response chunk-or-data enc-or-handler] (.write http-server-response chunk-or-data enc-or-handler))
+  ([http-server-response chunk enc handler] (.write http-server-response chunk enc handler)))
 (defn write-continue
   ([http-server-response] (.writeContinue http-server-response)))
 (defn write-custom-frame

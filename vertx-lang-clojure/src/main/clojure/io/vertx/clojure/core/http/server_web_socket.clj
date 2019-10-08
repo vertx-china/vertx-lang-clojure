@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.server-web-socket)
 
-(import io.vertx.core.Future)
 (import io.vertx.core.Handler)
+(import io.vertx.core.Promise)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.http.ServerWebSocket)
 (import io.vertx.core.http.WebSocketFrame)
@@ -14,15 +14,21 @@
 (defn binary-message-handler
   ([server-web-socket handler] (.binaryMessageHandler server-web-socket handler)))
 (defn close
-  ([server-web-socket status-code] (.close server-web-socket status-code))
-  ([server-web-socket status-code reason] (.close server-web-socket status-code reason))
+  ([server-web-socket status-code-or-handler] (.close server-web-socket status-code-or-handler))
+  ([server-web-socket status-code reason-or-handler] (.close server-web-socket status-code reason-or-handler))
+  ([server-web-socket status-code reason handler] (.close server-web-socket status-code reason handler))
   ([server-web-socket] (.close server-web-socket)))
 (defn close-handler
   ([server-web-socket handler] (.closeHandler server-web-socket handler)))
+(defn close-reason
+  ([server-web-socket] (.closeReason server-web-socket)))
+(defn close-status-code
+  ([server-web-socket] (.closeStatusCode server-web-socket)))
 (defn drain-handler
   ([server-web-socket handler] (.drainHandler server-web-socket handler)))
 (defn end
-  ([server-web-socket t] (.end server-web-socket t))
+  ([server-web-socket handler-or-data] (.end server-web-socket handler-or-data))
+  ([server-web-socket data handler] (.end server-web-socket data handler))
   ([server-web-socket] (.end server-web-socket)))
 (defn end-handler
   ([server-web-socket end-handler] (.endHandler server-web-socket end-handler)))
@@ -41,6 +47,8 @@
   ([server-web-socket handler] (.handler server-web-socket handler)))
 (defn headers
   ([server-web-socket] (.headers server-web-socket)))
+(defn is-closed
+  ([server-web-socket] (.isClosed server-web-socket)))
 (defn is-ssl
   ([server-web-socket] (.isSsl server-web-socket)))
 (defn local-address
@@ -78,15 +86,20 @@
 (defn uri
   ([server-web-socket] (.uri server-web-socket)))
 (defn write
-  ([server-web-socket data] (.write server-web-socket data)))
+  ([server-web-socket data] (.write server-web-socket data))
+  ([server-web-socket data handler] (.write server-web-socket data handler)))
 (defn write-binary-message
-  ([server-web-socket data] (.writeBinaryMessage server-web-socket data)))
+  ([server-web-socket data] (.writeBinaryMessage server-web-socket data))
+  ([server-web-socket data handler] (.writeBinaryMessage server-web-socket data handler)))
 (defn write-final-binary-frame
-  ([server-web-socket data] (.writeFinalBinaryFrame server-web-socket data)))
+  ([server-web-socket data] (.writeFinalBinaryFrame server-web-socket data))
+  ([server-web-socket data handler] (.writeFinalBinaryFrame server-web-socket data handler)))
 (defn write-final-text-frame
-  ([server-web-socket text] (.writeFinalTextFrame server-web-socket text)))
+  ([server-web-socket text] (.writeFinalTextFrame server-web-socket text))
+  ([server-web-socket text handler] (.writeFinalTextFrame server-web-socket text handler)))
 (defn write-frame
-  ([server-web-socket frame] (.writeFrame server-web-socket frame)))
+  ([server-web-socket frame] (.writeFrame server-web-socket frame))
+  ([server-web-socket frame handler] (.writeFrame server-web-socket frame handler)))
 (defn write-ping
   ([server-web-socket data] (.writePing server-web-socket data)))
 (defn write-pong
@@ -94,4 +107,5 @@
 (defn write-queue-full
   ([server-web-socket] (.writeQueueFull server-web-socket)))
 (defn write-text-message
-  ([server-web-socket text] (.writeTextMessage server-web-socket text)))
+  ([server-web-socket text] (.writeTextMessage server-web-socket text))
+  ([server-web-socket text handler] (.writeTextMessage server-web-socket text handler)))

@@ -26,6 +26,9 @@
   ([event-bus interceptor] (.removeInboundInterceptor event-bus interceptor)))
 (defn remove-outbound-interceptor
   ([event-bus interceptor] (.removeOutboundInterceptor event-bus interceptor)))
+(defn request
+  ([event-bus address message reply-handler] (.request event-bus address message reply-handler))
+  ([event-bus address message options reply-handler] (.request event-bus address message options reply-handler)))
 (defn send
   ([event-bus address message] (.send event-bus address message))
   ([event-bus address message options-or-reply-handler] (.send event-bus address message options-or-reply-handler))

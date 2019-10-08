@@ -18,8 +18,9 @@
 (defn drain-handler
   ([http-client-request handler] (.drainHandler http-client-request handler)))
 (defn end
-  ([http-client-request chunk] (.end http-client-request chunk))
-  ([http-client-request chunk enc] (.end http-client-request chunk enc))
+  ([http-client-request handler-or-chunk] (.end http-client-request handler-or-chunk))
+  ([http-client-request chunk enc-or-handler] (.end http-client-request chunk enc-or-handler))
+  ([http-client-request chunk enc handler] (.end http-client-request chunk enc handler))
   ([http-client-request] (.end http-client-request)))
 (defn end-handler
   ([http-client-request end-handler] (.endHandler http-client-request end-handler)))
@@ -75,6 +76,8 @@
   ([http-client-request follow-redirects] (.setFollowRedirects http-client-request follow-redirects)))
 (defn set-host
   ([http-client-request host] (.setHost http-client-request host)))
+(defn set-max-redirects
+  ([http-client-request max-redirects] (.setMaxRedirects http-client-request max-redirects)))
 (defn set-raw-method
   ([http-client-request method] (.setRawMethod http-client-request method)))
 (defn set-stream-priority
@@ -89,7 +92,8 @@
   ([http-client-request] (.uri http-client-request)))
 (defn write
   ([http-client-request chunk-or-data] (.write http-client-request chunk-or-data))
-  ([http-client-request chunk enc] (.write http-client-request chunk enc)))
+  ([http-client-request chunk-or-data enc-or-handler] (.write http-client-request chunk-or-data enc-or-handler))
+  ([http-client-request chunk enc handler] (.write http-client-request chunk enc handler)))
 (defn write-custom-frame
   ([http-client-request type flags payload] (.writeCustomFrame http-client-request type flags payload))
   ([http-client-request frame] (.writeCustomFrame http-client-request frame)))

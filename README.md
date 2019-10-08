@@ -10,7 +10,7 @@ Maven (in your pom.xml):
 <dependency>
   <groupId>com.w2v4</groupId>
   <artifactId>vertx-lang-clojure</artifactId>
-  <version>3.7.1-SNAPSHOT</version>
+  <version>3.8.2-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -18,7 +18,8 @@ Leiningen (in your `project.clj`):
 
 ```clojure
   :dependencies [[org.clojure/clojure "1.10.0"]
-                 [com.w2v4/vertx-lang-clojure "3.7.1-SNAPSHOT"]]
+                 [io.vertx/vertx-web "3.8.2"]
+                 [com.w2v4/vertx-lang-clojure "3.8.2-SNAPSHOT"]]
 ```
 
 

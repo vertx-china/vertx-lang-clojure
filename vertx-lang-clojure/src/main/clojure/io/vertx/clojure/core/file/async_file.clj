@@ -11,7 +11,8 @@
 (defn drain-handler
   ([async-file handler] (.drainHandler async-file handler)))
 (defn end
-  ([async-file t] (.end async-file t))
+  ([async-file handler-or-data] (.end async-file handler-or-data))
+  ([async-file data handler] (.end async-file data handler))
   ([async-file] (.end async-file)))
 (defn end-handler
   ([async-file end-handler] (.endHandler async-file end-handler)))
@@ -44,6 +45,8 @@
   ([async-file] (.resume async-file)))
 (defn set-read-buffer-size
   ([async-file read-buffer-size] (.setReadBufferSize async-file read-buffer-size)))
+(defn set-read-length
+  ([async-file read-length] (.setReadLength async-file read-length)))
 (defn set-read-pos
   ([async-file read-pos] (.setReadPos async-file read-pos)))
 (defn set-write-pos
@@ -52,6 +55,7 @@
   ([async-file max-size] (.setWriteQueueMaxSize async-file max-size)))
 (defn write
   ([async-file data] (.write async-file data))
+  ([async-file data handler] (.write async-file data handler))
   ([async-file buffer position handler] (.write async-file buffer position handler)))
 (defn write-queue-full
   ([async-file] (.writeQueueFull async-file)))

@@ -22,6 +22,7 @@
   <name>vertx-lang-clojure</name>
   <description>Vert.x Clojure Implementation</description>
   <url>https://github.com/whitewoodcity/vertx-lang-clojure</url>
+
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -34,11 +35,13 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+
   <scm>
     <connection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</connection>
     <developerConnection>scm:git:git@github.com:whitewoodcity/vertx-lang-clojure.git</developerConnection>
     <url>git@github.com:whitewoodcity/vertx-lang-clojure.git</url>
   </scm>
+
   <developers>
     <developer>
       <id>chengenzhao</id>
@@ -51,7 +54,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <clojure.version>1.10.0</clojure.version>
-    <clojure.plugin.version>1.8.1</clojure.plugin.version>
+    <clojure.plugin.version>1.8.4</clojure.plugin.version>
     <junit.version>4.12</junit.version>
     <stack.version>3.8.2</stack.version>
   </properties>
@@ -72,25 +75,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.clojure</groupId>
-      <artifactId>clojure</artifactId>
-      <version>${clojure.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <testSourceDirectory>src/test/java</testSourceDirectory>
-  </build>
 
   <profiles>
     <profile>
