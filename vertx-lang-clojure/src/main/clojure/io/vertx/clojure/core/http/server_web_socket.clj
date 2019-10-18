@@ -1,7 +1,7 @@
 (ns io.vertx.clojure.core.http.server-web-socket)
 
+(import io.vertx.core.Future)
 (import io.vertx.core.Handler)
-(import io.vertx.core.Promise)
 (import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.http.ServerWebSocket)
 (import io.vertx.core.http.WebSocketFrame)
@@ -74,6 +74,7 @@
 (defn resume
   ([server-web-socket] (.resume server-web-socket)))
 (defn set-handshake
+  ([server-web-socket future handler] (.setHandshake server-web-socket future handler))
   ([server-web-socket future] (.setHandshake server-web-socket future)))
 (defn set-write-queue-max-size
   ([server-web-socket max-size] (.setWriteQueueMaxSize server-web-socket max-size)))
