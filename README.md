@@ -1,7 +1,8 @@
 # vertx-lang-clojure
 Vert.x Clojure support.
 
-Currently this fork is SNAPSHOT, so you need to `mvn install` to use.
+Currently this fork is SNAPSHOT, so you need to `mvn install` to use.  
+See https://github.com/tychobrailleur/vertx-lang-clojure-example for examples of usage.
 
 ### How to use?
 
