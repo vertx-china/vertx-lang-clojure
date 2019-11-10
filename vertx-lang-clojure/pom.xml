@@ -110,6 +110,11 @@
       <artifactId>vertx-config</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-jdbc-client</artifactId>
+      <optional>true</optional>
+    </dependency>
 
     <dependency>
       <groupId>log4j</groupId>
@@ -220,7 +225,8 @@
                 vertx-web-common,
                 vertx-web-client,
                 vertx-web,
-                vertx-config
+                vertx-config,
+                vertx-jdbc-client
               </includeArtifactIds>
               <classifier>sources</classifier>
               <!-- Prevent AuthOptions (interface) to be generated with ctor -->
