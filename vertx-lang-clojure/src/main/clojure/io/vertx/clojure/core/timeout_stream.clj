@@ -24,7 +24,6 @@
 (defn pipe
   ([timeout-stream] (.pipe timeout-stream)))
 (defn pipe-to
-  ([timeout-stream dst] (.pipeTo timeout-stream dst))
   ([timeout-stream dst handler] (.pipeTo timeout-stream dst handler)))
 (defn resume
   ([timeout-stream] (.resume timeout-stream)))

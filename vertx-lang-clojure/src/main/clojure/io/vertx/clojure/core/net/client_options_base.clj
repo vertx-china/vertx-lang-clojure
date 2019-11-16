@@ -78,6 +78,4 @@
 (defn get-trust-store-options [^ClientOptionsBase client-options-base] (.getTrustStoreOptions client-options-base))
 (defn set-use-alpn [^ClientOptionsBase client-options-base use-alpn] (.setUseAlpn client-options-base use-alpn))
 (defn is-use-alpn [^ClientOptionsBase client-options-base] (.isUseAlpn client-options-base))
-(defn set-use-pooled-buffers [^ClientOptionsBase client-options-base use-pooled-buffers] (.setUsePooledBuffers client-options-base use-pooled-buffers))
-(defn is-use-pooled-buffers [^ClientOptionsBase client-options-base] (.isUsePooledBuffers client-options-base))
 (defn to-json [^ClientOptionsBase client-options-base] (.toJson client-options-base))

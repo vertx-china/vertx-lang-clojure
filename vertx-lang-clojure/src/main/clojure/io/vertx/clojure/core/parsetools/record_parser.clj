@@ -38,7 +38,6 @@
 (defn pipe
   ([record-parser] (.pipe record-parser)))
 (defn pipe-to
-  ([record-parser dst] (.pipeTo record-parser dst))
   ([record-parser dst handler] (.pipeTo record-parser dst handler)))
 (defn resume
   ([record-parser] (.resume record-parser)))

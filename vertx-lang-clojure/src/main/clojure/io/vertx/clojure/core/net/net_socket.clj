@@ -6,16 +6,14 @@
 (import io.vertx.core.streams.WriteStream)
 
 (defn close
-  ([net-socket] (.close net-socket))
   ([net-socket handler] (.close net-socket handler)))
 (defn close-handler
   ([net-socket handler] (.closeHandler net-socket handler)))
 (defn drain-handler
   ([net-socket handler] (.drainHandler net-socket handler)))
 (defn end
-  ([net-socket handler-or-data] (.end net-socket handler-or-data))
   ([net-socket data handler] (.end net-socket data handler))
-  ([net-socket] (.end net-socket)))
+  ([net-socket handler] (.end net-socket handler)))
 (defn end-handler
   ([net-socket end-handler] (.endHandler net-socket end-handler)))
 (defn exception-handler
@@ -40,16 +38,14 @@
 (defn pipe
   ([net-socket] (.pipe net-socket)))
 (defn pipe-to
-  ([net-socket dst] (.pipeTo net-socket dst))
   ([net-socket dst handler] (.pipeTo net-socket dst handler)))
 (defn remote-address
   ([net-socket] (.remoteAddress net-socket)))
 (defn resume
   ([net-socket] (.resume net-socket)))
 (defn send-file
-  ([net-socket filename] (.sendFile net-socket filename))
-  ([net-socket filename result-handler-or-offset] (.sendFile net-socket filename result-handler-or-offset))
-  ([net-socket filename offset result-handler-or-length] (.sendFile net-socket filename offset result-handler-or-length))
+  ([net-socket filename result-handler] (.sendFile net-socket filename result-handler))
+  ([net-socket filename offset result-handler] (.sendFile net-socket filename offset result-handler))
   ([net-socket filename offset length result-handler] (.sendFile net-socket filename offset length result-handler)))
 (defn set-write-queue-max-size
   ([net-socket max-size] (.setWriteQueueMaxSize net-socket max-size)))
@@ -57,8 +53,7 @@
   ([net-socket handler] (.upgradeToSsl net-socket handler))
   ([net-socket server-name handler] (.upgradeToSsl net-socket server-name handler)))
 (defn write
-  ([net-socket str-or-data] (.write net-socket str-or-data))
-  ([net-socket message-or-str enc-or-handler] (.write net-socket message-or-str enc-or-handler))
+  ([net-socket message-or-str handler] (.write net-socket message-or-str handler))
   ([net-socket str enc handler] (.write net-socket str enc handler)))
 (defn write-handler-id
   ([net-socket] (.writeHandlerID net-socket)))

@@ -95,25 +95,6 @@
   ([http-client options-or-request-uri handler] (.webSocket http-client options-or-request-uri handler)))
 (defn web-socket-abs
   ([http-client url headers version sub-protocols handler] (.webSocketAbs http-client url headers version sub-protocols handler)))
-(defn websocket
-  ([http-client request-uri-or-options ws-connect] (.websocket http-client request-uri-or-options ws-connect))
-  ([http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-ws-connect-or-request-uri failure-handler-or-ws-connect] (.websocket http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-ws-connect-or-request-uri failure-handler-or-ws-connect))
-  ([http-client request-uri-or-host-or-options headers-or-request-uri-or-ws-connect ws-connect-or-failure-handler] (.websocket http-client request-uri-or-host-or-options headers-or-request-uri-or-ws-connect ws-connect-or-failure-handler))
-  ([http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri sub-protocols-or-version-or-headers-or-ws-connect ws-connect-or-failure-handler] (.websocket http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri sub-protocols-or-version-or-headers-or-ws-connect ws-connect-or-failure-handler))
-  ([http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri sub-protocols-or-version-or-headers sub-protocols-or-version-or-ws-connect ws-connect-or-failure-handler] (.websocket http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri sub-protocols-or-version-or-headers sub-protocols-or-version-or-ws-connect ws-connect-or-failure-handler))
-  ([http-client host-or-port request-uri-or-host headers-or-request-uri version-or-headers sub-protocols-or-version sub-protocols-or-ws-connect ws-connect-or-failure-handler] (.websocket http-client host-or-port request-uri-or-host headers-or-request-uri version-or-headers sub-protocols-or-version sub-protocols-or-ws-connect ws-connect-or-failure-handler))
-  ([http-client port host request-uri headers version sub-protocols ws-connect failure-handler] (.websocket http-client port host request-uri headers version sub-protocols ws-connect failure-handler)))
-(defn websocket-abs
-  ([http-client url headers version sub-protocols ws-connect failure-handler] (.websocketAbs http-client url headers version sub-protocols ws-connect failure-handler)))
-(defn websocket-stream
-  ([http-client request-uri-or-options] (.websocketStream http-client request-uri-or-options))
-  ([http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri] (.websocketStream http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri))
-  ([http-client request-uri-or-options-or-host headers-or-request-uri] (.websocketStream http-client request-uri-or-options-or-host headers-or-request-uri))
-  ([http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri sub-protocols-or-version-or-headers] (.websocketStream http-client request-uri-or-options-or-host-or-port headers-or-request-uri-or-host version-or-headers-or-request-uri sub-protocols-or-version-or-headers))
-  ([http-client host-or-port request-uri-or-host headers-or-request-uri version-or-headers sub-protocols-or-version] (.websocketStream http-client host-or-port request-uri-or-host headers-or-request-uri version-or-headers sub-protocols-or-version))
-  ([http-client port host request-uri headers version sub-protocols] (.websocketStream http-client port host request-uri headers version sub-protocols)))
-(defn websocket-stream-abs
-  ([http-client url headers version sub-protocols] (.websocketStreamAbs http-client url headers version sub-protocols)))
 (defn handler [f]
   (reify
    io.vertx.core.Handler

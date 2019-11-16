@@ -15,7 +15,6 @@
 (defn cancel-timer
   ([vertx id] (.cancelTimer vertx id)))
 (defn close
-  ([vertx] (.close vertx))
   ([vertx completion-handler] (.close vertx completion-handler)))
 (defn clustered-vertx
   ([options result-handler] (Vertx/clusteredVertx options result-handler)))
@@ -46,8 +45,7 @@
 (defn current-context
   ([] (Vertx/currentContext)))
 (defn deploy-verticle
-  ([vertx name] (.deployVerticle vertx name))
-  ([vertx name options-or-completion-handler] (.deployVerticle vertx name options-or-completion-handler))
+  ([vertx name completion-handler] (.deployVerticle vertx name completion-handler))
   ([vertx name options completion-handler] (.deployVerticle vertx name options completion-handler)))
 (defn deployment-i-ds
   ([vertx] (.deploymentIDs vertx)))
@@ -81,7 +79,6 @@
 (defn timer-stream
   ([vertx delay] (.timerStream vertx delay)))
 (defn undeploy
-  ([vertx deployment-id] (.undeploy vertx deployment-id))
   ([vertx deployment-id completion-handler] (.undeploy vertx deployment-id completion-handler)))
 (defn vertx
   ([] (Vertx/vertx))

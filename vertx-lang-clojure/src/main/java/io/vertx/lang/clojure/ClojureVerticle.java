@@ -2,11 +2,7 @@ package io.vertx.lang.clojure;
 
 import clojure.java.api.Clojure;
 import clojure.lang.*;
-import clojure.lang.Compiler;
-import io.vertx.core.Context;
-import io.vertx.core.Future;
-import io.vertx.core.Verticle;
-import io.vertx.core.Vertx;
+import io.vertx.core.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +12,9 @@ import java.util.Map;
  * it will automatically load the corresponding Clojure namespace file
  * and load its start method, currently supports several ways of start
  * start[] start[vertx] start[vertx context] start[context] start[context vertx]
+ *
  * @author <a href="mailto:chengen.zhao@whitewoodcity.com">Chengen Zhao</a>
+ * @author <a href="mailto:sebastien@weblogism.com">Sébastien Le Callonnec</a>
  */
 public class ClojureVerticle implements Verticle {
 
@@ -49,7 +47,7 @@ public class ClojureVerticle implements Verticle {
   }
 
   @Override
-  public void start(Future<Void> startFuture) {
+  public void start(Promise<Void> startFuture) {
 
     try {
       if (requireCompiling) {
@@ -102,7 +100,7 @@ public class ClojureVerticle implements Verticle {
   }
 
   @Override
-  public void stop(Future<Void> stopFuture) {
+  public void stop(Promise<Void> stopFuture) {
     try {
       synchronized (Clojure.class) {
         IFn iFn = Clojure.var("clojure.core", "require");

@@ -9,8 +9,7 @@
   ([datagram-socket multicast-address source-to-block handler] (.blockMulticastGroup datagram-socket multicast-address source-to-block handler))
   ([datagram-socket multicast-address network-interface source-to-block handler] (.blockMulticastGroup datagram-socket multicast-address network-interface source-to-block handler)))
 (defn close
-  ([datagram-socket handler] (.close datagram-socket handler))
-  ([datagram-socket] (.close datagram-socket)))
+  ([datagram-socket handler] (.close datagram-socket handler)))
 (defn end-handler
   ([datagram-socket end-handler] (.endHandler datagram-socket end-handler)))
 (defn exception-handler
@@ -38,7 +37,6 @@
 (defn pipe
   ([datagram-socket] (.pipe datagram-socket)))
 (defn pipe-to
-  ([datagram-socket dst] (.pipeTo datagram-socket dst))
   ([datagram-socket dst handler] (.pipeTo datagram-socket dst handler)))
 (defn resume
   ([datagram-socket] (.resume datagram-socket)))

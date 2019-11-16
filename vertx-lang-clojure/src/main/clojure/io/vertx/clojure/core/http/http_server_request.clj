@@ -6,6 +6,8 @@
 
 (defn absolute-uri
   ([http-server-request] (.absoluteURI http-server-request)))
+(defn body
+  ([http-server-request handler] (.body http-server-request handler)))
 (defn body-handler
   ([http-server-request body-handler] (.bodyHandler http-server-request body-handler)))
 (defn bytes-read
@@ -14,6 +16,8 @@
   ([http-server-request] (.connection http-server-request)))
 (defn cookie-count
   ([http-server-request] (.cookieCount http-server-request)))
+(defn cookie-map
+  ([http-server-request] (.cookieMap http-server-request)))
 (defn custom-frame-handler
   ([http-server-request handler] (.customFrameHandler http-server-request handler)))
 (defn end-handler
@@ -64,7 +68,6 @@
 (defn pipe
   ([http-server-request] (.pipe http-server-request)))
 (defn pipe-to
-  ([http-server-request dst] (.pipeTo http-server-request dst))
   ([http-server-request dst handler] (.pipeTo http-server-request dst handler)))
 (defn query
   ([http-server-request] (.query http-server-request)))

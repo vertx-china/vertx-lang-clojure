@@ -94,6 +94,4 @@
 (defn get-trust-store-options [^EventBusOptions event-bus-options] (.getTrustStoreOptions event-bus-options))
 (defn set-use-alpn [^EventBusOptions event-bus-options use-alpn] (.setUseAlpn event-bus-options use-alpn))
 (defn is-use-alpn [^EventBusOptions event-bus-options] (.isUseAlpn event-bus-options))
-(defn set-use-pooled-buffers [^EventBusOptions event-bus-options use-pooled-buffers] (.setUsePooledBuffers event-bus-options use-pooled-buffers))
-(defn is-use-pooled-buffers [^EventBusOptions event-bus-options] (.isUsePooledBuffers event-bus-options))
 (defn to-json [^EventBusOptions event-bus-options] (.toJson event-bus-options))
