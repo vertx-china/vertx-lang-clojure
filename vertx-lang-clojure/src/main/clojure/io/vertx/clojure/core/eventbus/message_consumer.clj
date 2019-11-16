@@ -32,12 +32,10 @@
 (defn pipe
   ([message-consumer] (.pipe message-consumer)))
 (defn pipe-to
-  ([message-consumer dst] (.pipeTo message-consumer dst))
   ([message-consumer dst handler] (.pipeTo message-consumer dst handler)))
 (defn resume
   ([message-consumer] (.resume message-consumer)))
 (defn set-max-buffered-messages
   ([message-consumer max-buffered-messages] (.setMaxBufferedMessages message-consumer max-buffered-messages)))
 (defn unregister
-  ([message-consumer] (.unregister message-consumer))
   ([message-consumer completion-handler] (.unregister message-consumer completion-handler)))

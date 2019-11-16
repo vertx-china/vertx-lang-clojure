@@ -24,10 +24,9 @@
 (defn drain-handler
   ([http-server-response handler] (.drainHandler http-server-response handler)))
 (defn end
-  ([http-server-response chunk-or-handler] (.end http-server-response chunk-or-handler))
-  ([http-server-response chunk enc-or-handler] (.end http-server-response chunk enc-or-handler))
-  ([http-server-response chunk enc handler] (.end http-server-response chunk enc handler))
-  ([http-server-response] (.end http-server-response)))
+  ([http-server-response handler] (.end http-server-response handler))
+  ([http-server-response chunk handler] (.end http-server-response chunk handler))
+  ([http-server-response chunk enc handler] (.end http-server-response chunk enc handler)))
 (defn end-handler
   ([http-server-response handler] (.endHandler http-server-response handler)))
 (defn ended
@@ -61,9 +60,8 @@
   ([http-server-response] (.reset http-server-response))
   ([http-server-response code] (.reset http-server-response code)))
 (defn send-file
-  ([http-server-response filename] (.sendFile http-server-response filename))
-  ([http-server-response filename result-handler-or-offset] (.sendFile http-server-response filename result-handler-or-offset))
-  ([http-server-response filename offset result-handler-or-length] (.sendFile http-server-response filename offset result-handler-or-length))
+  ([http-server-response filename result-handler] (.sendFile http-server-response filename result-handler))
+  ([http-server-response filename offset result-handler] (.sendFile http-server-response filename offset result-handler))
   ([http-server-response filename offset length result-handler] (.sendFile http-server-response filename offset length result-handler)))
 (defn set-chunked
   ([http-server-response chunked] (.setChunked http-server-response chunked)))
@@ -80,8 +78,7 @@
 (defn trailers
   ([http-server-response] (.trailers http-server-response)))
 (defn write
-  ([http-server-response chunk-or-data] (.write http-server-response chunk-or-data))
-  ([http-server-response chunk-or-data enc-or-handler] (.write http-server-response chunk-or-data enc-or-handler))
+  ([http-server-response chunk-or-data handler] (.write http-server-response chunk-or-data handler))
   ([http-server-response chunk enc handler] (.write http-server-response chunk enc handler)))
 (defn write-continue
   ([http-server-response] (.writeContinue http-server-response)))

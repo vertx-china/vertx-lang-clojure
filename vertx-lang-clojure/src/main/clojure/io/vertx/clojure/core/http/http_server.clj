@@ -7,7 +7,6 @@
 (defn actual-port
   ([http-server] (.actualPort http-server)))
 (defn close
-  ([http-server] (.close http-server))
   ([http-server completion-handler] (.close http-server completion-handler)))
 (defn connection-handler
   ([http-server handler] (.connectionHandler http-server handler)))
@@ -16,10 +15,9 @@
 (defn is-metrics-enabled
   ([http-server] (.isMetricsEnabled http-server)))
 (defn listen
-  ([http-server] (.listen http-server))
-  ([http-server address-or-port listen-handler-or-host] (.listen http-server address-or-port listen-handler-or-host))
   ([http-server port host listen-handler] (.listen http-server port host listen-handler))
-  ([http-server listen-handler-or-port] (.listen http-server listen-handler-or-port)))
+  ([http-server port-or-address listen-handler] (.listen http-server port-or-address listen-handler))
+  ([http-server listen-handler] (.listen http-server listen-handler)))
 (defn request-handler
   ([http-server handler] (.requestHandler http-server handler)))
 (defn request-stream

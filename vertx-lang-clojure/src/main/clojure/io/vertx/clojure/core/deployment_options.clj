@@ -23,8 +23,6 @@
 (defn get-max-worker-execute-time [^DeploymentOptions deployment-options] (.getMaxWorkerExecuteTime deployment-options))
 (defn set-max-worker-execute-time-unit [^DeploymentOptions deployment-options max-worker-execute-time-unit] (.setMaxWorkerExecuteTimeUnit deployment-options max-worker-execute-time-unit))
 (defn get-max-worker-execute-time-unit [^DeploymentOptions deployment-options] (.getMaxWorkerExecuteTimeUnit deployment-options))
-(defn set-multi-threaded [^DeploymentOptions deployment-options multi-threaded] (.setMultiThreaded deployment-options multi-threaded))
-(defn is-multi-threaded [^DeploymentOptions deployment-options] (.isMultiThreaded deployment-options))
 (defn set-worker [^DeploymentOptions deployment-options worker] (.setWorker deployment-options worker))
 (defn is-worker [^DeploymentOptions deployment-options] (.isWorker deployment-options))
 (defn set-worker-pool-name [^DeploymentOptions deployment-options worker-pool-name] (.setWorkerPoolName deployment-options worker-pool-name))

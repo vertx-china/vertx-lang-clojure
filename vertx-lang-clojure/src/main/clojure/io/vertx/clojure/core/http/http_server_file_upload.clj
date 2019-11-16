@@ -36,7 +36,6 @@
 (defn pipe
   ([http-server-file-upload] (.pipe http-server-file-upload)))
 (defn pipe-to
-  ([http-server-file-upload dst] (.pipeTo http-server-file-upload dst))
   ([http-server-file-upload dst handler] (.pipeTo http-server-file-upload dst handler)))
 (defn resume
   ([http-server-file-upload] (.resume http-server-file-upload)))

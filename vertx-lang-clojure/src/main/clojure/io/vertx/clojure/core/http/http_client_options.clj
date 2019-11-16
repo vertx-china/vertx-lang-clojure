@@ -136,8 +136,6 @@
 (defn get-try-websocket-deflate-frame-compression [^HttpClientOptions http-client-options] (.getTryWebsocketDeflateFrameCompression http-client-options))
 (defn set-use-alpn [^HttpClientOptions http-client-options use-alpn] (.setUseAlpn http-client-options use-alpn))
 (defn is-use-alpn [^HttpClientOptions http-client-options] (.isUseAlpn http-client-options))
-(defn set-use-pooled-buffers [^HttpClientOptions http-client-options use-pooled-buffers] (.setUsePooledBuffers http-client-options use-pooled-buffers))
-(defn is-use-pooled-buffers [^HttpClientOptions http-client-options] (.isUsePooledBuffers http-client-options))
 (defn set-verify-host [^HttpClientOptions http-client-options verify-host] (.setVerifyHost http-client-options verify-host))
 (defn is-verify-host [^HttpClientOptions http-client-options] (.isVerifyHost http-client-options))
 (defn set-websocket-compression-allow-client-no-context [^HttpClientOptions http-client-options websocket-compression-allow-client-no-context] (.setWebsocketCompressionAllowClientNoContext http-client-options websocket-compression-allow-client-no-context))

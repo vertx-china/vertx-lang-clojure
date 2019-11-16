@@ -68,6 +68,4 @@
 (defn get-trust-store-options [^TCPSSLOptions t-cpssl-options] (.getTrustStoreOptions t-cpssl-options))
 (defn set-use-alpn [^TCPSSLOptions t-cpssl-options use-alpn] (.setUseAlpn t-cpssl-options use-alpn))
 (defn is-use-alpn [^TCPSSLOptions t-cpssl-options] (.isUseAlpn t-cpssl-options))
-(defn set-use-pooled-buffers [^TCPSSLOptions t-cpssl-options use-pooled-buffers] (.setUsePooledBuffers t-cpssl-options use-pooled-buffers))
-(defn is-use-pooled-buffers [^TCPSSLOptions t-cpssl-options] (.isUsePooledBuffers t-cpssl-options))
 (defn to-json [^TCPSSLOptions t-cpssl-options] (.toJson t-cpssl-options))

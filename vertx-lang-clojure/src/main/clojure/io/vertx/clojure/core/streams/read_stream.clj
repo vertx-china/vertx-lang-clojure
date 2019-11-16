@@ -22,7 +22,6 @@
 (defn pipe
   ([read-stream] (.pipe read-stream)))
 (defn pipe-to
-  ([read-stream dst] (.pipeTo read-stream dst))
   ([read-stream dst handler] (.pipeTo read-stream dst handler)))
 (defn resume
   ([read-stream] (.resume read-stream)))

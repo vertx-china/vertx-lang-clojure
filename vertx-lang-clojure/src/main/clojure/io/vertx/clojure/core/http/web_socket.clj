@@ -11,9 +11,8 @@
 (defn binary-message-handler
   ([web-socket handler] (.binaryMessageHandler web-socket handler)))
 (defn close
-  ([web-socket] (.close web-socket))
-  ([web-socket status-code-or-handler] (.close web-socket status-code-or-handler))
-  ([web-socket status-code reason-or-handler] (.close web-socket status-code reason-or-handler))
+  ([web-socket handler] (.close web-socket handler))
+  ([web-socket status-code handler] (.close web-socket status-code handler))
   ([web-socket status-code reason handler] (.close web-socket status-code reason handler)))
 (defn close-handler
   ([web-socket handler] (.closeHandler web-socket handler)))
@@ -24,9 +23,8 @@
 (defn drain-handler
   ([web-socket handler] (.drainHandler web-socket handler)))
 (defn end
-  ([web-socket handler-or-data] (.end web-socket handler-or-data))
   ([web-socket data handler] (.end web-socket data handler))
-  ([web-socket] (.end web-socket)))
+  ([web-socket handler] (.end web-socket handler)))
 (defn end-handler
   ([web-socket end-handler] (.endHandler web-socket end-handler)))
 (defn exception-handler
@@ -55,7 +53,6 @@
 (defn pipe
   ([web-socket] (.pipe web-socket)))
 (defn pipe-to
-  ([web-socket dst] (.pipeTo web-socket dst))
   ([web-socket dst handler] (.pipeTo web-socket dst handler)))
 (defn pong-handler
   ([web-socket handler] (.pongHandler web-socket handler)))
@@ -72,26 +69,20 @@
 (defn text-message-handler
   ([web-socket handler] (.textMessageHandler web-socket handler)))
 (defn write
-  ([web-socket data] (.write web-socket data))
   ([web-socket data handler] (.write web-socket data handler)))
 (defn write-binary-message
-  ([web-socket data] (.writeBinaryMessage web-socket data))
   ([web-socket data handler] (.writeBinaryMessage web-socket data handler)))
 (defn write-final-binary-frame
-  ([web-socket data] (.writeFinalBinaryFrame web-socket data))
   ([web-socket data handler] (.writeFinalBinaryFrame web-socket data handler)))
 (defn write-final-text-frame
-  ([web-socket text] (.writeFinalTextFrame web-socket text))
   ([web-socket text handler] (.writeFinalTextFrame web-socket text handler)))
 (defn write-frame
-  ([web-socket frame] (.writeFrame web-socket frame))
   ([web-socket frame handler] (.writeFrame web-socket frame handler)))
 (defn write-ping
-  ([web-socket data] (.writePing web-socket data)))
+  ([web-socket data handler] (.writePing web-socket data handler)))
 (defn write-pong
-  ([web-socket data] (.writePong web-socket data)))
+  ([web-socket data handler] (.writePong web-socket data handler)))
 (defn write-queue-full
   ([web-socket] (.writeQueueFull web-socket)))
 (defn write-text-message
-  ([web-socket text] (.writeTextMessage web-socket text))
   ([web-socket text handler] (.writeTextMessage web-socket text handler)))

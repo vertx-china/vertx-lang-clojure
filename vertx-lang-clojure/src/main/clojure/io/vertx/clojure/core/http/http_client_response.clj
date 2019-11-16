@@ -4,6 +4,8 @@
 (import io.vertx.core.http.HttpClientResponse)
 (import io.vertx.core.streams.WriteStream)
 
+(defn body
+  ([http-client-response handler] (.body http-client-response handler)))
 (defn body-handler
   ([http-client-response body-handler] (.bodyHandler http-client-response body-handler)))
 (defn cookies
@@ -36,7 +38,6 @@
 (defn pipe
   ([http-client-response] (.pipe http-client-response)))
 (defn pipe-to
-  ([http-client-response dst] (.pipeTo http-client-response dst))
   ([http-client-response dst handler] (.pipeTo http-client-response dst handler)))
 (defn request
   ([http-client-response] (.request http-client-response)))

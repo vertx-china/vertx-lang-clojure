@@ -39,7 +39,6 @@
 (defn pipe
   ([json-parser] (.pipe json-parser)))
 (defn pipe-to
-  ([json-parser dst] (.pipeTo json-parser dst))
   ([json-parser dst handler] (.pipeTo json-parser dst handler)))
 (defn resume
   ([json-parser] (.resume json-parser)))

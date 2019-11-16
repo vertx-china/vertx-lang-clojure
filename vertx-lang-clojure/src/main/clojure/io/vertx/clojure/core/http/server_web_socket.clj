@@ -14,10 +14,9 @@
 (defn binary-message-handler
   ([server-web-socket handler] (.binaryMessageHandler server-web-socket handler)))
 (defn close
-  ([server-web-socket status-code-or-handler] (.close server-web-socket status-code-or-handler))
-  ([server-web-socket status-code reason-or-handler] (.close server-web-socket status-code reason-or-handler))
-  ([server-web-socket status-code reason handler] (.close server-web-socket status-code reason handler))
-  ([server-web-socket] (.close server-web-socket)))
+  ([server-web-socket handler] (.close server-web-socket handler))
+  ([server-web-socket status-code handler] (.close server-web-socket status-code handler))
+  ([server-web-socket status-code reason handler] (.close server-web-socket status-code reason handler)))
 (defn close-handler
   ([server-web-socket handler] (.closeHandler server-web-socket handler)))
 (defn close-reason
@@ -27,9 +26,8 @@
 (defn drain-handler
   ([server-web-socket handler] (.drainHandler server-web-socket handler)))
 (defn end
-  ([server-web-socket handler-or-data] (.end server-web-socket handler-or-data))
   ([server-web-socket data handler] (.end server-web-socket data handler))
-  ([server-web-socket] (.end server-web-socket)))
+  ([server-web-socket handler] (.end server-web-socket handler)))
 (defn end-handler
   ([server-web-socket end-handler] (.endHandler server-web-socket end-handler)))
 (defn exception-handler
@@ -60,7 +58,6 @@
 (defn pipe
   ([server-web-socket] (.pipe server-web-socket)))
 (defn pipe-to
-  ([server-web-socket dst] (.pipeTo server-web-socket dst))
   ([server-web-socket dst handler] (.pipeTo server-web-socket dst handler)))
 (defn pong-handler
   ([server-web-socket handler] (.pongHandler server-web-socket handler)))
@@ -74,8 +71,7 @@
 (defn resume
   ([server-web-socket] (.resume server-web-socket)))
 (defn set-handshake
-  ([server-web-socket future handler] (.setHandshake server-web-socket future handler))
-  ([server-web-socket future] (.setHandshake server-web-socket future)))
+  ([server-web-socket future handler] (.setHandshake server-web-socket future handler)))
 (defn set-write-queue-max-size
   ([server-web-socket max-size] (.setWriteQueueMaxSize server-web-socket max-size)))
 (defn sub-protocol
@@ -87,26 +83,20 @@
 (defn uri
   ([server-web-socket] (.uri server-web-socket)))
 (defn write
-  ([server-web-socket data] (.write server-web-socket data))
   ([server-web-socket data handler] (.write server-web-socket data handler)))
 (defn write-binary-message
-  ([server-web-socket data] (.writeBinaryMessage server-web-socket data))
   ([server-web-socket data handler] (.writeBinaryMessage server-web-socket data handler)))
 (defn write-final-binary-frame
-  ([server-web-socket data] (.writeFinalBinaryFrame server-web-socket data))
   ([server-web-socket data handler] (.writeFinalBinaryFrame server-web-socket data handler)))
 (defn write-final-text-frame
-  ([server-web-socket text] (.writeFinalTextFrame server-web-socket text))
   ([server-web-socket text handler] (.writeFinalTextFrame server-web-socket text handler)))
 (defn write-frame
-  ([server-web-socket frame] (.writeFrame server-web-socket frame))
   ([server-web-socket frame handler] (.writeFrame server-web-socket frame handler)))
 (defn write-ping
-  ([server-web-socket data] (.writePing server-web-socket data)))
+  ([server-web-socket data handler] (.writePing server-web-socket data handler)))
 (defn write-pong
-  ([server-web-socket data] (.writePong server-web-socket data)))
+  ([server-web-socket data handler] (.writePong server-web-socket data handler)))
 (defn write-queue-full
   ([server-web-socket] (.writeQueueFull server-web-socket)))
 (defn write-text-message
-  ([server-web-socket text] (.writeTextMessage server-web-socket text))
   ([server-web-socket text handler] (.writeTextMessage server-web-socket text handler)))
