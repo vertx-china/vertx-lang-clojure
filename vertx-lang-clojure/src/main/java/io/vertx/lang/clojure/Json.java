@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Clojure Json corresponding util class

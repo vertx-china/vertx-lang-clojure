@@ -24,7 +24,7 @@ public class ClojureVerticle implements Verticle {
   private Vertx vertx;
   private Context context;
 
-  private boolean requireCompiling = false;
+  private boolean requireCompiling;
 
   public ClojureVerticle(String ns) {
     this(ns, false);

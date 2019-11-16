@@ -11,7 +11,7 @@ Maven (in your pom.xml):
 <dependency>
   <groupId>com.w2v4</groupId>
   <artifactId>vertx-lang-clojure</artifactId>
-  <version>3.8.2-SNAPSHOT</version>
+  <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -19,8 +19,8 @@ Leiningen (in your `project.clj`):
 
 ```clojure
   :dependencies [[org.clojure/clojure "1.10.0"]
-                 [io.vertx/vertx-web "3.8.2"]
-                 [com.w2v4/vertx-lang-clojure "3.8.2-SNAPSHOT"]]
+                 [io.vertx/vertx-web "4.0.0-SNAPSHOT"]
+                 [com.w2v4/vertx-lang-clojure "4.0.0-SNAPSHOT"]]
 ```
 
 
@@ -66,11 +66,10 @@ Here’s an example verticle:
 ```clojure
 
 ;Called when verticle is deployed
-(defn start [] )
+(defn start [])
 
 ;Optional - called when verticle is undeployed
-(defn stop [] )
-
+(defn stop [])
 ```
 
 When Vert.x deploys the verticle it will call the start method, and when the method has completed the verticle will be considered started.
