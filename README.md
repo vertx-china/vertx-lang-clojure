@@ -1,7 +1,7 @@
 # vertx-lang-clojure
 Vert.x Clojure support.
 
-Currently this fork is SNAPSHOT, so you need to `mvn install` to use.  
+Currently this fork is SNAPSHOT, so you need to `mvn install` to use.
 See https://github.com/tychobrailleur/vertx-lang-clojure-example for examples of usage.
 
 ### How to use?
@@ -79,32 +79,36 @@ You can also optionally provide vertx and context parameters. This will be used 
 ```clojure
 
 ;Following functions format are all allowed, pick one.
-(defn start [context vertx] )
-(defn start [vertx context] )
-(defn start [vertx] )
-(defn start [context] )
+(defn start [context vertx])
+(defn start [vertx context])
+(defn start [vertx])
+(defn start [context])
 
 ;Following functions format are all allowed, pick one.
-(defn stop [context vertx] )
-(defn stop [vertx context] )
-(defn stop [vertx] )
-(defn stop [context] )
+(defn stop [context vertx])
+(defn stop [vertx context])
+(defn stop [vertx])
+(defn stop [context])
 
 ```
 
 ### Verticle Deployment
 
-You could deploy a Clojure verticle with ".clj" suffix or "clj:" prefix:
+A Clojure verticle can be deployed with `.clj` suffix or `clj:` prefix:
 
 ```clojure
 (ns example.verticle
   (:require [io.vertx.clojure.core.vertx :as vertx]))
 
+; completion-handler is required to start the verticle
+(def my-handler
+  (verticle/completion-handler #(println %)))
+
 (defn start [vertx]
-  (vertx/deploy-verticle vertx "io.vertx.sample_verticle.clj"))
+  (vertx/deploy-verticle vertx "io.vertx.sample_verticle.clj" my-handler))
 ;or
 (defn start [vertx]
-  (vertx/deploy-verticle vertx "clj:io.vertx.sample_verticle"))
+  (vertx/deploy-verticle vertx "clj:io.vertx.sample_verticle" my-handler))
 ```
 
 ;TODO
