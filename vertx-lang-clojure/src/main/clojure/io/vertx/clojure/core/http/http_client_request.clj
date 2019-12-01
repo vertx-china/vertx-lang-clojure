@@ -45,6 +45,8 @@
   ([http-client-request mapper] (.map http-client-request mapper)))
 (defn method
   ([http-client-request] (.method http-client-request)))
+(defn net-socket
+  ([http-client-request handler] (.netSocket http-client-request handler)))
 (defn on-complete
   ([http-client-request handler] (.onComplete http-client-request handler)))
 (defn on-failure

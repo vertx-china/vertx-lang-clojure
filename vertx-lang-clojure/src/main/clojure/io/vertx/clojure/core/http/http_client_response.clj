@@ -31,8 +31,6 @@
   ([http-client-response handler] (.handler http-client-response handler)))
 (defn headers
   ([http-client-response] (.headers http-client-response)))
-(defn net-socket
-  ([http-client-response] (.netSocket http-client-response)))
 (defn pause
   ([http-client-response] (.pause http-client-response)))
 (defn pipe
