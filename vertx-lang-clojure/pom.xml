@@ -218,7 +218,11 @@
             <configuration>
               <includeArtifactIds>
                 vertx-core,
+                vertx-unit,
+                vertx-bridge-common,
                 vertx-sql-common,
+                vertx-mongo-client,
+                vertx-cassandra-client,
                 vertx-jdbc-client,
                 vertx-auth-common,
                 vertx-auth-jdbc,

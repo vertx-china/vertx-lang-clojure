@@ -20,6 +20,8 @@
   ([async-file amount] (.fetch async-file amount)))
 (defn flush
   ([async-file handler] (.flush async-file handler)))
+(defn get-read-length
+  ([async-file] (.getReadLength async-file)))
 (defn get-write-pos
   ([async-file] (.getWritePos async-file)))
 (defn handler

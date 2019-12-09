@@ -15,8 +15,6 @@
   ([http-client-request success-mapper failure-mapper] (.compose http-client-request success-mapper failure-mapper)))
 (defn connection
   ([http-client-request] (.connection http-client-request)))
-(defn connection-handler
-  ([http-client-request handler] (.connectionHandler http-client-request handler)))
 (defn continue-handler
   ([http-client-request handler] (.continueHandler http-client-request handler)))
 (defn drain-handler
@@ -73,7 +71,6 @@
 (defn result
   ([http-client-request] (.result http-client-request)))
 (defn send-head
-  ([http-client-request] (.sendHead http-client-request))
   ([http-client-request completion-handler] (.sendHead http-client-request completion-handler)))
 (defn set-chunked
   ([http-client-request chunked] (.setChunked http-client-request chunked)))
