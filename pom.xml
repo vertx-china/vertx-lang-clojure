@@ -48,8 +48,12 @@
       <organization>White Wood City</organization>
       <email>chengen.zhao@whitewoodcity.com</email>
     </developer>
+    <developer>
+      <id>tychobrailleur</id>
+      <organization>Weblogism</organization>
+      <email>sebastien@weblogism.com</email>
+    </developer>
   </developers>
-
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
