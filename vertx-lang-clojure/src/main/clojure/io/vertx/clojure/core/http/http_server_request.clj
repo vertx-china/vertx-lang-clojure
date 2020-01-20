@@ -71,8 +71,6 @@
   ([http-server-request dst handler] (.pipeTo http-server-request dst handler)))
 (defn query
   ([http-server-request] (.query http-server-request)))
-(defn raw-method
-  ([http-server-request] (.rawMethod http-server-request)))
 (defn remote-address
   ([http-server-request] (.remoteAddress http-server-request)))
 (defn response

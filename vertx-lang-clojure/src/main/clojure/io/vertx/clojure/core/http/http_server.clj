@@ -22,10 +22,10 @@
   ([http-server handler] (.requestHandler http-server handler)))
 (defn request-stream
   ([http-server] (.requestStream http-server)))
-(defn websocket-handler
-  ([http-server handler] (.websocketHandler http-server handler)))
-(defn websocket-stream
-  ([http-server] (.websocketStream http-server)))
+(defn web-socket-handler
+  ([http-server handler] (.webSocketHandler http-server handler)))
+(defn web-socket-stream
+  ([http-server] (.webSocketStream http-server)))
 (defn handler [f]
   (reify
    io.vertx.core.Handler

@@ -31,8 +31,6 @@
   ([http-client-request] (.getHandler http-client-request)))
 (defn get-host
   ([http-client-request] (.getHost http-client-request)))
-(defn get-raw-method
-  ([http-client-request] (.getRawMethod http-client-request)))
 (defn get-stream-priority
   ([http-client-request] (.getStreamPriority http-client-request)))
 (defn headers
@@ -82,8 +80,6 @@
   ([http-client-request host] (.setHost http-client-request host)))
 (defn set-max-redirects
   ([http-client-request max-redirects] (.setMaxRedirects http-client-request max-redirects)))
-(defn set-raw-method
-  ([http-client-request method] (.setRawMethod http-client-request method)))
 (defn set-stream-priority
   ([http-client-request stream-priority] (.setStreamPriority http-client-request stream-priority)))
 (defn set-timeout
