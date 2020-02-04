@@ -27,10 +27,10 @@
   ([http-client-request handler] (.exceptionHandler http-client-request handler)))
 (defn flat-map
   ([http-client-request mapper] (.flatMap http-client-request mapper)))
+(defn get-authority
+  ([http-client-request] (.getAuthority http-client-request)))
 (defn get-handler
   ([http-client-request] (.getHandler http-client-request)))
-(defn get-host
-  ([http-client-request] (.getHost http-client-request)))
 (defn get-stream-priority
   ([http-client-request] (.getStreamPriority http-client-request)))
 (defn headers
@@ -70,14 +70,14 @@
   ([http-client-request] (.result http-client-request)))
 (defn send-head
   ([http-client-request completion-handler] (.sendHead http-client-request completion-handler)))
+(defn set-authority
+  ([http-client-request authority] (.setAuthority http-client-request authority)))
 (defn set-chunked
   ([http-client-request chunked] (.setChunked http-client-request chunked)))
 (defn set-follow-redirects
   ([http-client-request follow-redirects] (.setFollowRedirects http-client-request follow-redirects)))
 (defn set-handler
   ([http-client-request handler] (.setHandler http-client-request handler)))
-(defn set-host
-  ([http-client-request host] (.setHost http-client-request host)))
 (defn set-max-redirects
   ([http-client-request max-redirects] (.setMaxRedirects http-client-request max-redirects)))
 (defn set-stream-priority

@@ -2,12 +2,14 @@
 
 (import io.vertx.core.Handler)
 (import io.vertx.core.MultiMap)
+(import io.vertx.core.buffer.Buffer)
 (import io.vertx.core.http.HttpClient)
 (import io.vertx.core.http.HttpMethod)
 (import io.vertx.core.http.RequestOptions)
 (import io.vertx.core.http.WebSocketConnectOptions)
 (import io.vertx.core.http.WebsocketVersion)
 (import io.vertx.core.net.SocketAddress)
+(import io.vertx.core.streams.ReadStream)
 (import java.util.List)
 (import java.util.function.Function)
 
@@ -16,79 +18,52 @@
 (defn connection-handler
   ([http-client handler] (.connectionHandler http-client handler)))
 (defn delete
-  ([http-client request-uri-or-options] (.delete http-client request-uri-or-options))
-  ([http-client host-or-port request-uri-or-host response-handler-or-request-uri] (.delete http-client host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client request-uri-or-options-or-host response-handler-or-request-uri] (.delete http-client request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client port host request-uri response-handler] (.delete http-client port host request-uri response-handler)))
-(defn delete-abs
-  ([http-client absolute-uri] (.deleteAbs http-client absolute-uri))
-  ([http-client absolute-uri response-handler] (.deleteAbs http-client absolute-uri response-handler)))
+  ([http-client port host request-uri headers response-handler] (.delete http-client port host request-uri headers response-handler))
+  ([http-client port-or-host host-or-request-uri request-uri-or-headers response-handler] (.delete http-client port-or-host host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client host-or-request-uri request-uri-or-headers response-handler] (.delete http-client host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client request-uri-or-options response-handler] (.delete http-client request-uri-or-options response-handler)))
 (defn get
-  ([http-client request-uri-or-options] (.get http-client request-uri-or-options))
-  ([http-client host-or-port request-uri-or-host response-handler-or-request-uri] (.get http-client host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client request-uri-or-options-or-host response-handler-or-request-uri] (.get http-client request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client port host request-uri response-handler] (.get http-client port host request-uri response-handler)))
-(defn get-abs
-  ([http-client absolute-uri] (.getAbs http-client absolute-uri))
-  ([http-client absolute-uri response-handler] (.getAbs http-client absolute-uri response-handler)))
-(defn get-now
-  ([http-client request-uri-or-options response-handler] (.getNow http-client request-uri-or-options response-handler))
-  ([http-client port host request-uri response-handler] (.getNow http-client port host request-uri response-handler))
-  ([http-client host request-uri response-handler] (.getNow http-client host request-uri response-handler)))
+  ([http-client port host request-uri headers response-handler] (.get http-client port host request-uri headers response-handler))
+  ([http-client port-or-host host-or-request-uri request-uri-or-headers response-handler] (.get http-client port-or-host host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client host-or-request-uri request-uri-or-headers response-handler] (.get http-client host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client request-uri-or-options response-handler] (.get http-client request-uri-or-options response-handler)))
 (defn head
-  ([http-client request-uri-or-options] (.head http-client request-uri-or-options))
-  ([http-client host-or-port request-uri-or-host response-handler-or-request-uri] (.head http-client host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client request-uri-or-options-or-host response-handler-or-request-uri] (.head http-client request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client port host request-uri response-handler] (.head http-client port host request-uri response-handler)))
-(defn head-abs
-  ([http-client absolute-uri] (.headAbs http-client absolute-uri))
-  ([http-client absolute-uri response-handler] (.headAbs http-client absolute-uri response-handler)))
-(defn head-now
-  ([http-client request-uri-or-options response-handler] (.headNow http-client request-uri-or-options response-handler))
-  ([http-client port host request-uri response-handler] (.headNow http-client port host request-uri response-handler))
-  ([http-client host request-uri response-handler] (.headNow http-client host request-uri response-handler)))
+  ([http-client port host request-uri headers response-handler] (.head http-client port host request-uri headers response-handler))
+  ([http-client port-or-host host-or-request-uri request-uri-or-headers response-handler] (.head http-client port-or-host host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client host-or-request-uri request-uri-or-headers response-handler] (.head http-client host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client request-uri-or-options response-handler] (.head http-client request-uri-or-options response-handler)))
 (defn is-metrics-enabled
   ([http-client] (.isMetricsEnabled http-client)))
 (defn options
-  ([http-client request-uri-or-options] (.options http-client request-uri-or-options))
-  ([http-client host-or-port request-uri-or-host response-handler-or-request-uri] (.options http-client host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client request-uri-or-options-or-host response-handler-or-request-uri] (.options http-client request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client port host request-uri response-handler] (.options http-client port host request-uri response-handler)))
-(defn options-abs
-  ([http-client absolute-uri] (.optionsAbs http-client absolute-uri))
-  ([http-client absolute-uri response-handler] (.optionsAbs http-client absolute-uri response-handler)))
-(defn options-now
-  ([http-client request-uri-or-options response-handler] (.optionsNow http-client request-uri-or-options response-handler))
-  ([http-client port host request-uri response-handler] (.optionsNow http-client port host request-uri response-handler))
-  ([http-client host request-uri response-handler] (.optionsNow http-client host request-uri response-handler)))
+  ([http-client port host request-uri headers response-handler] (.options http-client port host request-uri headers response-handler))
+  ([http-client port-or-host host-or-request-uri request-uri-or-headers response-handler] (.options http-client port-or-host host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client host-or-request-uri request-uri-or-headers response-handler] (.options http-client host-or-request-uri request-uri-or-headers response-handler))
+  ([http-client request-uri-or-options response-handler] (.options http-client request-uri-or-options response-handler)))
 (defn post
-  ([http-client request-uri-or-options] (.post http-client request-uri-or-options))
-  ([http-client host-or-port request-uri-or-host response-handler-or-request-uri] (.post http-client host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client request-uri-or-options-or-host response-handler-or-request-uri] (.post http-client request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client port host request-uri response-handler] (.post http-client port host request-uri response-handler)))
-(defn post-abs
-  ([http-client absolute-uri] (.postAbs http-client absolute-uri))
-  ([http-client absolute-uri response-handler] (.postAbs http-client absolute-uri response-handler)))
+  ([http-client port host request-uri headers body response-handler] (.post http-client port host request-uri headers body response-handler))
+  ([http-client port-or-host host-or-request-uri request-uri-or-headers body response-handler] (.post http-client port-or-host host-or-request-uri request-uri-or-headers body response-handler))
+  ([http-client host-or-request-uri request-uri-or-headers body response-handler] (.post http-client host-or-request-uri request-uri-or-headers body response-handler))
+  ([http-client request-uri-or-options body response-handler] (.post http-client request-uri-or-options body response-handler)))
 (defn put
-  ([http-client request-uri-or-options] (.put http-client request-uri-or-options))
-  ([http-client host-or-port request-uri-or-host response-handler-or-request-uri] (.put http-client host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client request-uri-or-options-or-host response-handler-or-request-uri] (.put http-client request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client port host request-uri response-handler] (.put http-client port host request-uri response-handler)))
-(defn put-abs
-  ([http-client absolute-uri] (.putAbs http-client absolute-uri))
-  ([http-client absolute-uri response-handler] (.putAbs http-client absolute-uri response-handler)))
+  ([http-client port host request-uri headers body response-handler] (.put http-client port host request-uri headers body response-handler))
+  ([http-client port-or-host host-or-request-uri request-uri-or-headers body response-handler] (.put http-client port-or-host host-or-request-uri request-uri-or-headers body response-handler))
+  ([http-client host-or-request-uri request-uri-or-headers body response-handler] (.put http-client host-or-request-uri request-uri-or-headers body response-handler))
+  ([http-client request-uri-or-options body response-handler] (.put http-client request-uri-or-options body response-handler)))
 (defn redirect-handler
   ([http-client handler] (.redirectHandler http-client handler)))
 (defn request
-  ([http-client method request-uri-or-options-or-host-or-server-address response-handler-or-request-uri-or-options] (.request http-client method request-uri-or-options-or-host-or-server-address response-handler-or-request-uri-or-options))
-  ([http-client method request-uri-or-options] (.request http-client method request-uri-or-options))
-  ([http-client method host-or-server-address-or-port request-uri-or-options-or-host response-handler-or-request-uri] (.request http-client method host-or-server-address-or-port request-uri-or-options-or-host response-handler-or-request-uri))
-  ([http-client method port-or-server-address host-or-port request-uri-or-host response-handler-or-request-uri] (.request http-client method port-or-server-address host-or-port request-uri-or-host response-handler-or-request-uri))
-  ([http-client method server-address port host request-uri response-handler] (.request http-client method server-address port host request-uri response-handler)))
-(defn request-abs
-  ([http-client method absolute-uri] (.requestAbs http-client method absolute-uri))
-  ([http-client method absolute-uri-or-server-address response-handler-or-absolute-uri] (.requestAbs http-client method absolute-uri-or-server-address response-handler-or-absolute-uri))
-  ([http-client method server-address absolute-uri response-handler] (.requestAbs http-client method server-address absolute-uri response-handler)))
+  ([http-client method-or-server-address request-uri-or-options] (.request http-client method-or-server-address request-uri-or-options))
+  ([http-client options] (.request http-client options))
+  ([http-client method port host request-uri] (.request http-client method port host request-uri))
+  ([http-client method server-address port host request-uri] (.request http-client method server-address port host request-uri))
+  ([http-client method host request-uri] (.request http-client method host request-uri)))
+(defn send
+  ([http-client options response-handler] (.send http-client options response-handler))
+  ([http-client method-or-options request-uri-or-body response-handler] (.send http-client method-or-options request-uri-or-body response-handler))
+  ([http-client method host-or-port request-uri-or-host headers-or-request-uri body-or-headers response-handler] (.send http-client method host-or-port request-uri-or-host headers-or-request-uri body-or-headers response-handler))
+  ([http-client method port host request-uri headers body response-handler] (.send http-client method port host request-uri headers body response-handler))
+  ([http-client method request-uri-or-host-or-port headers-or-request-uri-or-host body-or-headers-or-request-uri response-handler] (.send http-client method request-uri-or-host-or-port headers-or-request-uri-or-host body-or-headers-or-request-uri response-handler))
+  ([http-client method request-uri-or-host body-or-headers-or-request-uri response-handler] (.send http-client method request-uri-or-host body-or-headers-or-request-uri response-handler)))
 (defn web-socket
   ([http-client port host request-uri handler] (.webSocket http-client port host request-uri handler))
   ([http-client host request-uri handler] (.webSocket http-client host request-uri handler))
