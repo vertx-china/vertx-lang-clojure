@@ -13,12 +13,9 @@ public class VerticleTest extends VertxTestBase {
       HttpClient client = vertx.createHttpClient(new HttpClientOptions());
       HttpClientRequest req = client.request(HttpMethod.GET, 8080, "localhost", "/");
       req.exceptionHandler(err -> fail());
-      req.setHandler(ar2 -> {
-        if (ar2.succeeded()) {
-          HttpClientResponse resp = ar2.result();
+      req.onSuccess(resp -> {
           assertEquals(200, resp.statusCode());
           testComplete();
-        }
       });
       req.end();
     });

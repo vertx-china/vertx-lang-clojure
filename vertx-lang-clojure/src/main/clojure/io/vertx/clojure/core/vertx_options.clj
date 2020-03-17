@@ -15,6 +15,8 @@
 (defn get-blocked-thread-check-interval-unit [^VertxOptions vertx-options] (.getBlockedThreadCheckIntervalUnit vertx-options))
 (defn set-cluster-host [^VertxOptions vertx-options cluster-host] (.setClusterHost vertx-options cluster-host))
 (defn get-cluster-host [^VertxOptions vertx-options] (.getClusterHost vertx-options))
+(defn set-cluster-manager [^VertxOptions vertx-options cluster-manager] (.setClusterManager vertx-options cluster-manager))
+(defn get-cluster-manager [^VertxOptions vertx-options] (.getClusterManager vertx-options))
 (defn set-cluster-ping-interval [^VertxOptions vertx-options cluster-ping-interval] (.setClusterPingInterval vertx-options cluster-ping-interval))
 (defn get-cluster-ping-interval [^VertxOptions vertx-options] (.getClusterPingInterval vertx-options))
 (defn set-cluster-ping-reply-interval [^VertxOptions vertx-options cluster-ping-reply-interval] (.setClusterPingReplyInterval vertx-options cluster-ping-reply-interval))

@@ -1,7 +1,7 @@
 (ns io.vertx.lang.clojure.verticle
-  (:require
-   [io.vertx.clojure.core.vertx :as vertx]
-   [io.vertx.clojure.core.future :as future]))
+   (:require
+     [io.vertx.clojure.core.vertx :as vertx]
+     [io.vertx.clojure.core.future :as future]))
 
 (defn get-method-parameters [f]
   (first (->> f meta :arglists)))

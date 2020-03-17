@@ -53,3 +53,9 @@
 
 (defn values [json]
   (into [] (Json/values json)))
+
+(defn encode [obj]
+  (Json/encode obj))
+
+(defn encode-prettily [obj]
+  (Json/encodePrettily obj))

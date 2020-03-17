@@ -29,6 +29,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
+      <version>4.0.0-20200226.232101-57</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -246,7 +247,7 @@
               </includeArtifactIds>
               <classifier>sources</classifier>
               <!-- Prevent AuthOptions (interface) to be generated with ctor -->
-              <excludes>**/impl/**/*.java,io/vertx/groovy/**,io/vertx/reactivex/**,io/vertx/rxjava/**,examples/override/**,io/vertx/ext/auth/AuthOptions.java</excludes>
+              <excludes>**/impl/**/*.java,io/vertx/groovy/**,io/vertx/reactivex/**,io/vertx/rxjava/**,examples/override/**,io/vertx/codegen/testmodel/**,io/vertx/ext/auth/AuthOptions.java</excludes>
               <outputDirectory>${project.build.directory}/sources/vertx-core</outputDirectory>
             </configuration>
           </execution>
@@ -269,7 +270,7 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <version>3.3.1</version>
+        <version>3.3.3</version>
         <executions>
           <!-- Run the annotation processor on vertx-core and generate the clojure API -->
           <execution>
@@ -285,34 +286,34 @@
               <processors>
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
               </processors>
-              <optionMap>
+              <options>
                 <codegen.output>${project.basedir}/src/main</codegen.output>
                 <codegen.generators>Clojure</codegen.generators>
-              </optionMap>
+              </options>
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
             </configuration>
           </execution>
           <!-- Run the annotation processor on codegen and generate the clojure codegen -->
-          <execution>
-            <id>generate-codegen</id>
-            <goals>
-              <goal>process</goal>
-            </goals>
-            <phase>generate-test-sources</phase>
-            <configuration>
-              <systemProperties>
-                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
-              </systemProperties>
-              <processors>
-                <processor>io.vertx.codegen.CodeGenProcessor</processor>
-              </processors>
-              <optionMap>
-                <codegen.output>${project.basedir}/src/test</codegen.output>
-                <codegen.generators>Clojure</codegen.generators>
-              </optionMap>
-              <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
-            </configuration>
-          </execution>
+<!--          <execution>-->
+<!--            <id>generate-codegen</id>-->
+<!--            <goals>-->
+<!--              <goal>process</goal>-->
+<!--            </goals>-->
+<!--            <phase>generate-test-sources</phase>-->
+<!--            <configuration>-->
+<!--              <systemProperties>-->
+<!--                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>-->
+<!--              </systemProperties>-->
+<!--              <processors>-->
+<!--                <processor>io.vertx.codegen.CodeGenProcessor</processor>-->
+<!--              </processors>-->
+<!--              <options>-->
+<!--                <codegen.output>${project.basedir}/src/test</codegen.output>-->
+<!--                <codegen.generators>Clojure</codegen.generators>-->
+<!--              </options>-->
+<!--              <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>-->
+<!--            </configuration>-->
+<!--          </execution>-->
 
           <!-- We have to run the annotation processor again to process docs -->
           <execution>
@@ -325,12 +326,12 @@
               <processors>
                 <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
-              <optionMap>
+              <options>
                 <docgen.output>${asciidoc.dir}/clojure</docgen.output>
                 <maven.groupId>${project.groupId}</maven.groupId>
                 <maven.artifactId>${project.artifactId}</maven.artifactId>
                 <maven.version>${project.version}</maven.version>
-              </optionMap>
+              </options>
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
             </configuration>
           </execution>
@@ -346,12 +347,12 @@
               <processors>
                 <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
-              <optionMap>
+              <options>
                 <docgen.output>${asciidoc.dir}/clojure</docgen.output>
                 <maven.groupId>${project.groupId}</maven.groupId>
                 <maven.artifactId>${project.artifactId}</maven.artifactId>
                 <maven.version>${project.version}</maven.version>
-              </optionMap>
+              </options>
               <sourceDirectory>src/main/docoverride</sourceDirectory>
             </configuration>
           </execution>

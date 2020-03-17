@@ -76,8 +76,6 @@
   ([http-client-request chunked] (.setChunked http-client-request chunked)))
 (defn set-follow-redirects
   ([http-client-request follow-redirects] (.setFollowRedirects http-client-request follow-redirects)))
-(defn set-handler
-  ([http-client-request handler] (.setHandler http-client-request handler)))
 (defn set-max-redirects
   ([http-client-request max-redirects] (.setMaxRedirects http-client-request max-redirects)))
 (defn set-stream-priority

@@ -76,4 +76,12 @@ public class Json {
     }
     return list;
   }
+
+  public static String encode(Object obj) {
+    return io.vertx.core.json.Json.encode(obj);
+  }
+
+  public static String encodePrettily(Object obj) {
+    return io.vertx.core.json.Json.encodePrettily(obj);
+  }
 }
