@@ -1,9 +1,7 @@
 package io.vertx.lang.clojure;
 
 import io.vertx.codegen.*;
-import io.vertx.codegen.format.CamelCase;
 import io.vertx.codegen.format.KebabCase;
-import io.vertx.codegen.format.SnakeCase;
 import io.vertx.codegen.writer.CodeWriter;
 import io.vertx.lang.clojure.utils.ClojureUtils;
 
@@ -48,6 +46,7 @@ public class ClojureClassGenerator extends AbstractClojureCodeGenerator<ClassMod
                     imports.add(paramInfo.getType().getRaw().getName());
                 }
             }
+            imports.add(model.getType().getRaw().getName());
 
             String key = methodInfo.getName() + "#" + methodInfo.getParams().size();
             List<String> params = paramMap.get(key);
@@ -57,7 +56,6 @@ public class ClojureClassGenerator extends AbstractClojureCodeGenerator<ClassMod
                     .stream()
                     .map(ParamInfo::getName)
                     .collect(Collectors.toList());
-                paramMap.put(key, paramList);
             } else {
                 paramList = new ArrayList<>();
                 for (int i = 0; i < methodInfo.getParams().size(); i++) {
@@ -67,8 +65,8 @@ public class ClojureClassGenerator extends AbstractClojureCodeGenerator<ClassMod
                         paramList.add(methodInfo.getParam(i).getName() + "-or-" + params.get(i));
                     }
                 }
-                paramMap.put(key, paramList);
             }
+            paramMap.put(key, paramList);
 
             if (!methods.containsKey(methodInfo.getName())) {
                 Map<String, List<String>> methodParamMap = new HashMap<>();
@@ -98,13 +96,26 @@ public class ClojureClassGenerator extends AbstractClojureCodeGenerator<ClassMod
             } else if ("function".equals(methodName)) {
                 renderFunctionMethod(writer);
             } else {
-                writer.println("(defn " + clojurifyName(methodName));
-                value.forEach((key, value1) -> {
-                    String args = String.join(" ", value1);
-                    writer.println("  ([" + kebabCaseObjName + " " + args + "]");
-                    writer.println("    (." + methodName + " " + kebabCaseObjName + " " + args + "))");
-                });
-                writer.println(")");
+                MethodInfo methodInfo = model.getMethodMap().get(methodName).get(0);
+                if (methodInfo.isStaticMethod()) {
+                    writer.print("(defn " + clojurifyName(methodName));
+                    value.forEach((key, value1) -> {
+                        writer.println();
+                        String args = value1.stream().map(ClojureUtils::clojurifyName).collect(Collectors.joining(" "));
+                        writer.println("  ([" + args + "]");
+                        writer.print("    (" + model.getType().getRaw().getSimpleName() + "/" + methodName + " " + args + "))");
+                    });
+                    writer.println(")");
+                } else {
+                    writer.print("(defn " + clojurifyName(methodName));
+                    value.forEach((key, value1) -> {
+                        writer.println();
+                        String args = value1.stream().map(ClojureUtils::clojurifyName).collect(Collectors.joining(" "));
+                        writer.println("  ([" + kebabCaseObjName + " " + args + "]");
+                        writer.print("    (." + methodName + " " + kebabCaseObjName + " " + args + "))");
+                    });
+                    writer.println(")");
+                }
 
                 // TODO make method returning boolean lose `is` and end with `?`
             }
