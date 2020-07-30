@@ -19,39 +19,39 @@ import java.util.concurrent.Callable;
  */
 public class ClojureVerticleFactory implements VerticleFactory {
 
-  private Vertx vertx;
+    private Vertx vertx;
 
-  @Override
-  public String prefix() {
-    return "clj";
-  }
-
-  @Override
-  public void init(Vertx vertx) {
-    this.vertx = vertx;
-  }
-
-  @Override
-  public void createVerticle(String verticleName, ClassLoader classLoader, Promise<Callable<Verticle>> promise) {
-
-    String ns = VerticleFactory.removePrefix(verticleName);
-    boolean requireCompiling = false;
-
-    if (ns.endsWith("." + prefix())) {
-      ns = ns.substring(0, ns.indexOf("." + prefix()));
-      //check .clj source file exists, if file exists, Clojure will try to compile it
-      //and concurrently compile clojure files may cause exception, it has to be serial
-      String filePath = ns.replace(".", File.separator) + "." + prefix();
-      if (classLoader.getResource(filePath) != null) {
-        requireCompiling = true;
-      }
+    @Override
+    public String prefix() {
+        return "clj";
     }
 
-    //change SNAKE_CASE to KEBAB_CASE since in the namespace, clojure uses Kebab case, while Snake case in file name.
-    ns = ns.replace("_", "-");
-    final ClojureVerticle verticle = new ClojureVerticle(ns, requireCompiling);
+    @Override
+    public void init(Vertx vertx) {
+        this.vertx = vertx;
+    }
 
-    promise.complete(() -> verticle);
-  }
+    @Override
+    public void createVerticle(String verticleName, ClassLoader classLoader, Promise<Callable<Verticle>> promise) {
+
+        String ns = VerticleFactory.removePrefix(verticleName);
+        boolean requireCompiling = false;
+
+        if (ns.endsWith("." + prefix())) {
+            ns = ns.substring(0, ns.indexOf("." + prefix()));
+            //check .clj source file exists, if file exists, Clojure will try to compile it
+            //and concurrently compile clojure files may cause exception, it has to be serial
+            String filePath = ns.replace(".", File.separator) + "." + prefix();
+            if (classLoader.getResource(filePath) != null) {
+                requireCompiling = true;
+            }
+        }
+
+        //change SNAKE_CASE to KEBAB_CASE since in the namespace, clojure uses Kebab case, while Snake case in file name.
+        ns = ns.replace("_", "-");
+        final ClojureVerticle verticle = new ClojureVerticle(ns, requireCompiling);
+
+        promise.complete(() -> verticle);
+    }
 
 }

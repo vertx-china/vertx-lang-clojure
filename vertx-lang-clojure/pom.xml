@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <parent>
-    <groupId>com.w2v4</groupId>
+    <groupId>com.weblogism</groupId>
     <artifactId>vertx-lang-clojure-parent</artifactId>
     <version>4.0.0-SNAPSHOT</version>
   </parent>
@@ -29,7 +29,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
-      <version>4.0.0-20200226.232101-57</version>
+      <version>4.0.0.Beta1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -104,11 +104,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-webauthn</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-jwt</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -200,6 +195,12 @@
       <artifactId>netty-transport-native-kqueue</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>com.weblogism</groupId>
+      <artifactId>vertx-lang-clojure-gen</artifactId>
+      <version>4.0.0-SNAPSHOT</version>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 
   <packaging>clojure</packaging>
@@ -208,7 +209,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.1.1</version>
         <configuration>
           <includeGroupIds>io.vertx</includeGroupIds>
           <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
@@ -239,7 +239,6 @@
                 vertx-auth-oauth2,
                 vertx-auth-shiro,
                 vertx-auth-webauthn,
-                vertx-jwt,
                 vertx-web-common,
                 vertx-web-client,
                 vertx-web,
@@ -270,7 +269,6 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <version>3.3.3</version>
         <executions>
           <!-- Run the annotation processor on vertx-core and generate the clojure API -->
           <execution>
@@ -288,32 +286,31 @@
               </processors>
               <options>
                 <codegen.output>${project.basedir}/src/main</codegen.output>
-                <codegen.generators>Clojure</codegen.generators>
               </options>
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
             </configuration>
           </execution>
           <!-- Run the annotation processor on codegen and generate the clojure codegen -->
-<!--          <execution>-->
-<!--            <id>generate-codegen</id>-->
-<!--            <goals>-->
-<!--              <goal>process</goal>-->
-<!--            </goals>-->
-<!--            <phase>generate-test-sources</phase>-->
-<!--            <configuration>-->
-<!--              <systemProperties>-->
-<!--                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>-->
-<!--              </systemProperties>-->
-<!--              <processors>-->
-<!--                <processor>io.vertx.codegen.CodeGenProcessor</processor>-->
-<!--              </processors>-->
-<!--              <options>-->
-<!--                <codegen.output>${project.basedir}/src/test</codegen.output>-->
-<!--                <codegen.generators>Clojure</codegen.generators>-->
-<!--              </options>-->
-<!--              <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>-->
-<!--            </configuration>-->
-<!--          </execution>-->
+          <execution>
+            <id>generate-codegen</id>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-test-sources</phase>
+            <configuration>
+              <systemProperties>
+                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+              </systemProperties>
+              <processors>
+                <processor>io.vertx.codegen.CodeGenProcessor</processor>
+              </processors>
+              <options>
+                <codegen.output>${project.basedir}/src/test</codegen.output>
+                <codegen.generators>Clojure</codegen.generators>
+              </options>
+              <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
+            </configuration>
+          </execution>
 
           <!-- We have to run the annotation processor again to process docs -->
           <execution>

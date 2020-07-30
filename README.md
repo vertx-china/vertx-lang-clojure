@@ -9,7 +9,7 @@ See https://github.com/tychobrailleur/vertx-lang-clojure-example for examples of
 Maven (in your pom.xml):
 ```xml
 <dependency>
-  <groupId>com.w2v4</groupId>
+  <groupId>com.weblogism</groupId>
   <artifactId>vertx-lang-clojure</artifactId>
   <version>4.0.0-SNAPSHOT</version>
 </dependency>
@@ -20,7 +20,7 @@ Leiningen (in your `project.clj`):
 ```clojure
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [io.vertx/vertx-web "4.0.0-SNAPSHOT"]
-                 [com.w2v4/vertx-lang-clojure "4.0.0-SNAPSHOT"]]
+                 [com.weblogism/vertx-lang-clojure "4.0.0-SNAPSHOT"]]
 ```
 
 

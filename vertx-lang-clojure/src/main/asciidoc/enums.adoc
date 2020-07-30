@@ -1,0 +1,665 @@
+= Enums
+
+[[AllowForwardHeaders]]
+== AllowForwardHeaders
+
+++++
+ What kind of forward header parsing are we allowing.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[NONE]]`NONE`|+++
+No parsing shall be performed.
++++
+|[[FORWARD]]`FORWARD`|+++
+Only process the standard <code>Forward</code> header as defined by <a href="https://tools.ietf.org/html/rfc7239#section-4>RFC 7239, section 4: Forwarded</a>.
+
+ For more info see: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded</a>
++++
+|[[X_FORWARD]]`X_FORWARD`|+++
+Only process the non standard but widely used <code>X-Forward-*</code> headers.
+
+ These headers are not official standards but widely used. Users are advised to avoid them for new applications.
++++
+|[[ALL]]`ALL`|+++
+Will process both  and . Be aware that mixing the 2 headers can open
+ security holes has specially crafted requests that are not validated as proxy level can allow bypassing
+ the proxy desired forward value.
+
+ For example, a proxy will add the <code>X-Forward-*</code> headers to a request but not filter out if the original
+ request includes the <code>Forward</code> header.
++++
+|===
+
+[[Attestation]]
+== Attestation
+
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[NONE]]`NONE`|-
+|[[DIRECT]]`DIRECT`|-
+|[[INDIRECT]]`INDIRECT`|-
+|===
+
+[[AuthenticatorAttachment]]
+== AuthenticatorAttachment
+
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[CROSS_PLATFORM]]`CROSS_PLATFORM`|-
+|[[PLATFORM]]`PLATFORM`|-
+|===
+
+[[BridgeEventType]]
+== BridgeEventType
+
+++++
+ Bridge Event Types.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[SOCKET_CREATED]]`SOCKET_CREATED`|+++
+This event will occur when a new SockJS socket is created.
++++
+|[[SOCKET_CLOSED]]`SOCKET_CLOSED`|+++
+This event will occur when a SockJS socket is closed.
++++
+|[[SOCKET_IDLE]]`SOCKET_IDLE`|+++
+This event will occur when SockJS socket is on idle for longer period of time than configured.
++++
+|[[SOCKET_PING]]`SOCKET_PING`|+++
+This event will occur when the last ping timestamp is updated for the SockJS socket.
++++
+|[[SEND]]`SEND`|+++
+This event will occur when a message is attempted to be sent from the client to the server.
++++
+|[[PUBLISH]]`PUBLISH`|+++
+This event will occur when a message is attempted to be published from the client to the server.
++++
+|[[RECEIVE]]`RECEIVE`|+++
+This event will occur when a message is attempted to be delivered from the server to the client.
++++
+|[[REGISTER]]`REGISTER`|+++
+This event will occur when a client attempts to register a handler.
++++
+|[[REGISTERED]]`REGISTERED`|+++
+This event will occur when a client successfully registered. The raw message used for registration, notified with  event
++++
+|[[UNREGISTER]]`UNREGISTER`|+++
+This event will occur when a client attempts to unregister a handler.
++++
+|===
+
+[[ClientAuth]]
+== ClientAuth
+
+++++
+ Configures the engine to require/request client authentication.
+ <p/>
+ Created by manishk on 10/2/2015.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[NONE]]`NONE`|+++
+No client authentication is requested or required.
++++
+|[[REQUEST]]`REQUEST`|+++
+Accept authentication if presented by client. If this option is set and the client chooses
+ not to provide authentication information about itself, the negotiations will continue.
++++
+|[[REQUIRED]]`REQUIRED`|+++
+Require client to present authentication, if not presented then negotiations will be declined.
++++
+|===
+
+[[CookieSameSite]]
+== CookieSameSite
+
+++++
+ Represents the Cookie SameSite policy to be used. For more info <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies">https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies</a>.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[NONE]]`NONE`|+++
+The browser will send cookies with both cross-site requests and same-site requests.
++++
+|[[STRICT]]`STRICT`|+++
+The browser will only send cookies for same-site requests (requests originating from the site that set the cookie).
+ If the request originated from a different URL than the URL of the current location, none of the cookies tagged
+ with the Strict attribute will be included.
++++
+|[[LAX]]`LAX`|+++
+Same-site cookies are withheld on cross-site subrequests, such as calls to load images or frames, but will be sent
+ when a user navigates to the URL from an external site; for example, by following a link.
++++
+|===
+
+[[DnsResponseCode]]
+== DnsResponseCode
+
+++++
+ Represents the possible response codes a server may send after receiving a
+ query. A response code of 0 indicates no error.
+
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[NOERROR]]`NOERROR`|+++
+ID 0, no error
++++
+|[[FORMERROR]]`FORMERROR`|+++
+ID 1, format error
++++
+|[[SERVFAIL]]`SERVFAIL`|+++
+ID 2, server failure
++++
+|[[NXDOMAIN]]`NXDOMAIN`|+++
+ID 3, name error
++++
+|[[NOTIMPL]]`NOTIMPL`|+++
+ID 4, not implemented
++++
+|[[REFUSED]]`REFUSED`|+++
+ID 5, operation refused
++++
+|[[YXDOMAIN]]`YXDOMAIN`|+++
+ID 6, domain name should not exist
++++
+|[[YXRRSET]]`YXRRSET`|+++
+ID 7, resource record set should not exist
++++
+|[[NXRRSET]]`NXRRSET`|+++
+ID 8, rrset does not exist
++++
+|[[NOTAUTH]]`NOTAUTH`|+++
+ID 9, not authoritative for zone
++++
+|[[NOTZONE]]`NOTZONE`|+++
+ID 10, name not in zone
++++
+|[[BADVERS]]`BADVERS`|+++
+ID 11, bad extension mechanism for version
++++
+|[[BADSIG]]`BADSIG`|+++
+ID 12, bad signature
++++
+|[[BADKEY]]`BADKEY`|+++
+ID 13, bad key
++++
+|[[BADTIME]]`BADTIME`|+++
+ID 14, bad timestamp
++++
+|===
+
+[[FetchDirection]]
+== FetchDirection
+
+++++
+ Represents the fetch direction hint
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[FORWARD]]`FORWARD`|-
+|[[REVERSE]]`REVERSE`|-
+|[[UNKNOWN]]`UNKNOWN`|-
+|===
+
+[[HashAlgorithm]]
+== HashAlgorithm
+
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[SHA512]]`SHA512`|+++
+The default algorithm for backward compatible systems.
+
+ Should not be used for new projects as OWASP recommends stronger hashing algorithms.
++++
+|[[PBKDF2]]`PBKDF2`|+++
+Stronger hashing algorithm, recommended by OWASP as of 2018.
++++
+|===
+
+[[HashSaltStyle]]
+== HashSaltStyle
+
+++++
+ Password hash salt configuration.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[NO_SALT]]`NO_SALT`|+++
+Password hashes are not salted
++++
+|[[COLUMN]]`COLUMN`|+++
+Salt is in a separate column for each user in the database
++++
+|[[EXTERNAL]]`EXTERNAL`|+++
+Salt is NOT stored in the database, but defined as external value like application preferences or so
++++
+|===
+
+[[HttpVersion]]
+== HttpVersion
+
+++++
+ Represents the version of the HTTP protocol.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[HTTP_1_0]]`HTTP_1_0`|-
+|[[HTTP_1_1]]`HTTP_1_1`|-
+|[[HTTP_2]]`HTTP_2`|-
+|===
+
+[[JsonEventType]]
+== JsonEventType
+
+++++
+ The possibles types of link emitted by the link.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[START_OBJECT]]`START_OBJECT`|+++
+Signals the start of a JSON object.
++++
+|[[END_OBJECT]]`END_OBJECT`|+++
+Signals the end of a JSON object.
++++
+|[[START_ARRAY]]`START_ARRAY`|+++
+Signals the start of a JSON array.
++++
+|[[END_ARRAY]]`END_ARRAY`|+++
+Signals the end of a JSON array.
++++
+|[[VALUE]]`VALUE`|+++
+Signals a JSON value.
++++
+|===
+
+[[LoggerFormat]]
+== LoggerFormat
+
+++++
+ The possible out of the box formats.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[DEFAULT]]`DEFAULT`|+++
+<i>remote-client</i> - - [<i>timestamp</i>] "<i>method</i> <i>uri</i> <i>version</i>" <i>status</i> <i>content-length</i> "<i>referrer</i>" "<i>user-agent</i>"
++++
+|[[SHORT]]`SHORT`|+++
+<i>remote-client</i> - <i>method</i> <i>uri</i> <i>version</i> <i>status</i> <i>content-length</i> <i>duration</i> ms
++++
+|[[TINY]]`TINY`|+++
+<i>method</i> <i>uri</i> <i>status</i> - <i>content-length</i> <i>duration</i>
++++
+|[[CUSTOM]]`CUSTOM`|+++
+Will use user defined formatter function.
++++
+|===
+
+[[OAuth2FlowType]]
+== OAuth2FlowType
+
+++++
+ OAuth2 Flows
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[AUTH_CODE]]`AUTH_CODE`|+++
+The authorization code is obtained by using an authorization server
+ as an intermediary between the client and resource owner.  Instead of
+ requesting authorization directly from the resource owner, the client
+ directs the resource owner to an authorization server (via its
+ user-agent as defined in [RFC2616]), which in turn directs the
+ resource owner back to the client with the authorization code.
+ <p>
+ Before directing the resource owner back to the client with the
+ authorization code, the authorization server authenticates the
+ resource owner and obtains authorization.  Because the resource owner
+ only authenticates with the authorization server, the resource
+ owner's credentials are never shared with the client.
+ <p>
+ The authorization code provides a few important security benefits,
+ such as the ability to authenticate the client, as well as the
+ transmission of the access token directly to the client without
+ passing it through the resource owner's user-agent and potentially
+ exposing it to others, including the resource owner.
++++
+|[[IMPLICIT]]`IMPLICIT`|+++
+The implicit grant is a simplified authorization code flow optimized
+ for clients implemented in a browser using a scripting language such
+ as JavaScript.  In the implicit flow, instead of issuing the client
+ an authorization code, the client is issued an access token directly
+ (as the result of the resource owner authorization).  The grant type
+ is implicit, as no intermediate credentials (such as an authorization
+ code) are issued (and later used to obtain an access token).
+ <p>
+ When issuing an access token during the implicit grant flow, the
+ authorization server does not authenticate the client.  In some
+ cases, the client identity can be verified via the redirection URI
+ used to deliver the access token to the client.  The access token may
+ be exposed to the resource owner or other applications with access to
+ the resource owner's user-agent.
+ <p>
+ Implicit grants improve the responsiveness and efficiency of some
+ clients (such as a client implemented as an in-browser application),
+ since it reduces the number of round trips required to obtain an
+ access token.  However, this convenience should be weighed against
+ the security implications of using implicit grants, especially when the
+ authorization code grant type is available.
++++
+|[[PASSWORD]]`PASSWORD`|+++
+The resource owner password credentials (i.e., username and password)
+ can be used directly as an authorization grant to obtain an access
+ token.  The credentials should only be used when there is a high
+ degree of trust between the resource owner and the client (e.g., the
+ client is part of the device operating system or a highly privileged
+ application), and when other authorization grant types are not
+ available (such as an authorization code).
+ <p>
+ Even though this grant type requires direct client access to the
+ resource owner credentials, the resource owner credentials are used
+ for a single request and are exchanged for an access token.  This
+ grant type can eliminate the need for the client to store the
+ resource owner credentials for future use, by exchanging the
+ credentials with a long-lived access token or refresh token.
++++
+|[[CLIENT]]`CLIENT`|+++
+The client credentials (or other forms of client authentication) can
+ be used as an authorization grant when the authorization scope is
+ limited to the protected resources under the control of the client,
+ or to protected resources previously arranged with the authorization
+ server.  Client credentials are used as an authorization grant
+ typically when the client is acting on its own behalf (the client is
+ also the resource owner) or is requesting access to protected
+ resources based on an authorization previously arranged with the
+ authorization server.
++++
+|[[AUTH_JWT]]`AUTH_JWT`|+++
+RFC7523
++++
+|===
+
+[[ProxyType]]
+== ProxyType
+
+++++
+ The type of a TCP proxy server.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[HTTP]]`HTTP`|+++
+HTTP CONNECT ssl proxy
++++
+|[[SOCKS4]]`SOCKS4`|+++
+SOCKS4/4a tcp proxy
++++
+|[[SOCKS5]]`SOCKS5`|+++
+SOCSK5 tcp proxy
++++
+|===
+
+[[ReplyFailure]]
+== ReplyFailure
+
+++++
+ Represents the type of reply failure
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[TIMEOUT]]`TIMEOUT`|+++
+The message send failed because no reply was received before the timeout time.
++++
+|[[NO_HANDLERS]]`NO_HANDLERS`|+++
+The message send failed because no handlers were available to handle the message.
++++
+|[[RECIPIENT_FAILURE]]`RECIPIENT_FAILURE`|+++
+The message send failed because the recipient actively sent back a failure (rejected the message)
++++
+|===
+
+[[ResultSetConcurrency]]
+== ResultSetConcurrency
+
+++++
+ Represents the resultset concurrency hint
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[READ_ONLY]]`READ_ONLY`|-
+|[[UPDATABLE]]`UPDATABLE`|-
+|===
+
+[[ResultSetType]]
+== ResultSetType
+
+++++
+ Represents the resultset type hint
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[FORWARD_ONLY]]`FORWARD_ONLY`|-
+|[[SCROLL_INSENSITIVE]]`SCROLL_INSENSITIVE`|-
+|[[SCROLL_SENSITIVE]]`SCROLL_SENSITIVE`|-
+|===
+
+[[ShiroAuthRealmType]]
+== ShiroAuthRealmType
+
+++++
+ The type of the Shiro auth realm
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[PROPERTIES]]`PROPERTIES`|+++
+The realm is a Shiro properties auth provider
++++
+|[[LDAP]]`LDAP`|+++
+The realm is a Shiro LDAP auth provider
++++
+|===
+
+[[TransactionIsolation]]
+== TransactionIsolation
+
+++++
+ Represents a Transaction Isolation Level
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[READ_UNCOMMITTED]]`READ_UNCOMMITTED`|+++
+Implements dirty read, or isolation level 0 locking, which means that no shared locks are issued and no exclusive
+ locks are honored. When this option is set, it is possible to read uncommitted or dirty data; values in the data
+ can be changed and rows can appear or disappear in the data set before the end of the transaction. This is the
+ least restrictive of the four isolation levels.
++++
+|[[READ_COMMITTED]]`READ_COMMITTED`|+++
+Specifies that shared locks are held while the data is being read to avoid dirty reads, but the data can be changed
+ before the end of the transaction, resulting in nonrepeatable reads or phantom data.
++++
+|[[REPEATABLE_READ]]`REPEATABLE_READ`|+++
+Locks are placed on all data that is used in a query, preventing other users from updating the data, but new
+ phantom rows can be inserted into the data set by another user and are included in later reads in the current
+ transaction. Because concurrency is lower than the default isolation level, use this option only when necessary.
++++
+|[[SERIALIZABLE]]`SERIALIZABLE`|+++
+Places a range lock on the data set, preventing other users from updating or inserting rows into the data set until
+ the transaction is complete. This is the most restrictive of the four isolation levels. Because concurrency is
+ lower, use this option only when necessary.
++++
+|[[NONE]]`NONE`|+++
+For engines that support it, none isolation means that each statement would essentially be its own transaction.
++++
+|===
+
+[[Transport]]
+== Transport
+
+++++
+ The available SockJS transports
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[WEBSOCKET]]`WEBSOCKET`|+++
+<a href="http://www.rfc-editor.org/rfc/rfc6455.txt">rfc 6455</a>
++++
+|[[EVENT_SOURCE]]`EVENT_SOURCE`|+++
+<a href="http://dev.w3.org/html5/eventsource/">Event source</a>
++++
+|[[HTML_FILE]]`HTML_FILE`|+++
+<a href="http://cometdaily.com/2007/11/18/ie-activexhtmlfile-transport-part-ii/">HtmlFile</a>.
++++
+|[[JSON_P]]`JSON_P`|+++
+Slow and old fashioned <a hred="https://developer.mozilla.org/en/DOM/window.postMessage">JSONP polling</a>.
+ This transport will show "busy indicator" (aka: "spinning wheel") when sending data.
++++
+|[[XHR]]`XHR`|+++
+Long-polling using <a hred="https://secure.wikimedia.org/wikipedia/en/wiki/XMLHttpRequest#Cross-domain_requests">cross domain XHR</a>
++++
+|===
+
+[[UserVerification]]
+== UserVerification
+
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[REQUIRED]]`REQUIRED`|-
+|[[PREFERRED]]`PREFERRED`|-
+|[[DISCOURAGED]]`DISCOURAGED`|-
+|===
+
+[[WebsocketVersion]]
+== WebsocketVersion
+
+++++
+ Represents the WebSocket version
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[V00]]`V00`|-
+|[[V07]]`V07`|-
+|[[V08]]`V08`|-
+|[[V13]]`V13`|-
+|===
+
+[[WriteOption]]
+== WriteOption
+
+++++
+ Enum representing the mongoDB Java Driver's link
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[ACKNOWLEDGED]]`ACKNOWLEDGED`|+++
+
++++
+|[[UNACKNOWLEDGED]]`UNACKNOWLEDGED`|+++
+
++++
+|[[FSYNCED]]`FSYNCED`|+++
+
++++
+|[[JOURNALED]]`JOURNALED`|+++
+
++++
+|[[REPLICA_ACKNOWLEDGED]]`REPLICA_ACKNOWLEDGED`|+++
+
++++
+|[[MAJORITY]]`MAJORITY`|+++
+
++++
+|===
+
