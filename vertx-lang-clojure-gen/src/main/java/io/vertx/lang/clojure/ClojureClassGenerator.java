@@ -88,15 +88,17 @@ public class ClojureClassGenerator extends AbstractClojureCodeGenerator<ClassMod
                 } else {
                     renderMethod(writer, kebabCaseObjName, methodName, value);
                 }
-
-                // TODO make method returning boolean lose `is` and end with `?`
             }
             writer.println();
         };
     }
 
     private void renderMethod(CodeWriter writer, String kebabCaseObjName, String methodName, Map<String, List<String>> value) {
-        writer.print("(defn " + clojurifyName(methodName));
+        String s = clojurifyName(methodName);
+        if (s.startsWith("is-")) {
+            s = s.replaceAll("^is\\-", "") + "?";
+        }
+        writer.print("(defn " + s);
         value.forEach((key, value1) -> {
             writer.println();
             List<String> methodArgs = new ArrayList<>();
