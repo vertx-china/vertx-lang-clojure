@@ -66,36 +66,40 @@ public class ClojureVerticle implements Verticle {
     }
 
     private void start() {
-        final IFn require = Clojure.var("clojure.core", "require");
-        require.invoke(Symbol.intern(NS_IO_VERTX_LANG_CLOJURE_VERTICLE));
-        require.invoke(Symbol.intern(ns));
+        try {
+            final IFn require = Clojure.var("clojure.core", "require");
+            require.invoke(Symbol.intern(NS_IO_VERTX_LANG_CLOJURE_VERTICLE));
+            require.invoke(Symbol.intern(ns));
 
-        IFn iFn = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "exists");
-        if (iFn.invoke(ns + "/start") == null)
-            throw new RuntimeException("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
+            IFn iFn = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "exists");
+            if (iFn.invoke(ns + "/start") == null)
+                throw new RuntimeException("start method e.g.(defn start[vertx] (println vertx)) does not exist.");
 
 
-        Map objectMap = new HashMap() {{
-            put("vertx", vertx);
-            put("context", context);
-        }};
+            Map objectMap = new HashMap() {{
+                put("vertx", vertx);
+                put("context", context);
+            }};
 
-        IFn startIFn = Clojure.var(ns, "start");
-        IFn getInfo = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "get-method-parameters");
+            IFn startIFn = Clojure.var(ns, "start");
+            IFn getInfo = Clojure.var(NS_IO_VERTX_LANG_CLOJURE_VERTICLE, "get-method-parameters");
 
-        String rawParams = getInfo.invoke(startIFn).toString();
-        rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
-        String[] paramNames = rawParams.split(" ");
-        switch (paramNames.length) {
-            case 1:
-                startIFn.invoke(objectMap.get(paramNames[0]));
-                break;
-            case 2:
-                startIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
-                break;
-            default:
-                startIFn.invoke();
-                break;
+            String rawParams = getInfo.invoke(startIFn).toString();
+            rawParams = rawParams.trim().substring(1, rawParams.length() - 1);
+            String[] paramNames = rawParams.split(" ");
+            switch (paramNames.length) {
+                case 1:
+                    startIFn.invoke(objectMap.get(paramNames[0]));
+                    break;
+                case 2:
+                    startIFn.invoke(objectMap.get(paramNames[0]), objectMap.get(paramNames[1]));
+                    break;
+                default:
+                    startIFn.invoke();
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

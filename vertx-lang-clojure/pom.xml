@@ -6,13 +6,13 @@
   <parent>
     <groupId>com.weblogism</groupId>
     <artifactId>vertx-lang-clojure-parent</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.1.0-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>vertx-lang-clojure</artifactId>
-  <version>4.0.0-SNAPSHOT</version>
+  <version>4.1.0-SNAPSHOT</version>
 
   <properties>
     <log4j.version>1.2.17</log4j.version>
@@ -29,7 +29,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
-      <version>4.0.0.Beta1</version>
+      <version>4.1.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -37,11 +37,11 @@
       <artifactId>vertx-docgen</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-codetrans</artifactId>
-      <optional>true</optional>
-    </dependency>
+    <!-- <dependency> -->
+    <!--   <groupId>io.vertx</groupId> -->
+    <!--   <artifactId>vertx-codetrans</artifactId> -->
+    <!--   <optional>true</optional> -->
+    <!-- </dependency> -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-core</artifactId>
@@ -251,18 +251,18 @@
             </configuration>
           </execution>
           <!-- Unpack Codegen TCK source code to target/sources/codegen -->
-          <execution>
-            <id>unpack-codegen-tck</id>
-            <phase>generate-test-sources</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeArtifactIds>vertx-codegen</includeArtifactIds>
-              <includeClassifiers>tck-sources</includeClassifiers>
-              <outputDirectory>${project.build.directory}/sources/codegen</outputDirectory>
-            </configuration>
-          </execution>
+          <!-- <execution> -->
+          <!--   <id>unpack-codegen-tck</id> -->
+          <!--   <phase>generate-test-sources</phase> -->
+          <!--   <goals> -->
+          <!--     <goal>unpack-dependencies</goal> -->
+          <!--   </goals> -->
+          <!--   <configuration> -->
+          <!--     <includeArtifactIds>vertx-codegen</includeArtifactIds> -->
+          <!--     <includeClassifiers>tck-sources</includeClassifiers> -->
+          <!--     <outputDirectory>${project.build.directory}/sources/codegen</outputDirectory> -->
+          <!--   </configuration> -->
+          <!-- </execution> -->
         </executions>
       </plugin>
 
@@ -291,26 +291,25 @@
             </configuration>
           </execution>
           <!-- Run the annotation processor on codegen and generate the clojure codegen -->
-          <execution>
-            <id>generate-codegen</id>
-            <goals>
-              <goal>process</goal>
-            </goals>
-            <phase>generate-test-sources</phase>
-            <configuration>
-              <systemProperties>
-                <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
-              </systemProperties>
-              <processors>
-                <processor>io.vertx.codegen.CodeGenProcessor</processor>
-              </processors>
-              <options>
-                <codegen.output>${project.basedir}/src/test</codegen.output>
-                <codegen.generators>Clojure</codegen.generators>
-              </options>
-              <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
-            </configuration>
-          </execution>
+          <!-- <execution> -->
+          <!--   <id>generate-codegen</id> -->
+          <!--   <goals> -->
+          <!--     <goal>process</goal> -->
+          <!--   </goals> -->
+          <!--   <phase>generate-test-sources</phase> -->
+          <!--   <configuration> -->
+          <!--     <systemProperties> -->
+          <!--       <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format> -->
+          <!--     </systemProperties> -->
+          <!--     <processors> -->
+          <!--       <processor>io.vertx.codegen.CodeGenProcessor</processor> -->
+          <!--     </processors> -->
+          <!--     <options> -->
+          <!--       <codegen.output>${project.basedir}/src/test</codegen.output> -->
+          <!--     </options> -->
+          <!--     <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory> -->
+          <!--   </configuration> -->
+          <!-- </execution> -->
 
           <!-- We have to run the annotation processor again to process docs -->
           <execution>

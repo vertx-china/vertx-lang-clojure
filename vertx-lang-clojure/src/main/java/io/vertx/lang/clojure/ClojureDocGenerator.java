@@ -1,6 +1,5 @@
 package io.vertx.lang.clojure;
 
-import io.vertx.codetrans.CodeTranslator;
 import io.vertx.docgen.Coordinate;
 import io.vertx.docgen.DocGenerator;
 import io.vertx.docgen.JavaDocGenerator;
@@ -19,11 +18,9 @@ import javax.lang.model.element.VariableElement;
 public class ClojureDocGenerator implements DocGenerator {
 
     private JavaDocGenerator javaGen = new JavaDocGenerator();
-    private CodeTranslator translator;
 
     @Override
     public void init(ProcessingEnvironment processingEnv) {
-        translator = new CodeTranslator(processingEnv);
         javaGen.init(processingEnv);
     }
 

@@ -151,6 +151,7 @@ public class ClojureClassGenerator extends AbstractClojureCodeGenerator<ClassMod
         String key = methodInfo.getName() + "#" + methodInfo.getParams().size();
         List<String> params = paramMap.get(key);
         List<String> paramList = Collections.EMPTY_LIST;
+
         if (params == null) {
             paramList = methodInfo.getParams()
                 .stream()
