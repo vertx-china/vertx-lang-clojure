@@ -102,7 +102,7 @@ public class ClojureClassGenerator extends AbstractClojureCodeGenerator<ClassMod
         value.forEach((key, value1) -> {
             writer.println();
             List<String> methodArgs = new ArrayList<>();
-            methodArgs.add(kebabCaseObjName);
+            methodArgs.add(kebabCaseObjName+"-obj");
             methodArgs.addAll(value1);
             String args = methodArgs.stream().map(ClojureUtils::clojurifyName).collect(Collectors.joining(" "));
             writer.println("  ([" + args + "]");
