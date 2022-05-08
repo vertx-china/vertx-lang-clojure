@@ -5,7 +5,6 @@
 
   var classKeBabName = CASE_KEBAB.format(CASE_CAMEL.parse(className));
   var objKeBabName = CASE_KEBAB.format(CASE_CAMEL.parse(objName));
-
 }
 
 \n(import @{type.raw})
@@ -40,6 +39,6 @@
 
 @end{}
 
-@if{jsonifiable}
+@if{hasToJsonMethod}
 \n(defn to-json [^@{className} @{objKeBabName}] (.toJson @{objKeBabName}))
 @end{}

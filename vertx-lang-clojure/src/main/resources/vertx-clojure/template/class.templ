@@ -102,11 +102,11 @@ var functionIsDefined = false;
 new @{type.raw.getSimpleName(CASE_KEBAB)}(@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
 @else{method.staticMethod}[@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
-@{type.raw.getSimpleName}/@{method.name} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
+@{type.raw.getSimpleName}/@{method.name}@if{paramsSize>0} @end{}@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
 @else{}
-[@{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
-.@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)} @foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
+[@{type.raw.getSimpleName(CASE_KEBAB)}@if{paramsSize>0} @end{}@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}] (
+.@{method.name} @{type.raw.getSimpleName(CASE_KEBAB)}@if{paramsSize>0} @end{}@foreach{param:paramsMap[methodName+"-"+paramsSize]}@{CASE_KEBAB.format(CASE_CAMEL.parse(param))}@end{' '}
 )
 @end{})
 @end{})
