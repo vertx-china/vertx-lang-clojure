@@ -12,7 +12,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>vertx-lang-clojure</artifactId>
-  <version>4.1.0-SNAPSHOT</version>
+  <version>4.5.7</version>
 
   <properties>
     <log4j.version>1.2.17</log4j.version>
@@ -29,7 +29,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
-      <version>4.1.0</version>
+      <version>4.5.7</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -246,7 +246,7 @@
               </includeArtifactIds>
               <classifier>sources</classifier>
               <!-- Prevent AuthOptions (interface) to be generated with ctor -->
-              <excludes>**/impl/**/*.java,io/vertx/groovy/**,io/vertx/reactivex/**,io/vertx/rxjava/**,examples/override/**,io/vertx/codegen/testmodel/**,io/vertx/ext/auth/AuthOptions.java</excludes>
+              <excludes>**/impl/**/*.java,io/vertx/ext/web/handler/OtpAuthHandler.java,examples/**,io/vertx/groovy/**,io/vertx/reactivex/**,io/vertx/rxjava/**,examples/override/**,io/vertx/codegen/testmodel/**,io/vertx/ext/auth/AuthOptions.java</excludes>
               <outputDirectory>${project.build.directory}/sources/vertx-core</outputDirectory>
             </configuration>
           </execution>

@@ -1,6 +1,6 @@
 package io.vertx.lang.clojure;
 
-import io.vertx.docgen.Coordinate;
+//import io.vertx.docgen.Coordinate;
 import io.vertx.docgen.DocGenerator;
 import io.vertx.docgen.JavaDocGenerator;
 
@@ -41,18 +41,18 @@ public class ClojureDocGenerator implements DocGenerator {
     }
 
     @Override
-    public String resolveTypeLink(TypeElement elt, Coordinate coordinate) {
-        return javaGen.resolveTypeLink(elt, coordinate);
+    public String resolveTypeLink(TypeElement elt) {
+        return javaGen.resolveTypeLink(elt);
     }
 
     @Override
-    public String resolveConstructorLink(ExecutableElement elt, Coordinate coordinate) {
-        return javaGen.resolveConstructorLink(elt, coordinate);
+    public String resolveConstructorLink(ExecutableElement elt) {
+        return javaGen.resolveConstructorLink(elt);
     }
 
     @Override
-    public String resolveMethodLink(ExecutableElement elt, Coordinate coordinate) {
-        return javaGen.resolveMethodLink(elt, coordinate);
+    public String resolveMethodLink(ExecutableElement elt) {
+        return javaGen.resolveMethodLink(elt);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ClojureDocGenerator implements DocGenerator {
     }
 
     @Override
-    public String resolveFieldLink(VariableElement elt, Coordinate coordinate) {
-        return javaGen.resolveFieldLink(elt, coordinate);
+    public String resolveFieldLink(VariableElement elt) {
+        return javaGen.resolveFieldLink(elt);
     }
 }
